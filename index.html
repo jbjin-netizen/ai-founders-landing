@@ -1761,49 +1761,7 @@
 </section>
 
 <!-- ════════════════════════════════════════
-  [12] Cohort Limit
-════════════════════════════════════════ -->
-<!-- ════════════════════════════════════════
-  1기 한정 카운트다운
-════════════════════════════════════════ -->
-<section id="limit" class="section section-alt" style="border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-  <div class="inner" style="max-width:560px; margin:0 auto; text-align:center;">
-    <span class="sec-label">LIMITED SEATS</span>
-    <h2 class="sec-title" style="margin-bottom:36px;">이번 한 번뿐인 1기 자리.</h2>
-    <p id="limit-cd-label" style="font-size:13px; font-weight:700; color:var(--acc); letter-spacing:0.08em; margin-bottom:16px;">⚡ 얼리버드 마감까지</p>
-    <div class="limit-cd-wrap">
-      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-days">08</div><div class="limit-cd-lbl">일</div></div>
-      <div class="limit-cd-sep">:</div>
-      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-hours">06</div><div class="limit-cd-lbl">시간</div></div>
-      <div class="limit-cd-sep">:</div>
-      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-mins">52</div><div class="limit-cd-lbl">분</div></div>
-      <div class="limit-cd-sep">:</div>
-      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-secs">27</div><div class="limit-cd-lbl">초</div></div>
-    </div>
-    <div class="limit-progress-wrap">
-      <div class="limit-progress-bg"><div class="limit-progress-fill" id="limit-fill" style="width:36%"></div></div>
-      <p class="limit-progress-txt" id="limit-seats-txt">36% 마감 · 남은 자리 <strong>32석</strong></p>
-    </div>
-    <button class="btn-cta btn-cta-lg" onclick="openModal('cohort_limit')" style="width:100%; max-width:400px; margin-bottom:16px;">지금 바로 신청하기 →</button>
-    <p class="limit-note">* 다음 기수(2기) 일정은 1기 종료 후 결정됩니다.</p>
-  </div>
-</section>
-<style>
-  .limit-cd-wrap { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:28px; }
-  .limit-cd-unit { display:flex; flex-direction:column; align-items:center; gap:6px; }
-  .limit-cd-box { background:#111318; border:1px solid var(--border-s); border-radius:10px; width:72px; height:72px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900; color:var(--text); letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
-  .limit-cd-lbl { font-size:11px; color:var(--text-muted); font-weight:600; letter-spacing:0.06em; }
-  .limit-cd-sep { font-size:28px; font-weight:900; color:var(--text-muted); margin-bottom:18px; }
-  .limit-progress-wrap { margin-bottom:32px; }
-  .limit-progress-bg { background:rgba(255,255,255,0.08); border-radius:100px; height:8px; overflow:hidden; margin-bottom:10px; }
-  .limit-progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--acc) 0%,var(--hl) 100%); transition:width 1s ease; }
-  .limit-progress-txt { font-size:13px; color:var(--text-muted); }
-  .limit-progress-txt strong { color:var(--text); font-weight:800; }
-  @media (max-width:480px) { .limit-cd-box { width:60px; height:60px; font-size:26px; } .limit-cd-sep { font-size:22px; } }
-</style>
-
-<!-- ════════════════════════════════════════
-  [13] Photos
+  MOMENTS (OPERATOR 직후)
 ════════════════════════════════════════ -->
 <section id="photos" class="section section-alt">
   <div class="inner">
@@ -1866,59 +1824,59 @@
 </section>
 
 <style>
-  .photo-grid-v2 {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 40px;
-  }
-  .photo-card-v2 {
-    position: relative;
-    aspect-ratio: 3/2;
-    border-radius: var(--r);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    transition: transform 0.2s, border-color 0.2s;
-  }
-  .photo-card-wide { aspect-ratio: unset; min-height: 160px; }
-  .photo-card-v2:hover { transform: translateY(-3px); border-color: var(--border-s); }
-  .photo-card-bg {
-    position: absolute;
-    inset: 0;
-    background-size: cover;
-    background-position: center;
-    /* 실제 사진 추가 시: background-image: url('...'); */
-  }
-  .photo-card-noise {
-    position: absolute;
-    inset: 0;
-    background: rgba(8,9,13,0.45);
-  }
-  .photo-card-body {
-    position: relative;
-    z-index: 1;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 24px 16px;
-    color: white;
-  }
-  .photo-card-icon { font-size: 28px; margin-bottom: 10px; }
-  .photo-card-title { font-size: 15px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.01em; }
-  .photo-card-sub { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+  .photo-grid-v2 { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:40px; }
+  .photo-card-v2 { position:relative; aspect-ratio:3/2; border-radius:var(--r); overflow:hidden; border:1px solid var(--border); transition:transform 0.2s, border-color 0.2s; }
+  .photo-card-v2:hover { transform:translateY(-3px); border-color:var(--border-s); }
+  .photo-card-bg { position:absolute; inset:0; background-size:cover; background-position:center; }
+  .photo-card-noise { position:absolute; inset:0; background:rgba(8,9,13,0.45); }
+  .photo-card-body { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px 16px; color:white; }
+  .photo-card-icon { font-size:28px; margin-bottom:10px; }
+  .photo-card-title { font-size:15px; font-weight:800; margin-bottom:6px; letter-spacing:-0.01em; }
+  .photo-card-sub { font-size:12px; color:rgba(255,255,255,0.6); line-height:1.65; }
+  @media (max-width:780px) { .photo-grid-v2 { grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px) { .photo-grid-v2 { grid-template-columns:1fr; } }
+</style>
 
-  @media (max-width: 780px) {
-    .photo-grid-v2 { grid-template-columns: 1fr 1fr; }
-    .photo-card-wide { grid-column: 1 / -1; }
-    .photo-card-v2 { aspect-ratio: 4/3; }
-  }
-  @media (max-width: 480px) {
-    .photo-grid-v2 { grid-template-columns: 1fr; }
-    .photo-card-wide { grid-column: unset; }
-  }
+<!-- ════════════════════════════════════════
+  [12] Cohort Limit
+════════════════════════════════════════ -->
+<!-- ════════════════════════════════════════
+  1기 한정 카운트다운
+════════════════════════════════════════ -->
+<section id="limit" class="section section-alt" style="border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="inner" style="max-width:560px; margin:0 auto; text-align:center;">
+    <span class="sec-label">LIMITED SEATS</span>
+    <h2 class="sec-title" style="margin-bottom:36px;">이번 한 번뿐인 1기 자리.</h2>
+    <p id="limit-cd-label" style="font-size:13px; font-weight:700; color:var(--acc); letter-spacing:0.08em; margin-bottom:16px;">⚡ 얼리버드 마감까지</p>
+    <div class="limit-cd-wrap">
+      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-days">08</div><div class="limit-cd-lbl">일</div></div>
+      <div class="limit-cd-sep">:</div>
+      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-hours">06</div><div class="limit-cd-lbl">시간</div></div>
+      <div class="limit-cd-sep">:</div>
+      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-mins">52</div><div class="limit-cd-lbl">분</div></div>
+      <div class="limit-cd-sep">:</div>
+      <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-secs">27</div><div class="limit-cd-lbl">초</div></div>
+    </div>
+    <div class="limit-progress-wrap">
+      <div class="limit-progress-bg"><div class="limit-progress-fill" id="limit-fill" style="width:36%"></div></div>
+      <p class="limit-progress-txt" id="limit-seats-txt">36% 마감 · 남은 자리 <strong>32석</strong></p>
+    </div>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('cohort_limit')" style="width:100%; max-width:400px; margin-bottom:16px;">지금 바로 신청하기 →</button>
+    <p class="limit-note">* 다음 기수(2기) 일정은 1기 종료 후 결정됩니다.</p>
+  </div>
+</section>
+<style>
+  .limit-cd-wrap { display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:28px; }
+  .limit-cd-unit { display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .limit-cd-box { background:#111318; border:1px solid var(--border-s); border-radius:10px; width:72px; height:72px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900; color:var(--text); letter-spacing:-0.02em; font-variant-numeric:tabular-nums; }
+  .limit-cd-lbl { font-size:11px; color:var(--text-muted); font-weight:600; letter-spacing:0.06em; }
+  .limit-cd-sep { font-size:28px; font-weight:900; color:var(--text-muted); margin-bottom:18px; }
+  .limit-progress-wrap { margin-bottom:32px; }
+  .limit-progress-bg { background:rgba(255,255,255,0.08); border-radius:100px; height:8px; overflow:hidden; margin-bottom:10px; }
+  .limit-progress-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--acc) 0%,var(--hl) 100%); transition:width 1s ease; }
+  .limit-progress-txt { font-size:13px; color:var(--text-muted); }
+  .limit-progress-txt strong { color:var(--text); font-weight:800; }
+  @media (max-width:480px) { .limit-cd-box { width:60px; height:60px; font-size:26px; } .limit-cd-sep { font-size:22px; } }
 </style>
 
 <!-- ════════════════════════════════════════
