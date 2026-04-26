@@ -1935,6 +1935,22 @@
   }
   const UTM = getUTM();
 
+  /* ── Google Sheets 연동 ────────────────── */
+  // Apps Script 배포 후 아래 URL을 교체하세요
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxcx9INGwhuigdZgyjFlZiPlcDx1ekYO6bYkgUw7hVBVUe1BkPJG-kSVwP8NRE7a6Vj/exec';
+
+  function sendToSheets(payload) {
+    if (!SHEETS_URL || SHEETS_URL.startsWith('PASTE')) return;
+    try {
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      }).catch(function(){});
+    } catch(e) {}
+  }
+
   /* ── Tracking ──────────────────────────── */
   function track(eventType, extra) {
     const ev = Object.assign({
@@ -1951,6 +1967,8 @@
       localStorage.setItem('af1_events', JSON.stringify(evs));
     } catch(e) {}
     console.log('[AF1 Track]', ev);
+    // Google Sheets 이벤트 전송
+    sendToSheets(Object.assign({ type: 'event' }, ev));
   }
 
   // landing_view on load
@@ -2259,10 +2277,15 @@
       apply_status: 'apply_done',
     }, UTM);
 
-    // Save applicant record
+    const createdAt = new Date().toISOString();
+
+    // Google Sheets 신청자 저장
+    sendToSheets(Object.assign({ type: 'applicant', created_at: createdAt }, applyData));
+
+    // localStorage 백업
     try {
       const applicants = JSON.parse(localStorage.getItem('af1_applicants') || '[]');
-      applicants.push(Object.assign({ id: genSessionId(), created_at: new Date().toISOString() }, applyData));
+      applicants.push(Object.assign({ id: genSessionId(), created_at: createdAt }, applyData));
       localStorage.setItem('af1_applicants', JSON.stringify(applicants));
     } catch(e) {}
 
