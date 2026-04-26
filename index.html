@@ -1,0 +1,2023 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="AI Native들의 첫 모임, AI 파운더스 1기. 4주 안에 끝까지 만들어보는 경험. 5/16 개강, 50명 한정." />
+  <meta property="og:title" content="AI 파운더스 1기 — 끝까지 만들어보는 4주" />
+  <meta property="og:description" content="AI Native들의 첫 모임. 같은 시각을 가진 50명이 4주 안에 함께 만들어갑니다." />
+  <title>AI 파운더스 1기 — 끝까지 만들어보는 4주</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+
+  <style>
+    :root {
+      /* ── Base ── */
+      --bg:        #08090D;
+      --bg-alt:    #0D0E14;
+      --bg-card:   rgba(255,255,255,0.04);
+      --bg-card-h: rgba(255,255,255,0.07);
+      --bg-chip:   rgba(255,255,255,0.08);
+
+      /* ── Text ── */
+      --text:      #FFFFFF;
+      --text-sub:  rgba(255,255,255,0.62);
+      --text-muted:rgba(255,255,255,0.38);
+
+      /* ── Borders ── */
+      --border:    rgba(255,255,255,0.10);
+      --border-s:  rgba(255,255,255,0.20);
+
+      /* ── Accent — Claude Orange (선명한 웜 오렌지) ── */
+      --acc:       #E8703A;
+      --acc-dark:  #CF5C28;
+      --acc-glow:  rgba(232,112,58,0.32);
+      --acc-chip:  rgba(232,112,58,0.15);
+      --acc-text:  #F5A070;
+
+      /* ── Highlight — 가격·강조 앰버 골드 ── */
+      --hl:        #FFB800;
+      --hl-chip:   rgba(255,184,0,0.12);
+
+      /* ── Light surfaces (신청폼·모달 내부) ── */
+      --sf:        #FFFFFF;
+      --sf-sub:    #F5F5F7;
+      --sf-border: #E4E4E7;
+      --sf-text:   #111118;
+      --sf-sub-t:  #52525B;
+      --sf-light:  #A1A1AA;
+
+      --max-w:     1200px;
+      --r:         12px;
+      --r-lg:      20px;
+      --sh:        0 4px 24px rgba(0,0,0,0.35);
+      --sh-h:      0 12px 48px rgba(0,0,0,0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, 'Apple SD Gothic Neo', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.75;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+
+    /* ─── Utility ─── */
+    .inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .section { padding: 100px 24px; background: var(--bg); }
+    .section-alt { background: var(--bg-alt); }
+
+    .sec-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--acc);
+      margin-bottom: 16px;
+    }
+
+    h2.sec-title {
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 800;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+    .sec-desc {
+      font-size: 17px;
+      color: var(--text-sub);
+      line-height: 1.85;
+      max-width: 640px;
+    }
+
+    /* ─── [0] Countdown Banner ─── */
+    #countdown-banner {
+      background: #0F1015;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      text-align: center;
+      padding: 11px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      font-weight: 700;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    #countdown-banner.closed-state { background: #1a1a1a; }
+    #countdown-banner.regular-state { background: #0F1015; }
+    .banner-desktop { display: block; }
+    .banner-mobile { display: none; }
+    .banner-price { color: var(--hl); margin-left: 6px; }
+    .banner-divider { margin: 0 10px; opacity: 0.25; }
+    .banner-next { font-weight: 400; opacity: 0.55; margin-left: 4px; }
+
+    /* ─── [1] Hero ─── */
+    #hero {
+      background: var(--bg);
+      color: var(--text);
+      padding: 110px 24px 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 45%, rgba(249,115,22,0.07) 0%, transparent 68%),
+        radial-gradient(ellipse 100% 80% at 50% 100%, rgba(249,115,22,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--acc-chip);
+      border: 1px solid rgba(249,115,22,0.35);
+      color: var(--acc-text);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 5px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+    .hero-title {
+      font-size: clamp(30px, 5.5vw, 60px);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.025em;
+      margin-bottom: 24px;
+      position: relative;
+      color: var(--text);
+    }
+    .hero-title em { color: var(--hl); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 19px);
+      color: var(--text-sub);
+      line-height: 1.85;
+      margin-bottom: 40px;
+      max-width: 580px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .hero-meta-item {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero-meta-item span { font-weight: 700; color: var(--text); margin-left: 4px; }
+
+    /* ─── CTA Button ─── */
+    .btn-cta {
+      display: inline-block;
+      background: var(--acc);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 17px 40px;
+      border-radius: 100px;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px var(--acc-glow);
+      text-align: center;
+    }
+    .btn-cta:hover { background: var(--acc-dark); transform: translateY(-2px); box-shadow: 0 8px 36px var(--acc-glow); }
+    .btn-cta:active { transform: translateY(0); }
+    .btn-cta-lg { font-size: 19px; padding: 20px 52px; }
+
+    /* ─── [2] Hook ─── */
+    #hook {
+      padding: 90px 24px;
+      background: var(--bg-alt);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .hook-text {
+      font-size: clamp(22px, 3.5vw, 36px);
+      font-weight: 800;
+      line-height: 1.5;
+      color: var(--text);
+      max-width: 680px;
+      margin: 0 auto 28px;
+      letter-spacing: -0.01em;
+    }
+    .hook-text em { color: var(--acc); font-style: normal; }
+    .hook-body {
+      font-size: 16px;
+      color: var(--text-sub);
+      line-height: 1.95;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ─── [3] Insight ─── */
+    #insight { padding: 100px 24px; background: var(--bg); }
+    .insight-inner { max-width: var(--max-w); margin: 0 auto; }
+    .insight-highlight {
+      background: rgba(249,115,22,0.07);
+      border-left: 3px solid var(--acc);
+      border-radius: 0 var(--r) var(--r) 0;
+      padding: 28px 32px;
+      margin-top: 40px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.75;
+    }
+
+    /* ─── [4] Solution ─── */
+    #solution { padding: 100px 24px; background: var(--bg-alt); }
+    .solution-quote {
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.4;
+      margin-bottom: 48px;
+      max-width: 800px;
+      letter-spacing: -0.015em;
+    }
+    .solution-quote em { color: var(--acc); font-style: normal; }
+
+    /* Week table */
+    .week-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+    }
+    .week-table th {
+      background: rgba(255,255,255,0.07);
+      color: var(--text-muted);
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: left;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .week-table td {
+      padding: 18px 20px;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--text-sub);
+    }
+    .week-table tr:last-child td { border-bottom: none; }
+    .week-num {
+      font-weight: 800;
+      color: var(--acc);
+      font-size: 13px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .week-milestone { color: var(--text); font-weight: 600; }
+    .week-output {
+      display: inline-block;
+      background: var(--bg-chip);
+      color: var(--text-sub);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .week-table .week-output.highlight { background: var(--acc-chip); color: var(--acc-text); }
+
+    /* ─── [5] Value ─── */
+    #value { padding: 100px 24px; background: var(--bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .value-text {
+      font-size: clamp(18px, 2.8vw, 28px);
+      line-height: 1.9;
+      max-width: 700px;
+      color: var(--text-sub);
+    }
+    .value-text strong { color: var(--hl); font-weight: 800; }
+
+    /* ─── [6] Worries ─── */
+    #worries { padding: 100px 24px; background: var(--bg-alt); }
+    .worry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+    .worry-card {
+      background: var(--bg-card);
+      border-radius: var(--r);
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .worry-card:hover { border-color: var(--border-s); background: var(--bg-card-h); }
+    .worry-q {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .worry-q-badge {
+      flex-shrink: 0;
+      background: var(--acc);
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 100px;
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+    }
+    .worry-a { font-size: 14px; color: var(--text-sub); line-height: 1.85; }
+
+    /* ─── [7] Core Values ─── */
+    #values { padding: 100px 24px; background: var(--bg); }
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .value-card {
+      background: var(--bg-card);
+      border-radius: var(--r);
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .value-card:hover { transform: translateY(-4px); border-color: var(--border-s); background: var(--bg-card-h); }
+    .value-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .value-name { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .value-desc { font-size: 13px; color: var(--text-sub); line-height: 1.75; }
+
+    /* ─── [8] Result Categories ─── */
+    #categories { padding: 100px 24px; background: var(--bg-alt); }
+    .cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .cat-card {
+      background: var(--bg-card);
+      border-radius: var(--r);
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cat-card:hover { border-color: var(--acc); background: var(--bg-card-h); }
+    .cat-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+    .cat-name { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .cat-desc { font-size: 13px; color: var(--text-sub); margin-bottom: 14px; line-height: 1.75; }
+    .cat-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cat-link {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-chip);
+      border-radius: 4px;
+      padding: 3px 9px;
+      font-weight: 600;
+      transition: background 0.15s, color 0.15s;
+    }
+    .cat-link:hover { background: var(--acc-chip); color: var(--acc-text); }
+
+    /* ─── [9] Reviews ─── */
+    #reviews { padding: 100px 24px; background: var(--bg); }
+    .review-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .review-card {
+      background: var(--bg-card);
+      border-radius: var(--r);
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .review-card:hover { border-color: var(--border-s); transform: translateY(-3px); }
+    .review-stars { color: var(--acc); font-size: 14px; margin-bottom: 14px; letter-spacing: 3px; }
+    .review-body { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin-bottom: 20px; word-break: keep-all; }
+    .review-author { font-size: 13px; font-weight: 800; color: var(--text); }
+    .review-role { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+
+    /* ─── [10] Pricing ─── */
+    #pricing { padding: 100px 24px; background: var(--bg-alt); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 900px; margin: 40px auto 0; }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 36px;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .pricing-card:hover { border-color: var(--border-s); background: var(--bg-card-h); }
+    .pricing-card.recommended { border-color: var(--acc); background: rgba(249,115,22,0.06); }
+    .pricing-badge-rec {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--acc);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .pricing-name { font-size: 18px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+    .pricing-includes { font-size: 13px; color: var(--text-sub); margin-bottom: 24px; line-height: 1.75; }
+    .pricing-original { font-size: 14px; color: var(--text-muted); text-decoration: line-through; margin-bottom: 2px; }
+    .pricing-regular { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+    .pricing-price {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 900;
+      color: var(--hl);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .pricing-price-note { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+    .pricing-btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.1);
+      color: var(--text);
+      border: 1px solid var(--border-s);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .pricing-btn:hover { background: rgba(255,255,255,0.18); }
+    .pricing-card.recommended .pricing-btn {
+      background: var(--acc);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 20px var(--acc-glow);
+    }
+    .pricing-card.recommended .pricing-btn:hover { background: var(--acc-dark); }
+
+    /* ─── [11] Who ─── */
+    #who { padding: 100px 24px; background: var(--bg); }
+    .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; max-width: 800px; }
+    .who-item { display: flex; gap: 16px; align-items: flex-start; }
+    .who-icon { font-size: 32px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+    .who-name { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .who-desc { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
+
+    /* ─── [12] Cohort Limit ─── */
+    #limit { padding: 100px 24px; background: var(--bg-alt); text-align: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .limit-badges {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin: 36px 0;
+    }
+    .limit-badge {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 16px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-sub);
+    }
+    .limit-badge strong { display: block; font-size: 20px; font-weight: 900; color: var(--hl); margin-bottom: 4px; }
+    .limit-note { font-size: 13px; color: var(--text-muted); margin-top: 28px; }
+
+    /* ─── [13] Photos ─── */
+    #photos { padding: 100px 24px; background: var(--bg); }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 40px; }
+    .photo-item {
+      position: relative;
+      aspect-ratio: 4/3;
+      border-radius: var(--r);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .photo-bg {
+      position: absolute;
+      inset: 0;
+      filter: blur(8px);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.1);
+    }
+    .photo-bg-1 { background: linear-gradient(135deg, #1a1014 30%, #3d1a0a 60%, #F97316 100%); }
+    .photo-bg-2 { background: linear-gradient(135deg, #0e0e12 30%, #1a1a2e 60%, #2d2d4a 100%); }
+    .photo-bg-3 { background: linear-gradient(135deg, #0e120e 30%, #1a2a1a 60%, #2d4a2d 100%); }
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8,9,13,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+    .photo-overlay-icon { font-size: 32px; margin-bottom: 12px; }
+    .photo-overlay-title { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+    .photo-overlay-sub { font-size: 12px; color: rgba(255,255,255,0.55); }
+
+    /* ─── [14] FAQ ─── */
+    #faq { padding: 100px 24px; background: var(--bg-alt); }
+    .faq-list { margin-top: 40px; max-width: 800px; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 22px 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-family: inherit;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: var(--acc); }
+    .faq-chevron { flex-shrink: 0; font-size: 18px; transition: transform 0.3s; color: var(--text-muted); }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--acc); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { font-size: 15px; color: var(--text-sub); line-height: 1.9; padding-bottom: 22px; }
+
+    /* ─── [15] Final CTA ─── */
+    #final-cta {
+      padding: 120px 24px;
+      background: var(--bg);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #final-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(249,115,22,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .final-title {
+      font-size: clamp(26px, 4.5vw, 48px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 20px;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .final-sub { font-size: 17px; color: var(--text-sub); margin-bottom: 48px; line-height: 1.8; }
+    .final-note { font-size: 13px; color: var(--text-muted); margin-top: 24px; }
+
+    /* ─── Footer ─── */
+    #footer {
+      background: #050508;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .footer-brand { font-size: 18px; font-weight: 900; color: var(--text); }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-link { font-size: 13px; color: var(--text-muted); transition: color 0.2s; }
+    .footer-link:hover { color: var(--text-sub); }
+    .footer-biz { font-size: 12px; color: rgba(255,255,255,0.22); line-height: 1.85; }
+
+    /* ─── Floating CTA ─── */
+    #floating-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 800;
+      padding: 14px 16px env(safe-area-inset-bottom, 0);
+      background: rgba(8,9,13,0.88);
+      border-top: 1px solid var(--border);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: space-between;
+      transform: translateY(0);
+      transition: transform 0.3s;
+    }
+    #floating-cta.hidden { transform: translateY(110%); }
+    .floating-info { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+    .floating-price { font-size: 16px; font-weight: 800; color: var(--text); }
+    .floating-price-sub { font-size: 11px; color: var(--acc); font-weight: 700; }
+    .floating-btn {
+      flex-shrink: 0;
+      background: var(--acc);
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 24px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .floating-btn:hover { background: var(--acc-dark); }
+
+    /* ─── Option Modal ─── */
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+    }
+    #modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--sf);
+      border-radius: var(--r-lg);
+      padding: 36px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+      animation: modalIn 0.22s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--sf-text);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .modal-option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: var(--sf-sub);
+      border: 2px solid var(--sf-border);
+      border-radius: var(--r);
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      font-family: inherit;
+    }
+    .modal-option:hover { border-color: var(--acc); background: rgba(249,115,22,0.04); }
+    .modal-option-name { font-size: 16px; font-weight: 800; color: var(--sf-text); margin-bottom: 4px; }
+    .modal-option-price { font-size: 18px; font-weight: 900; color: var(--acc); margin-bottom: 4px; }
+    .modal-option-desc { font-size: 13px; color: var(--sf-sub-t); }
+    .modal-cancel {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: none;
+      color: var(--sf-light);
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 4px;
+      border-radius: var(--r);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    .modal-cancel:hover { background: var(--sf-sub); }
+
+    /* ─── Apply Form Overlay ─── */
+    #apply-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--sf);
+      z-index: 2500;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #apply-overlay.open { display: block; }
+
+    .apply-header {
+      position: sticky;
+      top: 0;
+      background: var(--sf);
+      border-bottom: 1px solid var(--sf-border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+    .apply-header-title { font-size: 15px; font-weight: 700; color: var(--sf-text); }
+    .apply-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: var(--sf-light);
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+    }
+    .apply-progress { padding: 20px 24px 0; max-width: 600px; margin: 0 auto; }
+    .progress-bar-bg { background: var(--sf-border); border-radius: 100px; height: 4px; margin-bottom: 8px; }
+    .progress-bar-fill { height: 100%; border-radius: 100px; background: var(--acc); transition: width 0.4s; }
+    .progress-label { font-size: 12px; color: var(--sf-light); text-align: right; }
+
+    .apply-body { padding: 32px 24px 120px; max-width: 600px; margin: 0 auto; }
+    .apply-phase { display: none; }
+    .apply-phase.active { display: block; }
+
+    .apply-phase-title { font-size: 22px; font-weight: 800; color: var(--sf-text); margin-bottom: 8px; }
+    .apply-phase-sub { font-size: 14px; color: var(--sf-sub-t); margin-bottom: 36px; }
+
+    .form-group { margin-bottom: 28px; }
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--sf-text);
+      margin-bottom: 8px;
+    }
+    .form-label .req { color: var(--acc); margin-left: 2px; }
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--sf-border);
+      border-radius: var(--r);
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--sf-text);
+      background: var(--sf);
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-input:focus, .form-textarea:focus { outline: none; border-color: var(--acc); }
+    .form-input.error, .form-textarea.error { border-color: #E53E3E; }
+    .form-textarea { resize: vertical; min-height: 100px; line-height: 1.7; }
+    .form-hint { font-size: 12px; color: var(--sf-light); margin-top: 6px; }
+    .form-error { font-size: 12px; color: #E53E3E; margin-top: 6px; display: none; }
+
+    .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .radio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 2px solid var(--sf-border);
+      border-radius: var(--r);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .radio-item:hover { border-color: var(--acc); background: rgba(249,115,22,0.03); }
+    .radio-item.selected { border-color: var(--acc); background: rgba(249,115,22,0.05); }
+    .radio-item input[type=radio] { display: none; }
+    .radio-dot {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--sf-border);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: border-color 0.15s;
+      position: relative;
+    }
+    .radio-item.selected .radio-dot { border-color: var(--acc); }
+    .radio-item.selected .radio-dot::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--acc);
+    }
+    .radio-text { font-size: 14px; color: var(--sf-text); line-height: 1.6; }
+
+    /* Recommendation Banner */
+    #rec-banner {
+      display: none;
+      background: rgba(255,184,0,0.08);
+      border: 1.5px solid rgba(255,184,0,0.3);
+      border-radius: var(--r);
+      padding: 16px 20px;
+      margin-top: 16px;
+    }
+    #rec-banner.visible { display: block; }
+    .rec-banner-title { font-size: 13px; font-weight: 700; color: var(--sf-text); margin-bottom: 6px; }
+    .rec-banner-body { font-size: 13px; color: var(--sf-sub-t); line-height: 1.75; }
+    .rec-banner-link { color: var(--acc); font-weight: 700; text-decoration: underline; cursor: pointer; }
+
+    /* Consent checkboxes */
+    .consent-group { margin-top: 4px; display: flex; flex-direction: column; gap: 10px; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .check-item input[type=checkbox] { display: none; }
+    .check-box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .check-item.checked .check-box { border-color: var(--acc); background: var(--acc); }
+    .check-item.checked .check-box::after { content: '✓'; font-size: 11px; color: white; font-weight: 800; }
+    .check-text { font-size: 13px; color: var(--sf-sub-t); line-height: 1.6; }
+    .check-text strong { color: var(--sf-text); }
+
+    /* Apply bottom buttons */
+    .apply-footer-btns {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--sf);
+      border-top: 1px solid var(--sf-border);
+      padding: 16px 24px env(safe-area-inset-bottom, 0);
+      display: flex;
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .btn-back {
+      padding: 15px 24px;
+      border: 2px solid var(--sf-border);
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--sf-light);
+      background: var(--sf);
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color 0.15s, color 0.15s;
+      flex-shrink: 0;
+    }
+    .btn-back:hover { border-color: var(--sf-text); color: var(--sf-text); }
+    .btn-next {
+      flex: 1;
+      padding: 15px;
+      background: var(--sf-text);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+    .btn-next:hover { background: #2a2a35; }
+    .btn-submit {
+      flex: 1;
+      padding: 15px;
+      background: var(--acc);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+      box-shadow: 0 4px 16px var(--acc-glow);
+    }
+    .btn-submit:hover { background: var(--acc-dark); }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 900px) {
+      .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .cat-grid { grid-template-columns: repeat(2, 1fr); }
+      .review-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .photo-grid { grid-template-columns: 1fr 1fr; }
+      .photo-grid .photo-item:last-child { grid-column: 1 / -1; }
+      .who-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: 64px 20px; }
+      .banner-desktop { display: none; }
+      .banner-mobile { display: block; }
+      .values-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .cat-grid { grid-template-columns: 1fr; }
+      .review-grid { grid-template-columns: 1fr; }
+      .worry-grid { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .photo-grid .photo-item:last-child { grid-column: unset; }
+      .limit-badges { flex-direction: column; align-items: center; }
+      .week-table { font-size: 13px; }
+      .week-table th, .week-table td { padding: 12px 14px; }
+      .modal-box { padding: 28px 20px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+  [0] Countdown Banner
+════════════════════════════════════════ -->
+<div id="countdown-banner">
+  <!-- Desktop -->
+  <div class="banner-desktop" id="banner-desktop-text">
+    🔥 1차 얼리버드 마감까지 <strong id="cd-days">D-</strong>
+    <span id="cd-time">00시간 00분 00초</span>
+    <span class="banner-divider">|</span>
+    <span class="banner-price" id="banner-price-label">199,000원</span>
+    <span id="banner-deadline-note">(~4/30 목 23:59)</span>
+    <span class="banner-next" id="banner-next-note">| 5/1부터 269,000원</span>
+  </div>
+  <!-- Mobile -->
+  <div class="banner-mobile">
+    <div id="banner-mobile-top">🔥 얼리버드 <strong id="cd-days-m">D-</strong> <span id="cd-time-m">00:00:00</span></div>
+    <div id="banner-mobile-bot" style="font-size:12px;font-weight:600;opacity:0.9;">199,000원 (~4/30 23:59)</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  [1] Hero
+════════════════════════════════════════ -->
+<section id="hero">
+  <div class="inner" style="position:relative; max-width:860px;">
+    <div class="hero-badge">AI FOUNDERS 1st COHORT</div>
+    <h1 class="hero-title">
+      AI Native들의 첫 모임,<br>
+      <em>AI 파운더스 1기</em>를 모집합니다.
+    </h1>
+    <p class="hero-sub">
+      내 손으로 끝까지 만들어보는 4주.<br>
+      창업, 사이드 프로젝트, 취미, 네트워킹 — 무엇이든 좋습니다.<br>
+      세상에 없던 무언가를, 함께 만들어요.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">📅 참여기간<span>5/16(토) – 6/13(토)</span></div>
+      <div class="hero-meta-item">👥 정원<span>50명 한정</span></div>
+      <div class="hero-meta-item">💻 운영<span>온라인 위주 · 오프라인 1회</span></div>
+    </div>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('hero')">지금 1기 신청하기</button>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [2] Hook
+════════════════════════════════════════ -->
+<section id="hook" class="section section-alt">
+  <div class="inner" style="max-width:760px; margin:0 auto; text-align:center;">
+    <p class="hook-text">
+      아이디어는 있었지만,<br>
+      <em>끝까지 만들어본 적은 없었습니다.</em>
+    </p>
+    <p class="hook-body">
+      혼자 시작하면 쉽게 미루고,<br>
+      주말 한두 번 만지다 폴더에 묻힙니다.<br>
+      "해봐야지"라는 생각만 쌓이고,<br>
+      남는 건 아무것도 없습니다.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [3] Insight
+════════════════════════════════════════ -->
+<section id="insight" class="section">
+  <div class="inner insight-inner">
+    <span class="sec-label">WHY NOW</span>
+    <h2 class="sec-title">AI 시대에는<br>실행력이 곧 경쟁력입니다.</h2>
+    <p class="sec-desc">
+      이제는 개발자가 아니어도 혼자서 서비스를 만들 수 있는 시대가 됐습니다.<br>
+      하지만 여전히 대부분은 만들지 않습니다.
+    </p>
+    <div class="insight-highlight">
+      '아는 사람'과 '직접 만들어본 사람'의 차이는,<br>
+      생각보다 빠르게 벌어지고 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [4] Solution + 4주 흐름
+════════════════════════════════════════ -->
+<section id="solution" class="section section-alt">
+  <div class="inner">
+    <span class="sec-label">HOW IT WORKS</span>
+    <h2 class="solution-quote">
+      그래서 우리는<br>
+      <em>'끝까지 만들 수밖에 없는 환경'</em>을 만듭니다.
+    </h2>
+    <p class="sec-desc" style="margin-bottom:40px;">
+      비슷한 수준의 5명이 한 팀이 되어, 매주 미션을 주고받으며 4주 안에 하나를 런칭합니다.<br>
+      혼자였다면 멈췄을 아이디어가, 이번에는 끝까지 갑니다.
+    </p>
+
+    <div style="overflow-x:auto;">
+      <table class="week-table">
+        <thead>
+          <tr>
+            <th>주차</th>
+            <th>마일스톤</th>
+            <th>산출물</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="week-num">Week 1</td>
+            <td class="week-milestone">아이디어 구체화 → 기획 완료</td>
+            <td><span class="week-output">1Page 기획안</span></td>
+          </tr>
+          <tr>
+            <td class="week-num">Week 2</td>
+            <td class="week-milestone">MVP 제작 + 배포 + 팀 피드백</td>
+            <td><span class="week-output">동작하는 제품</span></td>
+          </tr>
+          <tr>
+            <td class="week-num">Week 3</td>
+            <td class="week-milestone">마케팅 세팅 + 기능 이터레이션</td>
+            <td><span class="week-output">첫 유입 데이터</span></td>
+          </tr>
+          <tr>
+            <td class="week-num">Week 4</td>
+            <td class="week-milestone">마케팅 반복 + 수익화 시도</td>
+            <td><span class="week-output highlight">첫 수익화 시도</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:48px; text-align:center;">
+      <button class="btn-cta" onclick="openModal('solution_end')">4주 완주 함께하기</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [5] Value
+════════════════════════════════════════ -->
+<section id="value" class="section">
+  <div class="inner" style="max-width:740px;">
+    <span class="sec-label">WHAT YOU GAIN</span>
+    <h2 class="sec-title" style="margin-bottom:36px;">4주 후 남는 것은<br>결과물 하나가 아닙니다.</h2>
+    <div class="value-text">
+      내가 만든 것에 대한 <strong>첫 반응</strong>,<br>
+      누군가에게 가치를 제공해본 <strong>경험</strong>,<br>
+      작더라도 처음으로 벌어본 <strong>1만원</strong>,<br><br>
+      그리고 무엇보다,<br>
+      <strong>"나는 끝까지 만들어본 사람이다"</strong>라는 증명.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [6] Worries / FAQ
+════════════════════════════════════════ -->
+<section id="worries" class="section">
+  <div class="inner">
+    <span class="sec-label">FAQ</span>
+    <h2 class="sec-title">참여 전에 가장 많이<br>받는 질문 4가지</h2>
+    <div class="worry-grid">
+      <div class="worry-card">
+        <div class="worry-q"><span class="worry-q-badge">Q1</span>"꼭 창업까지 해야 하나요?"</div>
+        <div class="worry-a">아니요. 사이드 프로젝트, 취미, 네트워킹도 환영합니다. 본업 그대로, 퇴근 후 모이는 4주짜리 작업장이라고 생각하셔도 좋아요.</div>
+      </div>
+      <div class="worry-card">
+        <div class="worry-q"><span class="worry-q-badge">Q2</span>"제 수준에 맞을까요?"</div>
+        <div class="worry-a">클로드코드를 한 번이라도 써보셨다면 충분합니다. 더 다지고 싶으시면 '온보딩 강의' 옵션으로 시작하실 수 있어요.</div>
+      </div>
+      <div class="worry-card">
+        <div class="worry-q"><span class="worry-q-badge">Q3</span>"시간 부담이 크지 않을까요?"</div>
+        <div class="worry-a">주 10시간 정도면 충분합니다. 평일 저녁 + 주말 기준이고, 자율학습 + 팀 미팅 1회로 운영돼요.</div>
+      </div>
+      <div class="worry-card">
+        <div class="worry-q"><span class="worry-q-badge">Q4</span>"정말 4주 안에 결과가 나오나요?"</div>
+        <div class="worry-a">50명이 같은 일정으로 함께 가기 때문에 훨씬 빠릅니다. 4주 안에 배포까지 가는 건 구조의 힘이지 개인의 의지가 아니에요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [7] Core Values
+════════════════════════════════════════ -->
+<section id="values" class="section section-alt">
+  <div class="inner">
+    <span class="sec-label">CORE VALUES</span>
+    <h2 class="sec-title">파운더스가 만들어가는<br>4가지 가치</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <span class="value-icon">🎯</span>
+        <div class="value-name">실행력</div>
+        <div class="value-desc">팀·기한·데모데이로 만들 수밖에 없는 구조</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">👥</span>
+        <div class="value-name">동료</div>
+        <div class="value-desc">같은 시각을 가진 5인 피어 네트워크</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🔍</span>
+        <div class="value-name">레퍼런스</div>
+        <div class="value-desc">옆자리 동료가 만든 살아있는 사례를 옆에서 본다</div>
+      </div>
+      <div class="value-card">
+        <span class="value-icon">🚀</span>
+        <div class="value-name">결과물</div>
+        <div class="value-desc">배포된 내 제품 + 첫 1만원 수익 시도</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [8] Result Categories
+════════════════════════════════════════ -->
+<section id="categories" class="section">
+  <div class="inner">
+    <span class="sec-label">WHAT TO BUILD</span>
+    <h2 class="sec-title">어떤 걸 만들 수 있을까요?<br>6가지 카테고리</h2>
+    <p class="sec-desc" style="margin-bottom:0;">실제 참여자들이 만든 서비스들을 직접 확인해보세요.</p>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <span class="cat-icon">💰</span>
+        <div class="cat-name">수익화 서비스</div>
+        <div class="cat-desc">구독·결제 가능한 미니 SaaS</div>
+        <div class="cat-links">
+          <a class="cat-link" href="https://paper-ai-4502320.lovable.app" target="_blank" rel="noopener">paper-ai</a>
+          <a class="cat-link" href="https://talent-formulator.lovable.app" target="_blank" rel="noopener">talent-formulator</a>
+          <a class="cat-link" href="https://promo-snap-ai.lovable.app" target="_blank" rel="noopener">promo-snap-ai</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">💼</span>
+        <div class="cat-name">업무 자동화 도구</div>
+        <div class="cat-desc">반복 업무 자동화·효율화</div>
+        <div class="cat-links">
+          <a class="cat-link" href="https://cs-buddy.lovable.app" target="_blank" rel="noopener">cs-buddy</a>
+          <a class="cat-link" href="https://blog-starter-pro.lovable.app" target="_blank" rel="noopener">blog-starter-pro</a>
+          <a class="cat-link" href="https://benefit-spotter.lovable.app" target="_blank" rel="noopener">benefit-spotter</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🎨</span>
+        <div class="cat-name">취미·라이프스타일</div>
+        <div class="cat-desc">개인 만족·재미 중심</div>
+        <div class="cat-links">
+          <a class="cat-link" href="https://brew-journey-club.lovable.app" target="_blank" rel="noopener">brew-journey-club</a>
+          <a class="cat-link" href="https://my-easy-eats.lovable.app" target="_blank" rel="noopener">my-easy-eats</a>
+          <a class="cat-link" href="https://quote-sample-flow.lovable.app" target="_blank" rel="noopener">quote-sample-flow</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🤝</span>
+        <div class="cat-name">네트워킹·커뮤니티</div>
+        <div class="cat-desc">사람 연결·소통</div>
+        <div class="cat-links">
+          <a class="cat-link" href="https://senior-serene.lovable.app" target="_blank" rel="noopener">senior-serene</a>
+          <a class="cat-link" href="https://chalfit-ai-connect.lovable.app" target="_blank" rel="noopener">chalfit-ai-connect</a>
+          <a class="cat-link" href="https://databridge-fly.lovable.app" target="_blank" rel="noopener">databridge-fly</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">🔍</span>
+        <div class="cat-name">AI 추천·검색</div>
+        <div class="cat-desc">매칭·추천·큐레이션</div>
+        <div class="cat-links">
+          <a class="cat-link" href="https://pm-stack-scout.lovable.app" target="_blank" rel="noopener">pm-stack-scout</a>
+          <a class="cat-link" href="https://first-pick-finder.lovable.app" target="_blank" rel="noopener">first-pick-finder</a>
+          <a class="cat-link" href="https://near-you-discover.lovable.app" target="_blank" rel="noopener">near-you-discover</a>
+        </div>
+      </div>
+      <div class="cat-card">
+        <span class="cat-icon">📰</span>
+        <div class="cat-name">콘텐츠·미디어</div>
+        <div class="cat-desc">영상·이미지·뉴스 자동화</div>
+        <div class="cat-links">
+          <a class="cat-link" href="https://reel-mastery-kit.lovable.app" target="_blank" rel="noopener">reel-mastery-kit</a>
+          <a class="cat-link" href="https://shot-script.lovable.app" target="_blank" rel="noopener">shot-script</a>
+          <a class="cat-link" href="https://image-swift-boost.lovable.app" target="_blank" rel="noopener">image-swift-boost</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [9] Reviews
+════════════════════════════════════════ -->
+<section id="reviews" class="section section-alt">
+  <div class="inner">
+    <span class="sec-label">REVIEWS</span>
+    <h2 class="sec-title">직접 만들어본 사람들의<br>이야기</h2>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-body">코딩을 한 번도 해본 적 없는 디자이너인데 무엇이든 만들 수 있겠다는 자신감이 4주 만에 생겼어요. AI 시대에 디자이너가 어디까지 갈 수 있는지 직접 체감했습니다.</p>
+        <div><div class="review-author">성*경</div><div class="review-role">디자이너</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-body">생각만 해보고 못 했던 걸 직접 만들어본 경험이 가장 큰 성과예요. 조금만 더 보완하면 실제로 서비스를 출시하고 수익을 내볼 수 있겠다는 확신이 생겼습니다.</p>
+        <div><div class="review-author">윤*림</div><div class="review-role">기획자</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-body">현실화 하고 싶었던 사이트를 80% 구현할 수 있었어요. 머릿속에만 있던 아이디어가 실제로 돌아가는 화면이 되는 순간, 사업의 다음 단계가 명확해졌습니다.</p>
+        <div><div class="review-author">김*욱</div><div class="review-role">1인 사업가</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-body">내가 해야 할 일이 아니라 내가 하고 싶은 일이 무엇인지가 더 중요하다는 깨달음을 얻었어요. AI 활용 수익화의 다양한 사례를 직접 본 것도 큰 자극이 됐습니다.</p>
+        <div><div class="review-author">권*영</div><div class="review-role">기자</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-body">스스로 서비스를 만들어볼 수 있겠다고 느꼈습니다. PRD만 쓰던 PM이 직접 프로토타입까지 만드는 경험을 한 번 하고 나니, 일하는 방식 자체가 달라졌어요.</p>
+        <div><div class="review-author">한*우</div><div class="review-role">PM</div></div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-body">마케팅, 결제까지 붙이는 단계를 포함해 AI로 사업화·수익화를 실행하는 방법을 A부터 Z까지 체험했어요. 이제 혼자서도 가설을 검증할 수 있겠다는 자신감이 생겼습니다.</p>
+        <div><div class="review-author">손*호</div><div class="review-role">마케터</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [10] Pricing
+════════════════════════════════════════ -->
+<section id="pricing" class="section section-alt">
+  <div class="inner" style="text-align:center;">
+    <span class="sec-label">PRICING</span>
+    <h2 class="sec-title">지금 신청하면<br>얼리버드 가격으로 시작합니다</h2>
+    <p class="sec-desc" style="margin: 0 auto 8px; text-align:center;">
+      <span id="pricing-deadline-note" style="display:inline-block; background:var(--acc-chip); color:var(--acc-text); font-size:13px; font-weight:700; padding:4px 14px; border-radius:100px; margin-bottom:16px;">🔥 4/30(목) 23:59까지 얼리버드</span>
+    </p>
+    <div class="pricing-grid">
+      <!-- Standard -->
+      <div class="pricing-card">
+        <div class="pricing-name">AI 파운더스 1기</div>
+        <div class="pricing-includes">4주 본 과정 단품<br>Claude Code 경험 있는 분께 추천</div>
+        <div class="pricing-original">정가 340,000원</div>
+        <div class="pricing-regular" id="std-regular">269,000원 (5/1~)</div>
+        <div class="pricing-price"><span id="std-price">199,000</span>원</div>
+        <div class="pricing-price-note" id="std-note">얼리버드 (~4/30)</div>
+        <button class="pricing-btn" onclick="startApply('standard')">신청하기 →</button>
+      </div>
+      <!-- Base -->
+      <div class="pricing-card recommended">
+        <div class="pricing-badge-rec">✨ 처음 시작하는 분께 추천</div>
+        <div class="pricing-name">AI 파운더스 1기 + 온보딩 강의</div>
+        <div class="pricing-includes">4주 본 과정 + 사전 라이브 3시간<br>(기초·환경세팅, 개강 전 1회)</div>
+        <div class="pricing-original">정가 399,000원</div>
+        <div class="pricing-regular" id="base-regular">309,000원 (5/1~)</div>
+        <div class="pricing-price"><span id="base-price">249,000</span>원</div>
+        <div class="pricing-price-note" id="base-note">얼리버드 (~4/30)</div>
+        <button class="pricing-btn" onclick="startApply('base')">신청하기 →</button>
+      </div>
+    </div>
+    <p style="margin-top:24px; font-size:13px; color:var(--text-muted);">온보딩 강의 일정 택1: 5/10(일) 11:00~14:00 또는 5/12(화) 20:00~23:00</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [11] Who
+════════════════════════════════════════ -->
+<section id="who" class="section">
+  <div class="inner">
+    <span class="sec-label">OPERATOR</span>
+    <h2 class="sec-title">검증된 운영진과<br>함께합니다</h2>
+    <div class="who-grid">
+      <div class="who-item">
+        <div class="who-icon">🏆</div>
+        <div>
+          <div class="who-name">스파르타클럽</div>
+          <div class="who-desc">누적 수강생 70만+ · 코딩·AI 교육 분야 1위 브랜드</div>
+        </div>
+      </div>
+      <div class="who-item">
+        <div class="who-icon">💬</div>
+        <div>
+          <div class="who-name">튜터 Q&A</div>
+          <div class="who-desc">슬랙에서 24시간 내 응답 보장</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [12] Cohort Limit
+════════════════════════════════════════ -->
+<section id="limit" class="section">
+  <div class="inner" style="max-width:800px; margin:0 auto; text-align:center;">
+    <span class="sec-label">LIMITED SEATS</span>
+    <h2 class="sec-title">이번 한 번뿐인 1기 자리.</h2>
+    <div class="limit-badges">
+      <div class="limit-badge"><strong>5/14(목) 23:59</strong>모집 마감</div>
+      <div class="limit-badge"><strong>50명</strong>선착순 자동 마감</div>
+      <div class="limit-badge"><strong>얼리버드 가격</strong>1기 한정</div>
+      <div class="limit-badge"><strong>3개월</strong>수료 후 슬랙 커뮤니티</div>
+    </div>
+    <p style="font-size:17px; line-height:1.8; color:var(--text-sub); margin-bottom:40px;">
+      같은 시각을 가진 사람 50명이,<br>
+      같은 시간에 시작해 같은 시간에 끝냅니다.
+    </p>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('cohort_limit')">남은 좌석 확인하기</button>
+    <p class="limit-note">* 다음 기수(2기) 일정은 1기 종료 후 결정됩니다.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [13] Photos
+════════════════════════════════════════ -->
+<section id="photos" class="section section-alt">
+  <div class="inner">
+    <span class="sec-label">MOMENTS</span>
+    <h2 class="sec-title">함께 만들어가는<br>그 순간들</h2>
+    <div class="photo-grid">
+      <div class="photo-item">
+        <div class="photo-bg photo-bg-1"></div>
+        <div class="photo-overlay">
+          <div class="photo-overlay-icon">💻</div>
+          <div class="photo-overlay-title">함께 만드는 분위기</div>
+          <div class="photo-overlay-sub">라운드 테이블 작업 세션</div>
+        </div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-bg photo-bg-2"></div>
+        <div class="photo-overlay">
+          <div class="photo-overlay-icon">🚀</div>
+          <div class="photo-overlay-title">1기 킥오프</div>
+          <div class="photo-overlay-sub">Agent Study Group 발표</div>
+        </div>
+      </div>
+      <div class="photo-item">
+        <div class="photo-bg photo-bg-3"></div>
+        <div class="photo-overlay">
+          <div class="photo-overlay-icon">💡</div>
+          <div class="photo-overlay-title">전문가 특강</div>
+          <div class="photo-overlay-sub">인사이트 발표 세션</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px; color:var(--text-muted); text-align:center; margin-top:16px;">📍 서울 강남구 테헤란로 311 아남타워 3층</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [14] FAQ
+════════════════════════════════════════ -->
+<section id="faq" class="section">
+  <div class="inner">
+    <span class="sec-label">FAQ</span>
+    <h2 class="sec-title">자주 묻는 질문</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          환불은 어떻게 되나요?<span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">개강 전: 전액 환불 / 1주차: 75% / 2주차: 50% / 3주차: 25% / 4주차: 환불 불가</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          수료 기준이 있나요?<span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">미션 80% 이상 수행 + 서비스 제작 완료 두 가지를 충족하시면 수료입니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          옵션 변경 가능한가요?<span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">온보딩 강의 시작일 전까지 고객센터로 문의 주시면 변경 가능합니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          오프라인 참석은 필수인가요?<span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">권장하지만 의무는 아닙니다. 킥오프·데모데이는 온라인 동시 송출됩니다.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          AI 도구 구독료는 별도인가요?<span class="faq-chevron">▾</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">Claude Pro 등 개인 사용 도구는 별도 부담입니다.</div></div>
+      </div>
+    </div>
+    <p style="margin-top:28px; font-size:14px; color:var(--text-sub);">
+      더 궁금한 점은 <a href="https://bit.ly/4laTfK0" target="_blank" rel="noopener" style="color:var(--acc); font-weight:700; text-decoration:underline;">고객센터</a>로 문의해 주세요.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [15] Final CTA
+════════════════════════════════════════ -->
+<section id="final-cta">
+  <div class="inner" style="max-width:800px; margin:0 auto;">
+    <h2 class="final-title">혼자라서 미뤄왔던 아이디어,<br>이번에는 끝까지 만들어보세요.</h2>
+    <p class="final-sub">
+      같은 시각을 가진 49명이 옆에서 함께 갑니다.
+    </p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; font-size:15px; color:var(--text-muted);">
+      <span>📅 1기: 5/16(토) ~ 6/13(토)</span>
+      <span>👥 50명 한정 · 선착순 마감</span>
+      <span>💰 얼리버드 <span id="final-price" style="color:var(--hl); font-weight:800;">199,000원~</span></span>
+    </div>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('final')">지금 1기 신청하기</button>
+    <p class="final-note">* 다음 기수(2기) 일정은 1기 종료 후 결정됩니다.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  Footer
+════════════════════════════════════════ -->
+<footer id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">AI 파운더스 1기</div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://bit.ly/4laTfK0" target="_blank" rel="noopener">고객센터 문의</a>
+      <a class="footer-link" href="#" onclick="return false;">환불 정책</a>
+      <a class="footer-link" href="#" onclick="return false;">개인정보 처리방침</a>
+      <a class="footer-link" href="#" onclick="return false;">이용약관</a>
+    </div>
+    <div class="footer-biz">
+      스파르타클럽 | 대표: 이범규 | 사업자등록번호: 826-87-00538<br>
+      서울특별시 강남구 테헤란로 311 아남타워 3층
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════
+  Floating CTA
+════════════════════════════════════════ -->
+<div id="floating-cta">
+  <div class="floating-info">
+    <div class="floating-price" id="float-price">199,000원~</div>
+    <div class="floating-price-sub" id="float-sub">🔥 얼리버드 D-<span id="float-days">-</span>일 마감</div>
+  </div>
+  <button class="floating-btn" onclick="openModal('floating')">지금 1기 신청하기</button>
+</div>
+
+<!-- ════════════════════════════════════════
+  Option Modal
+════════════════════════════════════════ -->
+<div id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-title">어떤 옵션으로 신청하시겠어요?</div>
+    <button class="modal-option" onclick="startApply('standard')">
+      <div class="modal-option-name">AI 파운더스 1기</div>
+      <div class="modal-option-price" id="modal-std-price">199,000원 (얼리버드)</div>
+      <div class="modal-option-desc">클로드코드 사용 경험이 있는 분 ▶</div>
+    </button>
+    <button class="modal-option" onclick="startApply('base')">
+      <div class="modal-option-name">AI 파운더스 1기 + 온보딩 강의</div>
+      <div class="modal-option-price" id="modal-base-price">249,000원 (얼리버드)</div>
+      <div class="modal-option-desc">기초부터 다지고 싶은 분 ▶</div>
+    </button>
+    <button class="modal-cancel" onclick="closeModalDirect()">취소</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+  Apply Form Overlay
+════════════════════════════════════════ -->
+<div id="apply-overlay">
+  <div class="apply-header">
+    <div class="apply-header-title">AI 파운더스 1기 신청</div>
+    <button class="apply-close" onclick="closeApply()">✕</button>
+  </div>
+
+  <div class="apply-progress">
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-fill" style="width:50%"></div>
+    </div>
+    <div class="progress-label" id="progress-label">Phase 1 / 2</div>
+  </div>
+
+  <div class="apply-body">
+
+    <!-- Phase 1 -->
+    <div id="phase1" class="apply-phase active">
+      <h2 class="apply-phase-title">신청자 정보를 입력해주세요.</h2>
+      <p class="apply-phase-sub">합류 후 안내를 위해 정확히 입력해 주세요.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-name">이름 <span class="req">*</span></label>
+        <input class="form-input" id="inp-name" type="text" placeholder="홍길동" autocomplete="name" />
+        <div class="form-error" id="err-name">이름을 입력해주세요.</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-phone">연락처 <span class="req">*</span></label>
+        <input class="form-input" id="inp-phone" type="tel" placeholder="010-0000-0000" autocomplete="tel" inputmode="tel" />
+        <div class="form-hint">합류 후 안내를 위해 정확히 입력해 주세요.</div>
+        <div class="form-error" id="err-phone">올바른 연락처를 입력해주세요. (010-XXXX-XXXX)</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-motivation">지원 동기 <span class="req">*</span></label>
+        <textarea class="form-textarea" id="inp-motivation" placeholder="AI 파운더스 1기에서 어떤 경험을 얻고 싶으신가요?" rows="4"></textarea>
+        <div class="form-hint" id="motivation-counter">20자 이상 입력해주세요. (현재 0자)</div>
+        <div class="form-error" id="err-motivation">지원 동기를 20자 이상 입력해주세요.</div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div id="phase2" class="apply-phase">
+      <h2 class="apply-phase-title">마지막 단계입니다.</h2>
+      <p class="apply-phase-sub">조금만 더 알려주시면 더 잘 도와드릴 수 있어요.</p>
+
+      <div class="form-group">
+        <label class="form-label">Claude AI 활용 경험 <span class="req">*</span></label>
+        <div class="radio-group" id="ai-exp-group">
+          <label class="radio-item" onclick="selectAiExp(this, 1)">
+            <input type="radio" name="ai_exp" value="1" />
+            <div class="radio-dot"></div>
+            <div class="radio-text">아직 사용해 본 적이 없어요 (이번에 처음 시작하려고 해요)</div>
+          </label>
+          <label class="radio-item" onclick="selectAiExp(this, 2)">
+            <input type="radio" name="ai_exp" value="2" />
+            <div class="radio-dot"></div>
+            <div class="radio-text">설치는 해봤지만, 자주 쓰진 않았어요</div>
+          </label>
+          <label class="radio-item" onclick="selectAiExp(this, 3)">
+            <input type="radio" name="ai_exp" value="3" />
+            <div class="radio-dot"></div>
+            <div class="radio-text">매일 업무에서 활용하고 있어요</div>
+          </label>
+          <label class="radio-item" onclick="selectAiExp(this, 4)">
+            <input type="radio" name="ai_exp" value="4" />
+            <div class="radio-dot"></div>
+            <div class="radio-text">Max 플랜을 사용 중이고, 토큰을 적극적으로 쓰고 있어요</div>
+          </label>
+        </div>
+        <div class="form-error" id="err-aiexp">AI 경험을 선택해주세요.</div>
+
+        <!-- Recommendation banner (shown when exp=1 and option=standard) -->
+        <div id="rec-banner">
+          <div class="rec-banner-title">💡 처음 시작하시는 분께 'AI 파운더스 1기 + 온보딩 강의' 옵션을 추천드려요!</div>
+          <div class="rec-banner-body">개강 전 3시간 라이브 세션에서 환경 세팅 · 기본 사용법 · 실습까지 한 번에 다집니다. 본 과정을 훨씬 수월하게 따라오실 수 있어요.<br><br>옵션 변경을 원하시면 <a class="rec-banner-link" href="https://bit.ly/4laTfK0" target="_blank" rel="noopener">고객센터로 문의해 주세요 →</a></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="inp-service">만들고 싶은 서비스가 있나요? <span style="color:var(--text-light); font-weight:400;">(선택)</span></label>
+        <textarea class="form-textarea" id="inp-service" placeholder="아직 정해지지 않으셨다면 비워두셔도 괜찮아요." rows="3"></textarea>
+      </div>
+
+      <!-- Consent -->
+      <div class="form-group">
+        <label class="form-label">동의 사항 <span class="req">*</span></label>
+        <div class="consent-group">
+          <label class="check-item" id="chk-privacy-label" onclick="toggleCheck('chk-privacy-label', 'chk-privacy')">
+            <input type="checkbox" id="chk-privacy" />
+            <div class="check-box"></div>
+            <div class="check-text"><strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다.</div>
+          </label>
+          <label class="check-item" id="chk-marketing-label" onclick="toggleCheck('chk-marketing-label', 'chk-marketing')">
+            <input type="checkbox" id="chk-marketing" />
+            <div class="check-box"></div>
+            <div class="check-text"><strong>[선택]</strong> 마케팅 정보 수신에 동의합니다. (할인·혜택 안내)</div>
+          </label>
+        </div>
+        <div class="form-error" id="err-consent">개인정보 수집·이용에 동의해주세요.</div>
+      </div>
+    </div>
+  </div><!-- /apply-body -->
+
+  <!-- Bottom nav buttons -->
+  <div class="apply-footer-btns" id="phase1-btns">
+    <button class="btn-next" onclick="goPhase2()">다음 →</button>
+  </div>
+  <div class="apply-footer-btns" id="phase2-btns" style="display:none;">
+    <button class="btn-back" onclick="goPhase1()">← 이전</button>
+    <button class="btn-submit" onclick="submitApply()">신청 완료하고 결제하기 →</button>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+  JavaScript
+════════════════════════════════════════ -->
+<script>
+(function() {
+  'use strict';
+
+  /* ── Constants ─────────────────────────── */
+  const EARLY_DEADLINE = new Date('2026-04-30T23:59:59+09:00').getTime();
+  const REG_DEADLINE   = new Date('2026-05-14T23:59:59+09:00').getTime();
+  const PAY_STANDARD   = 'https://academia.spartaclub.kr/payment/1401';
+  const PAY_BASE       = 'https://academia.spartaclub.kr/payment/1400';
+
+  const PRICES = {
+    early: { standard: 199000, base: 249000 },
+    regular: { standard: 269000, base: 309000 },
+  };
+
+  /* ── Session / UTM ─────────────────────── */
+  function genSessionId() {
+    try { return crypto.randomUUID(); }
+    catch(e) { return Math.random().toString(36).substr(2, 9) + Date.now().toString(36); }
+  }
+  const SESSION_ID = (function(){
+    let s = sessionStorage.getItem('af1_session_id');
+    if (!s) { s = genSessionId(); sessionStorage.setItem('af1_session_id', s); }
+    return s;
+  })();
+
+  function getUTM() {
+    const p = new URLSearchParams(window.location.search);
+    return {
+      utm_source:   p.get('utm_source')   || '',
+      utm_medium:   p.get('utm_medium')   || '',
+      utm_campaign: p.get('utm_campaign') || '',
+      utm_content:  p.get('utm_content')  || '',
+    };
+  }
+  const UTM = getUTM();
+
+  /* ── Tracking ──────────────────────────── */
+  function track(eventType, extra) {
+    const ev = Object.assign({
+      timestamp:  new Date().toISOString(),
+      event_type: eventType,
+      session_id: SESSION_ID,
+      device:     window.innerWidth < 768 ? 'mobile' : 'desktop',
+      referrer:   document.referrer,
+    }, UTM, extra || {});
+    try {
+      const evs = JSON.parse(localStorage.getItem('af1_events') || '[]');
+      evs.push(ev);
+      if (evs.length > 200) evs.splice(0, evs.length - 200);
+      localStorage.setItem('af1_events', JSON.stringify(evs));
+    } catch(e) {}
+    console.log('[AF1 Track]', ev);
+  }
+
+  // landing_view on load
+  track('landing_view');
+
+  /* ── Price Mode ────────────────────────── */
+  function getPriceMode() {
+    const now = Date.now();
+    if (now >= REG_DEADLINE) return 'closed';
+    if (now >= EARLY_DEADLINE) return 'regular';
+    return 'early';
+  }
+  let currentMode = getPriceMode();
+  let selectedOption = 'standard';
+
+  function fmtPrice(n) {
+    return n.toLocaleString('ko-KR');
+  }
+
+  function applyPriceMode(mode) {
+    const prices = mode === 'early' ? PRICES.early : PRICES.regular;
+    // Hero
+    const heroEl = document.getElementById('hero-price');
+    if (heroEl) heroEl.textContent = fmtPrice(prices.standard) + '원~';
+    // Pricing section
+    const stdP = document.getElementById('std-price');
+    if (stdP) stdP.textContent = fmtPrice(prices.standard);
+    const stdNote = document.getElementById('std-note');
+    if (stdNote) stdNote.textContent = mode === 'early' ? '얼리버드 (~4/30)' : '판매가';
+    const baseP = document.getElementById('base-price');
+    if (baseP) baseP.textContent = fmtPrice(prices.base);
+    const baseNote = document.getElementById('base-note');
+    if (baseNote) baseNote.textContent = mode === 'early' ? '얼리버드 (~4/30)' : '판매가';
+    // Modal
+    const mStd = document.getElementById('modal-std-price');
+    if (mStd) mStd.textContent = fmtPrice(prices.standard) + '원 (' + (mode === 'early' ? '얼리버드' : '판매가') + ')';
+    const mBase = document.getElementById('modal-base-price');
+    if (mBase) mBase.textContent = fmtPrice(prices.base) + '원 (' + (mode === 'early' ? '얼리버드' : '판매가') + ')';
+    // Floating
+    const fp = document.getElementById('float-price');
+    if (fp) fp.textContent = fmtPrice(prices.standard) + '원~';
+    // Final CTA
+    const fp2 = document.getElementById('final-price');
+    if (fp2) fp2.textContent = fmtPrice(prices.standard) + '원~';
+  }
+
+  /* ── Countdown ─────────────────────────── */
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function updateCountdown() {
+    const now = Date.now();
+    const mode = getPriceMode();
+
+    if (mode !== currentMode) {
+      currentMode = mode;
+      applyPriceMode(mode);
+    }
+
+    const banner = document.getElementById('countdown-banner');
+
+    if (mode === 'closed') {
+      banner.className = 'closed-state';
+      document.getElementById('banner-desktop-text').innerHTML = '마감되었습니다. 다음 기수 소식은 준비 중입니다.';
+      document.getElementById('banner-mobile-top').textContent = '마감되었습니다.';
+      document.getElementById('banner-mobile-bot').textContent = '다음 기수 소식 준비 중';
+      const fc = document.getElementById('floating-cta');
+      if (fc) fc.classList.add('hidden');
+      return;
+    }
+
+    const target = mode === 'early' ? EARLY_DEADLINE : REG_DEADLINE;
+    const diff = Math.max(0, target - now);
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+
+    const timeStr = pad(hours) + '시간 ' + pad(mins) + '분 ' + pad(secs) + '초';
+    const timeStrShort = pad(hours) + ':' + pad(mins) + ':' + pad(secs);
+    const dStr = 'D-' + days + '일';
+
+    if (mode === 'early') {
+      banner.className = '';
+      document.getElementById('cd-days').textContent   = dStr + ' ';
+      document.getElementById('cd-time').textContent   = timeStr;
+      document.getElementById('cd-days-m').textContent = 'D-' + days + '일 ';
+      document.getElementById('cd-time-m').textContent = timeStrShort;
+      const dfDays = document.getElementById('float-days');
+      if (dfDays) dfDays.textContent = days;
+    } else {
+      banner.className = 'regular-state';
+      document.getElementById('banner-desktop-text').innerHTML =
+        '🔥 모집 마감까지 <strong>D-' + days + '일 ' + timeStr + '</strong>' +
+        '<span class="banner-divider">|</span>' +
+        '<span class="banner-price" id="banner-price-label">' + fmtPrice(PRICES.regular.standard) + '원</span>' +
+        '<span id="banner-deadline-note">(~5/14 목 23:59)</span>' +
+        '<span class="banner-next">| 50명 한정</span>';
+      document.getElementById('banner-mobile-top').innerHTML = '🔥 모집 마감 <strong>D-' + days + '일 ' + timeStrShort + '</strong>';
+      document.getElementById('banner-mobile-bot').textContent = fmtPrice(PRICES.regular.standard) + '원 (~5/14 23:59)';
+      const dfSub = document.getElementById('float-sub');
+      if (dfSub) dfSub.innerHTML = '⏰ 마감 D-' + days + '일';
+      const pricingNote = document.getElementById('pricing-deadline-note');
+      if (pricingNote) pricingNote.textContent = '⏰ 5/14(목) 23:59 모집 마감';
+    }
+  }
+
+  applyPriceMode(currentMode);
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ── Floating CTA visibility ───────────── */
+  let floatHidden = false;
+  const hero = document.getElementById('hero');
+  const finalCta = document.getElementById('final-cta');
+  const floatEl = document.getElementById('floating-cta');
+
+  function checkFloatVisibility() {
+    if (!hero || !finalCta || !floatEl) return;
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    const finalTop   = finalCta.getBoundingClientRect().top;
+    const wh = window.innerHeight;
+    const shouldHide = heroBottom > 0 || finalTop < wh;
+    if (shouldHide !== floatHidden) {
+      floatHidden = shouldHide;
+      floatEl.classList.toggle('hidden', shouldHide);
+    }
+  }
+  window.addEventListener('scroll', checkFloatVisibility, { passive: true });
+  checkFloatVisibility();
+
+  /* ── FAQ accordion ─────────────────────── */
+  window.toggleFaq = function(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  };
+
+  /* ── Option Modal ──────────────────────── */
+  let modalLocation = '';
+  window.openModal = function(location) {
+    if (getPriceMode() === 'closed') return;
+    modalLocation = location;
+    track('cta_click', { location: location });
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeModal = function(e) {
+    if (e && e.target !== document.getElementById('modal-overlay')) return;
+    closeModalDirect();
+  };
+  window.closeModalDirect = function() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  /* ── Apply Form ────────────────────────── */
+  window.startApply = function(option) {
+    selectedOption = option;
+    closeModalDirect();
+    // Restore saved data
+    restoreFormData();
+    showApply();
+    track('apply_start', { option: option });
+  };
+
+  function showApply() {
+    document.getElementById('apply-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    showPhase(1);
+    window.scrollTo(0, 0);
+  }
+
+  window.closeApply = function() {
+    document.getElementById('apply-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  function showPhase(n) {
+    document.getElementById('phase1').classList.toggle('active', n === 1);
+    document.getElementById('phase2').classList.toggle('active', n === 2);
+    document.getElementById('phase1-btns').style.display = n === 1 ? 'flex' : 'none';
+    document.getElementById('phase2-btns').style.display = n === 2 ? 'flex' : 'none';
+    const fill = document.getElementById('progress-fill');
+    const label = document.getElementById('progress-label');
+    if (fill) fill.style.width = n === 1 ? '50%' : '100%';
+    if (label) label.textContent = 'Phase ' + n + ' / 2';
+    document.getElementById('apply-overlay').scrollTop = 0;
+  }
+
+  /* ── Phone formatting ──────────────────── */
+  document.getElementById('inp-phone').addEventListener('input', function() {
+    let v = this.value.replace(/\D/g, '');
+    if (v.length > 11) v = v.substr(0, 11);
+    if (v.length >= 7) {
+      this.value = v.substr(0,3) + '-' + v.substr(3,4) + '-' + v.substr(7);
+    } else if (v.length >= 4) {
+      this.value = v.substr(0,3) + '-' + v.substr(3);
+    } else {
+      this.value = v;
+    }
+  });
+
+  /* ── Motivation counter ────────────────── */
+  document.getElementById('inp-motivation').addEventListener('input', function() {
+    const len = this.value.length;
+    const counter = document.getElementById('motivation-counter');
+    if (counter) counter.textContent = '20자 이상 입력해주세요. (현재 ' + len + '자)';
+  });
+
+  /* ── Phase 1 validation ────────────────── */
+  window.goPhase2 = function() {
+    let valid = true;
+    const name = document.getElementById('inp-name');
+    const phone = document.getElementById('inp-phone');
+    const motiv = document.getElementById('inp-motivation');
+    const errName = document.getElementById('err-name');
+    const errPhone = document.getElementById('err-phone');
+    const errMotiv = document.getElementById('err-motivation');
+
+    if (!name.value.trim()) {
+      name.classList.add('error'); errName.style.display = 'block'; valid = false;
+    } else { name.classList.remove('error'); errName.style.display = 'none'; }
+
+    const phoneVal = phone.value.replace(/\D/g, '');
+    if (phoneVal.length < 10 || phoneVal.length > 11 || !phoneVal.startsWith('010')) {
+      phone.classList.add('error'); errPhone.style.display = 'block'; valid = false;
+    } else { phone.classList.remove('error'); errPhone.style.display = 'none'; }
+
+    if (motiv.value.trim().length < 20) {
+      motiv.classList.add('error'); errMotiv.style.display = 'block'; valid = false;
+    } else { motiv.classList.remove('error'); errMotiv.style.display = 'none'; }
+
+    if (!valid) return;
+
+    // Save phase 1 data
+    saveFormData(1, {
+      name: name.value.trim(),
+      phone: phone.value.trim(),
+      motivation: motiv.value.trim(),
+    });
+    showPhase(2);
+  };
+
+  window.goPhase1 = function() { showPhase(1); };
+
+  /* ── AI Exp selection ──────────────────── */
+  let aiExpValue = 0;
+  window.selectAiExp = function(el, val) {
+    document.querySelectorAll('#ai-exp-group .radio-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+    aiExpValue = val;
+    // Show rec banner only if standard and exp=1
+    const recBanner = document.getElementById('rec-banner');
+    if (recBanner) {
+      recBanner.classList.toggle('visible', val === 1 && selectedOption === 'standard');
+    }
+  };
+
+  /* ── Checkbox ──────────────────────────── */
+  window.toggleCheck = function(labelId, inputId) {
+    const label = document.getElementById(labelId);
+    const input = document.getElementById(inputId);
+    if (!label || !input) return;
+    label.classList.toggle('checked');
+    input.checked = label.classList.contains('checked');
+  };
+
+  /* ── Phase 2 submit ────────────────────── */
+  window.submitApply = function() {
+    let valid = true;
+    const errAiExp = document.getElementById('err-aiexp');
+    const errConsent = document.getElementById('err-consent');
+    const privacyChecked = document.getElementById('chk-privacy').checked;
+
+    if (aiExpValue === 0) {
+      errAiExp.style.display = 'block'; valid = false;
+    } else { errAiExp.style.display = 'none'; }
+
+    if (!privacyChecked) {
+      errConsent.style.display = 'block'; valid = false;
+    } else { errConsent.style.display = 'none'; }
+
+    if (!valid) return;
+
+    const p1 = getFormData(1);
+    const p2 = {
+      ai_experience: aiExpValue,
+      desired_service: document.getElementById('inp-service').value.trim(),
+      marketing_consent: document.getElementById('chk-marketing').checked,
+    };
+
+    const applyData = Object.assign({}, p1, p2, {
+      selected_option: selectedOption,
+      payment_link: selectedOption === 'base' ? PAY_BASE : PAY_STANDARD,
+      apply_status: 'apply_done',
+    }, UTM);
+
+    // Save applicant record
+    try {
+      const applicants = JSON.parse(localStorage.getItem('af1_applicants') || '[]');
+      applicants.push(Object.assign({ id: genSessionId(), created_at: new Date().toISOString() }, applyData));
+      localStorage.setItem('af1_applicants', JSON.stringify(applicants));
+    } catch(e) {}
+
+    track('apply_done', {
+      option: selectedOption,
+      ai_experience: aiExpValue,
+    });
+
+    // Clear session form data
+    try { sessionStorage.removeItem('af1_form_phase1'); } catch(e) {}
+
+    // Redirect to payment (same tab)
+    const payUrl = selectedOption === 'base' ? PAY_BASE : PAY_STANDARD;
+    window.location.href = payUrl;
+  };
+
+  /* ── Form persistence ──────────────────── */
+  function saveFormData(phase, data) {
+    try { sessionStorage.setItem('af1_form_phase' + phase, JSON.stringify(data)); } catch(e) {}
+  }
+  function getFormData(phase) {
+    try { return JSON.parse(sessionStorage.getItem('af1_form_phase' + phase) || '{}'); } catch(e) { return {}; }
+  }
+  function restoreFormData() {
+    const d = getFormData(1);
+    if (d.name)       document.getElementById('inp-name').value       = d.name;
+    if (d.phone)      document.getElementById('inp-phone').value      = d.phone;
+    if (d.motivation) {
+      document.getElementById('inp-motivation').value = d.motivation;
+      const counter = document.getElementById('motivation-counter');
+      if (counter) counter.textContent = '20자 이상 입력해주세요. (현재 ' + d.motivation.length + '자)';
+    }
+  }
+
+  /* ── Expose for pricing table buttons ──── */
+  // startApply is already on window
+
+})();
+</script>
+
+</body>
+</html>
