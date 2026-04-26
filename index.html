@@ -1215,6 +1215,7 @@
         </div>
         <div class="ss-content">
           <div class="ss-session-num">SESSION 01</div>
+          <div class="ss-speaker-role">현직 1인 SaaS 메이커</div>
           <div class="ss-title">서비스 런칭 실전 인사이트 세션</div>
           <div class="ss-desc">실제 서비스로 매출을 만든 현직 바이브 메이커가, 빌드부터 런칭까지의 실전 노하우를 직접 공유합니다.</div>
           <div class="ss-quote">"아이디어가 있으면 지금 당장 만들어야 합니다. 완벽한 준비는 없어요. 저도 그렇게 시작했고, 그게 맞았습니다."</div>
@@ -1230,6 +1231,7 @@
         </div>
         <div class="ss-content">
           <div class="ss-session-num">SESSION 02</div>
+          <div class="ss-speaker-role">연 매출 약 4억 규모 1인 창업가</div>
           <div class="ss-title">비즈니스 맞춤 마케팅·수익화 세션</div>
           <div class="ss-desc">내 비즈니스 모델에 맞는 마케팅·수익화 전략을 전문 마케터와 함께 직접 설계합니다.</div>
           <div class="ss-quote">"만드는 것보다 알리는 게 더 어렵습니다. 누구에게, 어떻게, 왜 사야 하는지를 먼저 설계해야 팔립니다."</div>
@@ -1246,7 +1248,8 @@
   .ss-avatar { position:relative; width:72px; flex-shrink:0; }
   .ss-avatar svg { width:72px; height:72px; display:block; }
   .ss-badge { position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); background:var(--acc); color:white; font-size:9px; font-weight:800; padding:2px 8px; border-radius:100px; white-space:nowrap; letter-spacing:0.04em; }
-  .ss-session-num { font-size:10px; font-weight:800; color:var(--text-muted); letter-spacing:0.14em; margin-bottom:8px; }
+  .ss-session-num { font-size:10px; font-weight:800; color:var(--text-muted); letter-spacing:0.14em; margin-bottom:6px; }
+  .ss-speaker-role { font-size:13px; font-weight:700; color:var(--text); margin-bottom:10px; }
   .ss-title { font-size:16px; font-weight:800; color:var(--text); margin-bottom:10px; line-height:1.4; }
   .ss-desc { font-size:13px; color:var(--text-sub); line-height:1.8; margin-bottom:16px; }
   .ss-quote { font-size:13px; color:var(--acc-text); line-height:1.75; border-left:2px solid var(--acc); padding-left:12px; font-style:italic; }
@@ -1535,8 +1538,8 @@
         <div><div class="review-author">성*경</div><div class="review-role">디자이너</div></div>
       </div>
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-body">생각만 해보고 못 했던 걸 직접 만들어본 경험이 가장 큰 성과예요. 조금만 더 보완하면 실제로 서비스를 출시하고 수익을 내볼 수 있겠다는 확신이 생겼습니다.</p>
+        <div class="review-stars" style="color:var(--acc);">★★★★<span style="opacity:0.3;">★</span></div>
+        <p class="review-body">빡센 4주였어요. 매주 미션 따라가는 게 쉽진 않았지만, 끝나고 보니 정말 '배포된 내 것'이 남아있더라구요. 다음엔 더 잘 만들어볼 자신감이 생겼습니다.</p>
         <div><div class="review-author">윤*림</div><div class="review-role">기획자</div></div>
       </div>
       <div class="review-card">
@@ -1550,8 +1553,8 @@
         <div><div class="review-author">권*영</div><div class="review-role">기자</div></div>
       </div>
       <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-body">스스로 서비스를 만들어볼 수 있겠다고 느꼈습니다. PRD만 쓰던 PM이 직접 프로토타입까지 만드는 경험을 한 번 하고 나니, 일하는 방식 자체가 달라졌어요.</p>
+        <div class="review-stars" style="color:var(--acc);">★★★★<span style="opacity:0.3;">★</span></div>
+        <p class="review-body">PRD만 쓰던 PM이 직접 프로토타입까지 만드는 경험. 배포 단계에서 좀 헤맸지만 팀원들·튜터에게 물어보며 끝까지 갔어요. 일하는 방식 자체가 달라졌습니다.</p>
         <div><div class="review-author">한*우</div><div class="review-role">PM</div></div>
       </div>
       <div class="review-card">
@@ -1581,7 +1584,7 @@
       </div>
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q3</span>"시간 부담이 크지 않을까요?"</div>
-        <div class="worry-a">주 4~5시간 정도면 충분합니다. 평일 저녁 + 주말 기준이고, 자율학습 + 팀 미팅 1회로 운영돼요.</div>
+        <div class="worry-a">주 5~7시간 정도면 충분합니다. 평일 저녁 + 주말 사용 기준이고, 자율학습 + 팀 미팅 1회 + 제작 시간으로 운영됩니다. 본업과 병행 가능한 수준으로 설계되어 있어요.</div>
       </div>
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q4</span>"정말 4주 안에 결과가 나오나요?"</div>
@@ -1590,6 +1593,80 @@
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════
+  시장 비교표 (FAQ 직후, Pricing 직전)
+════════════════════════════════════════ -->
+<section id="comparison" class="section">
+  <div class="inner">
+    <span class="sec-label">WHY AI FOUNDERS</span>
+    <h2 class="sec-title">왜 AI 파운더스인가?</h2>
+    <p class="sec-desc" style="margin-bottom:36px;">학습도, 해커톤도, 독학도 닿지 못한 끝까지.</p>
+    <div style="overflow-x:auto;">
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th class="cmp-axis">비교</th>
+            <th>G사</th>
+            <th>H사<br><span style="font-weight:400;opacity:0.6;">(단발 해커톤)</span></th>
+            <th>독학<br><span style="font-weight:400;opacity:0.6;">(유튜브+GPT)</span></th>
+            <th class="cmp-highlight">AI 파운더스 1기</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cmp-row-label">형태</td>
+            <td>AI 학습 스터디·커뮤니티</td>
+            <td>1~2일 단발 빌드 행사</td>
+            <td>자기 페이스 학습·시도</td>
+            <td class="cmp-highlight">4주 기수제 빌드 클럽</td>
+          </tr>
+          <tr>
+            <td class="cmp-row-label">기간</td>
+            <td>월 단위 (장기)</td>
+            <td>1~2일</td>
+            <td>자율</td>
+            <td class="cmp-highlight">4주 (압축)</td>
+          </tr>
+          <tr>
+            <td class="cmp-row-label">가격</td>
+            <td>월 29만+</td>
+            <td>15~30만</td>
+            <td>무료</td>
+            <td class="cmp-highlight">19.9만 (얼리버드)</td>
+          </tr>
+          <tr>
+            <td class="cmp-row-label">핵심</td>
+            <td>학습 + 커뮤니티</td>
+            <td>단기 몰입 빌드</td>
+            <td>자기 학습</td>
+            <td class="cmp-highlight">실제 런칭 + 수익 시도</td>
+          </tr>
+          <tr>
+            <td class="cmp-row-label">한계</td>
+            <td class="cmp-weak">결과물 약함</td>
+            <td class="cmp-weak">교육 없이 단기간,<br>난이도 높음</td>
+            <td class="cmp-weak">혼자라 완주 어려움</td>
+            <td class="cmp-highlight cmp-none">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<style>
+  .cmp-table { width:100%; border-collapse:collapse; min-width:600px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+  .cmp-table th { background:rgba(255,255,255,0.06); color:var(--text-muted); font-size:12px; font-weight:700; padding:14px 16px; text-align:center; border-bottom:1px solid var(--border); letter-spacing:0.04em; line-height:1.5; }
+  .cmp-table th.cmp-axis { text-align:left; width:80px; }
+  .cmp-table th.cmp-highlight, .cmp-table td.cmp-highlight { background:rgba(232,112,58,0.08); border-left:1px solid rgba(232,112,58,0.25); }
+  .cmp-table th.cmp-highlight { color:var(--acc-text); }
+  .cmp-table td { padding:15px 16px; font-size:13px; color:var(--text-sub); border-bottom:1px solid rgba(255,255,255,0.05); text-align:center; vertical-align:middle; line-height:1.6; }
+  .cmp-table tr:last-child td { border-bottom:none; }
+  .cmp-row-label { font-size:12px; font-weight:700; color:var(--text-muted); text-align:left !important; letter-spacing:0.04em; white-space:nowrap; }
+  .cmp-highlight { color:var(--text) !important; font-weight:700; }
+  .cmp-weak { color:rgba(255,255,255,0.3) !important; font-size:12px; }
+  .cmp-none { color:var(--acc-text) !important; font-size:18px; font-weight:900; }
+</style>
 
 <!-- ════════════════════════════════════════
   [10] Pricing
