@@ -1721,6 +1721,14 @@
     box-shadow: 0 24px 64px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.15);
     z-index: 10;
   }
+  @media (max-width: 768px) {
+    .mq-card { cursor: pointer; }
+    .mq-card:hover {
+      transform: none;
+      border-color: var(--border);
+      box-shadow: none;
+    }
+  }
   .mq-card img {
     width: 100%;
     height: 170px;
@@ -1728,6 +1736,51 @@
     object-position: top;
     display: block;
     background: #1a1a24;
+  }
+
+  /* ── Lightbox ── */
+  #mq-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.88);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  #mq-lightbox.open { display: flex; }
+  #mq-lightbox img {
+    max-width: min(520px, 92vw);
+    max-height: 82vh;
+    border-radius: 14px;
+    object-fit: contain;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+    animation: lb-in 0.22s cubic-bezier(0.22,1,0.36,1);
+  }
+  #mq-lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @keyframes lb-in {
+    from { opacity: 0; transform: scale(0.88); }
+    to   { opacity: 1; transform: scale(1); }
   }
   .mq-label {
     padding: 10px 14px;
@@ -2922,6 +2975,45 @@
   /* ── Expose for pricing table buttons ──── */
   // startApply is already on window
 
+})();
+</script>
+
+<!-- Lightbox overlay -->
+<div id="mq-lightbox" role="dialog" aria-modal="true">
+  <button id="mq-lightbox-close" aria-label="닫기">✕</button>
+  <img id="mq-lightbox-img" src="" alt="서비스 크게 보기"/>
+</div>
+<script>
+(function(){
+  var lb = document.getElementById('mq-lightbox');
+  var lbImg = document.getElementById('mq-lightbox-img');
+  var lbClose = document.getElementById('mq-lightbox-close');
+
+  function openLightbox(src) {
+    lbImg.src = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  document.querySelectorAll('.mq-card img').forEach(function(img) {
+    img.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openLightbox(this.src);
+    });
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
 })();
 </script>
 
