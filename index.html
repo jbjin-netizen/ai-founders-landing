@@ -989,109 +989,100 @@
 ════════════════════════════════════════ -->
 <section id="hero">
   <div class="inner" style="position:relative; max-width:860px;">
-    <div class="hero-badge">첫 문턱을 넘는 사람들의 커뮤니티</div>
+    <div class="hero-badge">얼리버드 할인 모집 중</div>
     <h1 class="hero-title">
+      AI로 첫 수익화 하는 경험,<br>
       <em>AI 파운더스 1기</em>를 모집합니다.
     </h1>
     <p class="hero-sub">
       함께 모여 만들고, 배포하고, 첫 수익까지 가보는 4주.<br>
-      그 한 번의 경험이, 다음 10번의 기회를 만듭니다.
+      그 한 번의 경험이, 다음 열 번의 기회를 만듭니다.
     </p>
-    <div class="hero-meta">
-      <div class="hero-meta-item">📅 참여기간<span>5/16(토) – 6/13(토)</span></div>
-      <div class="hero-meta-item">👥 정원<span>50명 한정</span></div>
-      <div class="hero-meta-item">💻 운영<span>온라인 위주 참여</span></div>
-    </div>
-    <button class="btn-cta btn-cta-lg" onclick="openModal('hero')">지금 1기 신청하기</button>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('hero')">지금 신청하기</button>
   </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [1-B] 교육 개요
+════════════════════════════════════════ -->
+<section id="overview" style="background:var(--bg-alt); padding:40px 24px; border-top:1px solid var(--border);">
+  <div class="inner" style="max-width:860px; margin:0 auto;">
+    <div class="ov-grid">
+      <div class="ov-item">
+        <div class="ov-label">참여 대상</div>
+        <div class="ov-val">AI로 서비스를 만들고 수익화에 도전하고 싶은 분</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">정원</div>
+        <div class="ov-val">1기 50명 한정</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">참여 기간</div>
+        <div class="ov-val">5/16(토) – 6/13(토) · 4주 과정</div>
+      </div>
+      <div class="ov-item">
+        <div class="ov-label">참여 방식</div>
+        <div class="ov-val">온라인 (수료식 오프라인)</div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .ov-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .ov-item { padding: 20px 20px; border-right: 1px solid var(--border); }
+    .ov-item:last-child { border-right: none; }
+    .ov-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    .ov-val { font-size: 14px; color: var(--text); font-weight: 500; line-height: 1.55; }
+    @media (max-width: 640px) {
+      .ov-grid { grid-template-columns: repeat(2, 1fr); }
+      .ov-item:nth-child(2) { border-right: none; }
+      .ov-item:nth-child(1), .ov-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+    }
+  </style>
 </section>
 
 <!-- ════════════════════════════════════════
   [2] Hook
 ════════════════════════════════════════ -->
 <section id="hook" class="section section-alt">
-  <div class="inner" style="max-width:860px; margin:0 auto; text-align:center;">
-    <p class="hook-text">
-      아이디어는 있었지만,<br>
-      <em>끝까지 만들어본 적은 없었습니다.</em>
-    </p>
-    <p class="hook-body" style="margin-bottom:48px;">
-      시작은 합니다. 하지만 모든 단계가 거대한 벽이 됩니다.
-    </p>
+  <div class="inner" style="max-width:720px; margin:0 auto;">
+    <h2 class="hook-text" style="text-align:center; margin-bottom:40px;">
+      AI로 뭔가 만들어보려고 했지만<br>
+      <em>끝까지 완성해본 적, 없지 않나요?</em>
+    </h2>
 
-    <!-- 4-card grid -->
-    <div class="hk-cards">
-      <div class="hk-card">
-        <div class="hk-emoji">🤔</div>
-        <div class="hk-stage-row"><span class="hk-check">☐</span><span class="hk-stage">기획</span></div>
-        <p class="hk-copy">"이게 진짜 팔릴까?" 고민만 하다 고객 정의 단계에서 멈추고</p>
-      </div>
-      <div class="hk-arrow">→</div>
-      <div class="hk-card">
-        <div class="hk-emoji">😰</div>
-        <div class="hk-stage-row"><span class="hk-check">☐</span><span class="hk-stage">구현</span></div>
-        <p class="hk-copy">데이터는 어디서? API는 어떻게? 막상 만들려니 막막해집니다</p>
-      </div>
-      <div class="hk-arrow">→</div>
-      <div class="hk-card">
-        <div class="hk-emoji">😶‍🌫️</div>
-        <div class="hk-stage-row"><span class="hk-check">☐</span><span class="hk-stage">비즈니스</span></div>
-        <p class="hk-copy">퍼널·결제창 세팅, '돈 벌 구조' 근처에도 못 가본 채</p>
-      </div>
-      <div class="hk-arrow">→</div>
-      <div class="hk-card hk-card--end">
-        <div class="hk-emoji">😮‍💨</div>
-        <div class="hk-stage-row"><span class="hk-check hk-check--end">☐</span><span class="hk-stage hk-stage--end">포기</span></div>
-        <p class="hk-copy hk-copy--end">익숙한 GPT 창으로 돌아와, 실행은 흐릿해집니다</p>
-      </div>
+    <ul class="pain-list">
+      <li class="pain-item">
+        <span class="pain-emoji">😩</span>
+        <span class="pain-copy">아이디어는 있는데, AI가 막막해서 시작을 못 하고</span>
+      </li>
+      <li class="pain-item">
+        <span class="pain-emoji">😵‍💫</span>
+        <span class="pain-copy">한 번 만들어보다가 막히면 그냥 덮어버리고</span>
+      </li>
+      <li class="pain-item">
+        <span class="pain-emoji">🙄</span>
+        <span class="pain-copy">유튜브, 강의는 보는데 실제로 만든 건 없고</span>
+      </li>
+      <li class="pain-item">
+        <span class="pain-emoji">😞</span>
+        <span class="pain-copy">어렵게 완성해도 아무도 쓰지 않고, 수익으로 잘 이어지지 않습니다</span>
+      </li>
+    </ul>
+
+    <div class="pain-conclusion">
+      <p>결국 혼자서는 끝까지 가기 어렵습니다.</p>
+      <p>문제는 의지가 아니라, <strong>끝까지 가게 만드는 구조가 없기 때문입니다.</strong></p>
     </div>
-
-    <p class="hook-body" style="margin-top:48px;">
-      지식이 부족해서가 아닙니다.<br>
-      혼자서는 넘을 수 없는 <strong style="color:var(--text);">'완성의 문턱'</strong>을 함께 넘겨줄 구조가 없었기 때문입니다.
-    </p>
   </div>
 
   <style>
-    .hk-cards {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-      gap: 0;
-      align-items: center;
-      text-align: left;
-    }
-    .hk-arrow {
-      font-size: 20px; color: var(--text-muted); padding: 0 8px;
-      align-self: center; margin-top: -16px;
-    }
-    .hk-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 20px;
-    }
-    .hk-card--end {
-      background: rgba(180,40,40,0.08);
-      border-color: rgba(180,40,40,0.3);
-    }
-    .hk-emoji { font-size: 32px; margin-bottom: 14px; line-height: 1; }
-    .hk-stage-row { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
-    .hk-check {
-      font-size: 15px; color: var(--text-muted); line-height: 1;
-    }
-    .hk-check--end { color: rgba(220,60,60,0.7); }
-    .hk-stage {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--text-muted);
-    }
-    .hk-stage--end { color: rgba(220,80,80,0.85); }
-    .hk-copy { font-size: 14px; color: var(--text-sub); line-height: 1.65; margin: 0; }
-    .hk-copy--end { color: rgba(220,100,100,0.75); }
-
-    @media (max-width: 680px) {
-      .hk-cards { grid-template-columns: 1fr; gap: 0; }
-      .hk-arrow { padding: 4px 0; margin: 0; text-align: center; transform: rotate(90deg); }
-    }
+    .pain-list { list-style: none; padding: 0; margin: 0 0 40px; display: flex; flex-direction: column; gap: 16px; }
+    .pain-item { display: flex; align-items: flex-start; gap: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 18px 20px; }
+    .pain-emoji { font-size: 24px; flex-shrink: 0; line-height: 1.2; }
+    .pain-copy { font-size: 16px; color: var(--text-sub); line-height: 1.6; }
+    .pain-conclusion { border-left: 3px solid var(--acc); padding: 20px 24px; background: rgba(232,112,58,0.06); border-radius: 0 var(--r) var(--r) 0; }
+    .pain-conclusion p { margin: 0 0 8px; font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.5; }
+    .pain-conclusion p:last-child { margin-bottom: 0; }
   </style>
 </section>
 
@@ -1099,129 +1090,100 @@
   타겟 콜링
 ════════════════════════════════════════ -->
 <!-- ════════════════════════════════════════
-  [3] Insight
+  [3] 솔루션 4카드
 ════════════════════════════════════════ -->
 <section id="insight" class="section">
   <div class="inner insight-inner">
-    <span class="sec-label">WHY AI FOUNDERS</span>
-    <h2 class="sec-title">AI 시대에 관성을 깨고,<br>실행하게 만드는 구조</h2>
-    <p class="sec-desc">막히는 모든 단계에, 끝까지 가게 하는 장치가 있습니다.</p>
+    <span class="sec-label">HOW WE HELP</span>
+    <h2 class="sec-title">AI 파운더스는<br><em>'끝까지 완주할 수밖에 없는 환경'</em>을 만듭니다.</h2>
+    <p class="sec-desc">막히는 순간마다 개입하고, 병목마다 장치가 있습니다.</p>
 
-    <!-- 페인→솔루션 카드 그리드 -->
-    <div class="sv-grid">
+    <!-- 솔루션 4카드 2×2 -->
+    <div class="sol4-grid">
 
-      <div class="sv-card">
-        <span class="sv-stage">기획</span>
-        <p class="sv-pain">"이게 팔릴까?" 고민만 하다 멈춤</p>
-        <div class="sv-divider">↓</div>
-        <p class="sv-sol">1주차 기획안 강제 마감</p>
-        <p class="sv-sol-sub">+ 동료·운영진 밀착 피드백</p>
+      <div class="sol4-card">
+        <div class="sol4-head">
+          <span class="sol4-num">01</span>
+          <h3 class="sol4-title">막히는 순간 혼자 고민하지 않도록</h3>
+          <p class="sol4-sub">커뮤니티 / Q&A</p>
+        </div>
+        <div class="sol4-body">
+          <p>어디가 문제인지 명확하게 짚어주고, 바로 다음 액션으로 이어지도록 운영진이 개입합니다.</p>
+          <p>막히는 부분은 튜터에게 언제든 질문할 수 있고, <strong>평균 2시간 이내 답변</strong>을 받아 흐름이 끊기지 않습니다.</p>
+        </div>
+        <div class="sol4-img-area">
+          <div class="sol4-img-placeholder">슬랙 Q&A 대화 캡처</div>
+        </div>
       </div>
 
-      <div class="sv-card">
-        <span class="sv-stage">구현</span>
-        <p class="sv-pain">데이터·API, 어디서부터 막막</p>
-        <div class="sv-divider">↓</div>
-        <p class="sv-sol">평일 19~21시 슬랙 즉문즉답</p>
-        <p class="sv-sol-sub">+ Claude A to Z 자료집</p>
+      <div class="sol4-card">
+        <div class="sol4-head">
+          <span class="sol4-num">02</span>
+          <h3 class="sol4-title">검증된 AI 수익 모델 기반으로<br>비즈니스 모델 설계</h3>
+          <p class="sol4-sub">BM 라이브러리</p>
+        </div>
+        <div class="sol4-body">
+          <p>아이디어를 단순히 구현하는 것이 아니라 <strong>실제로 돈이 되는 구조</strong>로 바꿉니다.</p>
+          <p>서비스에 맞는 수익화 방식 제안 받고 가격, 타겟, 구조까지 구체적으로 설계합니다.</p>
+        </div>
+        <div class="sol4-img-area">
+          <div class="sol4-img-placeholder">BM 라이브러리 / 수익 구조 다이어그램</div>
+        </div>
       </div>
 
-      <div class="sv-card">
-        <span class="sv-stage">비즈니스</span>
-        <p class="sv-pain">결제·퍼널 구조 근처에도 못 가봄</p>
-        <div class="sv-divider">↓</div>
-        <p class="sv-sol">BM 라이브러리로 수익 구조 즉시 선택</p>
-        <p class="sv-sol-sub">+ 1기 한정 BM 전문가 특강</p>
+      <div class="sol4-card">
+        <div class="sol4-head">
+          <span class="sol4-num">03</span>
+          <h3 class="sol4-title">끝까지 완주하게 만드는<br>실행 구조</h3>
+          <p class="sol4-sub">4주 사이클</p>
+        </div>
+        <div class="sol4-body">
+          <p>기획 → 피드백 → 제작 → 개선 사이클이 4주간 연속적으로 운영됩니다.</p>
+          <p>매주 반드시 결과물을 만드는 미션이 주어지고, 운영진과 동료들의 피드백으로 방향을 계속 점검합니다.</p>
+        </div>
+        <div class="sol4-img-area">
+          <div class="sol4-img-placeholder">리더보드 / 진행 점검 화면</div>
+        </div>
       </div>
 
-      <div class="sv-card">
-        <span class="sv-stage">포기</span>
-        <p class="sv-pain">GPT 창으로 회귀, 흐릿해짐</p>
-        <div class="sv-divider">↓</div>
-        <p class="sv-sol">매주 줌 미팅 + 데모데이 발표 의무</p>
-        <p class="sv-sol-sub">+ 이탈 방지 구조 설계</p>
-      </div>
-
-      <div class="sv-card">
-        <span class="sv-stage">표류</span>
-        <p class="sv-pain">마감 없이 흘러가다 흐지부지</p>
-        <div class="sv-divider">↓</div>
-        <p class="sv-sol">매주 관문 통과 구조</p>
-        <p class="sv-sol-sub">기획 → 제작 → 마케팅 → 수익화</p>
-      </div>
-
-      <div class="sv-card sv-card--win">
-        <span class="sv-stage sv-stage--win">4주 후</span>
-        <div class="sv-win-emoji">🚀</div>
-        <p class="sv-win-title">서비스 배포 완료</p>
-        <p class="sv-win-desc">실제로 작동하는 서비스,<br>첫 유저, 첫 수익,<br>그리고 다음 10번의 출발점.</p>
+      <div class="sol4-card">
+        <div class="sol4-head">
+          <span class="sol4-num">04</span>
+          <h3 class="sol4-title">즉시 활용 가능한 교육 자료 및<br>실전 템플릿</h3>
+          <p class="sol4-sub">자료집</p>
+        </div>
+        <div class="sol4-body">
+          <p>단순한 강의가 아니라 <strong>실제로 만들 때 바로 써먹을 수 있는 자료</strong>를 제공합니다.</p>
+          <p>DB, API, 결제 구현까지 막히는 모든 구간의 자료가 제공됩니다.</p>
+        </div>
+        <div class="sol4-img-area">
+          <div class="sol4-img-placeholder">자료집·템플릿 미리보기</div>
+        </div>
       </div>
 
     </div>
 
-    <div class="insight-highlight" style="margin-top:40px;">
-      막막함에 멈추던 어제는 잊으세요.<br>
-      파운더스에 올라타면, 병목을 뚫고 반드시 <strong>'완성하는 경험'</strong>을 합니다.
+    <div class="sol4-conclusion">
+      AI 파운더스는 단순한 스터디가 아니라<br>
+      <strong>포기하지 않고 끝까지 가게 만드는 구조</strong>로 설계되어 있습니다.
     </div>
 
     <style>
-      .sv-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-top: 36px;
-      }
-      .sv-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        padding: 20px 16px;
-        display: flex;
-        flex-direction: column;
-      }
-      .sv-card--win {
-        background: rgba(232,112,58,0.08);
-        border-color: rgba(232,112,58,0.4);
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        grid-column: span 1;
-      }
-      .sv-stage {
-        font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
-        text-transform: uppercase; color: var(--text-muted);
-        margin-bottom: 10px;
-      }
-      .sv-stage--win { color: var(--acc); }
-      .sv-pain {
-        font-size: 13px; color: var(--text-muted); line-height: 1.6;
-        margin: 0; flex: 1;
-      }
-      .sv-divider {
-        font-size: 16px; color: var(--acc); text-align: center;
-        margin: 14px 0;
-      }
-      .sv-sol {
-        font-size: 13px; font-weight: 700; color: var(--text);
-        line-height: 1.55; margin: 0 0 4px;
-      }
-      .sv-sol-sub {
-        font-size: 12px; color: var(--acc-text); line-height: 1.5; margin: 0;
-      }
-      .sv-win-emoji { font-size: 36px; margin: 8px 0 12px; }
-      .sv-win-title {
-        font-size: 15px; font-weight: 800; color: var(--acc);
-        margin: 0 0 8px; line-height: 1.3;
-      }
-      .sv-win-desc {
-        font-size: 13px; color: var(--text-sub); line-height: 1.7; margin: 0;
-      }
-      @media (max-width: 640px) {
-        .sv-grid { grid-template-columns: repeat(2, 1fr); }
-      }
-      @media (max-width: 400px) {
-        .sv-grid { grid-template-columns: 1fr; }
-      }
+      .sol4-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+      .sol4-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; }
+      .sol4-head { padding: 24px 24px 16px; border-bottom: 1px solid var(--border); }
+      .sol4-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--acc); margin-bottom: 8px; display: block; }
+      .sol4-title { font-size: 17px; font-weight: 800; color: var(--text); margin: 0 0 6px; line-height: 1.4; }
+      .sol4-sub { font-size: 12px; color: var(--text-muted); margin: 0; font-weight: 600; letter-spacing: 0.05em; }
+      .sol4-body { padding: 20px 24px; flex: 1; }
+      .sol4-body p { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin: 0 0 10px; }
+      .sol4-body p:last-child { margin-bottom: 0; }
+      .sol4-body strong { color: var(--text); }
+      .sol4-img-area { padding: 0 24px 24px; }
+      .sol4-img-placeholder { background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px; padding: 20px; font-size: 12px; color: var(--text-muted); text-align: center; }
+      .sol4-conclusion { margin-top: 32px; text-align: center; padding: 28px 32px; background: rgba(232,112,58,0.08); border: 1px solid rgba(232,112,58,0.3); border-radius: var(--r); font-size: 16px; color: var(--text-sub); line-height: 1.7; }
+      .sol4-conclusion strong { color: var(--acc); }
+      @media (max-width: 640px) { .sol4-grid { grid-template-columns: 1fr; } }
     </style>
   </div>
 </section>
@@ -1231,49 +1193,194 @@
 ════════════════════════════════════════ -->
 <section id="solution" class="section section-alt">
   <div class="inner">
-    <span class="sec-label">HOW IT WORKS</span>
-    <h2 class="solution-quote">
-      병목마다 장치가 있고,<br>
-      <em>4주 뒤엔 반드시 결과물이 남습니다.</em>
-    </h2>
-    <p class="sec-desc" style="margin-bottom:40px;">
-      5인 피어 팀 + 매주 마감 + 튜터 즉문즉답.<br>
-      혼자선 흐지부지됐을 모든 단계가, 여기선 반드시 통과됩니다.
+    <span class="sec-label">CURRICULUM</span>
+    <h2 class="solution-quote">4주 동안 이렇게 배워요</h2>
+    <p class="sec-desc" style="margin-bottom:32px;">
+      각 주차를 클릭하면, 그 주에 받는 주요 교육 내용과 자료·도움 방식을 보실 수 있습니다.
     </p>
 
-    <div style="overflow-x:auto;">
-      <table class="week-table">
-        <thead>
-          <tr>
-            <th>주차</th>
-            <th>마일스톤</th>
-            <th>산출물</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="week-num">Week 1</td>
-            <td class="week-milestone">아이디어 구체화·기획 완료</td>
-            <td><span class="week-output">1Page 기획안</span></td>
-          </tr>
-          <tr>
-            <td class="week-num">Week 2</td>
-            <td class="week-milestone">MVP 제작·배포</td>
-            <td><span class="week-output">동작하는 제품</span></td>
-          </tr>
-          <tr>
-            <td class="week-num">Week 3</td>
-            <td class="week-milestone">마케팅 세팅·기능 보완</td>
-            <td><span class="week-output">첫 유입 데이터</span></td>
-          </tr>
-          <tr>
-            <td class="week-num">Week 4</td>
-            <td class="week-milestone">수익화 실험 · 데모데이 발표</td>
-            <td><span class="week-output highlight">첫 유저 · 첫 수익</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- 아코디언 -->
+    <div class="wk-accordion">
+
+      <!-- Week 1 -->
+      <div class="wk-item open" id="wk1">
+        <button class="wk-header" onclick="toggleWeek('wk1')">
+          <div class="wk-header-left">
+            <span class="wk-chip">Week 1</span>
+            <span class="wk-time-chip">⏱ 주 5~7시간</span>
+            <span class="wk-milestone">아이디어 구체화 · 기획 완료</span>
+          </div>
+          <div class="wk-header-right">
+            <span class="wk-output">1Page 기획안</span>
+            <span class="wk-chevron">▾</span>
+          </div>
+        </button>
+        <div class="wk-body">
+          <div class="wk-section-title">이번 주에 배우는 것</div>
+          <ul class="wk-list">
+            <li><strong>검증된 5가지 AI 수익 모델 패턴 분석</strong> — 구독·광고·중개·정보 상품·도구 판매, 각 모델의 단가·전환율·리스크</li>
+            <li><strong>내 아이디어에 맞는 BM 매칭법</strong> — '내가 만들고 싶은 것'과 '사람들이 돈 낼 것' 사이의 거리 좁히기</li>
+            <li><strong>JTBD 기반 고객 페르소나 정의</strong> — 누가 / 어떤 상황에서 / 왜 / 어떻게</li>
+            <li><strong>핵심 가치 제안(UVP) 한 문장 정리</strong> — 한 줄로 표현 못 하면 만들 수 없음</li>
+            <li><strong>가격 가설 설계</strong> — 누구에게·얼마에·왜 받을 수 있는지</li>
+            <li><strong>경쟁 벤치마킹(3~5개)</strong> + 차별점 정리</li>
+            <li><strong>1Page 기획안(PRD-light) 작성법</strong> — 한 장에 고객·기능·가격·차별점</li>
+          </ul>
+          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
+          <ul class="wk-list wk-list-dot">
+            <li>BM 라이브러리 — 5가지 핵심 AI 수익 모델 + 실제 사례</li>
+            <li>1Page 기획 템플릿 (PRD-light)</li>
+            <li>JTBD 기반 페르소나 워크시트</li>
+            <li>경쟁 벤치마킹 시트 + UVP 작성 가이드</li>
+            <li>튜터의 아이디어 개별 피드백 — "이게 진짜 팔릴까" 가설 검토</li>
+          </ul>
+          <div class="wk-quote">"이게 팔릴까?" 고민에서 멈추지 않습니다. 1주차 안에 시장성 검토가 끝나, 2주차로 진입합니다.</div>
+        </div>
+      </div>
+
+      <!-- Week 2 -->
+      <div class="wk-item" id="wk2">
+        <button class="wk-header" onclick="toggleWeek('wk2')">
+          <div class="wk-header-left">
+            <span class="wk-chip">Week 2</span>
+            <span class="wk-time-chip">⏱ 주 7~8시간</span>
+            <span class="wk-milestone">MVP 제작 → 실 서비스 배포</span>
+          </div>
+          <div class="wk-header-right">
+            <span class="wk-output">동작하는 제품</span>
+            <span class="wk-chevron">▾</span>
+          </div>
+        </button>
+        <div class="wk-body">
+          <div class="wk-section-title">이번 주에 배우는 것</div>
+          <ul class="wk-list">
+            <li><strong>CLAUDE.md / sub-agents / skills 활용법</strong> — 작업별 컨텍스트 분리</li>
+            <li><strong>DB 설계 및 API 호출 패턴</strong></li>
+            <li><strong>MCP 서버 연동</strong> — 자주 쓰는 MCP 활용</li>
+            <li><strong>Vercel 배포 + 도메인 연결</strong> — 가비아·Cloudflare DNS 설정</li>
+            <li><strong>Git 기본 워크플로우</strong> — 브랜치·커밋·머지</li>
+          </ul>
+          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
+          <ul class="wk-list wk-list-dot">
+            <li>Claude Code 활용 자료집 — 설정·프롬프트·디버깅·배포까지 단계별</li>
+            <li>CLAUDE.md / sub-agents / skills 최적화 가이드</li>
+            <li>DB 설계 가이드 & API 호출 + MCP 연동 템플릿 모음</li>
+            <li>Vercel 배포·도메인 체크리스트</li>
+            <li>슬랙 즉문즉답 — 막히면 2시간 안에 튜터가 붙어 함께 해결</li>
+          </ul>
+          <div class="wk-quote">데이터·API 등 어렵고 막막한 때에, 튜터와 압축된 교육자료로 문제를 쉽게 해결할 수 있습니다.</div>
+        </div>
+      </div>
+
+      <!-- Week 3 -->
+      <div class="wk-item" id="wk3">
+        <button class="wk-header" onclick="toggleWeek('wk3')">
+          <div class="wk-header-left">
+            <span class="wk-chip">Week 3</span>
+            <span class="wk-time-chip">⏱ 주 4~7시간</span>
+            <span class="wk-milestone">마케팅 → 첫 유입</span>
+          </div>
+          <div class="wk-header-right">
+            <span class="wk-output">첫 유입 데이터</span>
+            <span class="wk-chevron">▾</span>
+          </div>
+        </button>
+        <div class="wk-body">
+          <div class="wk-section-title">이번 주에 배우는 것</div>
+          <ul class="wk-list">
+            <li><strong>전환 중심 랜딩 구조</strong> — Hero·USP·Social Proof·CTA·FAQ 작성법</li>
+            <li><strong>GA4 이벤트 설계</strong> — 핵심 funnel 정의 + 이탈 지점 추적</li>
+            <li><strong>빌드 인 퍼블릭(Build in Public)</strong></li>
+            <li><strong>바이럴 루프 설계</strong></li>
+            <li><strong>A/B 테스트</strong></li>
+            <li><strong>첫 유저 인터뷰 5명</strong> — 인사이트 추출법 + 다음 가설 도출</li>
+          </ul>
+          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
+          <ul class="wk-list wk-list-dot">
+            <li>랜딩 카피 템플릿 — Hero·USP·CTA·FAQ 구조별</li>
+            <li>GA4·Pixel·GTM 세팅 가이드 + 핵심 이벤트 정의서</li>
+            <li>무료 채널 마케팅 플레이북</li>
+            <li>바이럴 루프 설계 패턴집</li>
+            <li>빌드 인 퍼블릭 템플릿</li>
+            <li>첫 유저 인터뷰 스크립트 + 인사이트 정리 워크시트</li>
+            <li>마케팅 셋업 특별강의 — BM 구조에 맞는 단기간 성과 달성 마케팅 방식</li>
+          </ul>
+          <div class="wk-quote">"어디서 사람을 데려오지?" 막막함이, 채널 플레이북과 코칭으로 풀립니다.</div>
+        </div>
+      </div>
+
+      <!-- Week 4 -->
+      <div class="wk-item" id="wk4">
+        <button class="wk-header" onclick="toggleWeek('wk4')">
+          <div class="wk-header-left">
+            <span class="wk-chip wk-chip--final">Week 4</span>
+            <span class="wk-time-chip">⏱ 주 6~8시간</span>
+            <span class="wk-milestone">결과 만들기 → 공유</span>
+          </div>
+          <div class="wk-header-right">
+            <span class="wk-output wk-output--final">첫 유저 · 첫 수익</span>
+            <span class="wk-chevron">▾</span>
+          </div>
+        </button>
+        <div class="wk-body">
+          <div class="wk-section-title">이번 주에 배우는 것</div>
+          <ul class="wk-list">
+            <li><strong>PG 연동 및 결제 흐름 설계</strong></li>
+            <li><strong>Webhook 처리</strong></li>
+            <li><strong>가격 전략</strong></li>
+            <li><strong>첫 유저 onboarding 플로우</strong></li>
+            <li><strong>데모데이 발표 및 3분 발표 스킬</strong></li>
+            <li><strong>다음 스텝</strong> — 4주 이후 실 서비스 운영</li>
+          </ul>
+          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
+          <ul class="wk-list wk-list-dot">
+            <li>PG 연동 가이드 & 결제 흐름 설계 패턴집</li>
+            <li>Webhook·이메일 자동화 템플릿</li>
+            <li>가격 전략 워크시트</li>
+            <li>데모데이 발표 템플릿</li>
+            <li>다음 스텝 매뉴얼 — 나만의 비즈니스 복제 가이드 (4주 후 평생 활용)</li>
+            <li>데모데이 + 수익화 개별 코칭 피드백</li>
+          </ul>
+          <div class="wk-quote">결제 붙이고 첫 유저 받는 단계까지 — 혼자라면 흐릿해졌을 마지막을 완성합니다. 그리고 4주 이후에도, 다음을 스스로 만들어 갈 수 있습니다.</div>
+        </div>
+      </div>
+
     </div>
+
+    <style>
+      .wk-accordion { margin-top: 8px; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+      .wk-item { border-bottom: 1px solid var(--border); }
+      .wk-item:last-child { border-bottom: none; }
+      .wk-header {
+        width: 100%; display: flex; align-items: center; justify-content: space-between;
+        padding: 18px 20px; background: none; border: none; cursor: pointer;
+        text-align: left; gap: 12px; transition: background 0.2s;
+      }
+      .wk-header:hover { background: rgba(255,255,255,0.03); }
+      .wk-item.open .wk-header { background: rgba(255,255,255,0.04); }
+      .wk-header-left { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .wk-header-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+      .wk-chip { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; background: rgba(255,255,255,0.08); color: var(--text-muted); padding: 4px 10px; border-radius: 20px; }
+      .wk-chip--final { background: rgba(232,112,58,0.15); color: var(--acc); }
+      .wk-time-chip { font-size: 11px; color: var(--acc); background: rgba(232,112,58,0.1); padding: 3px 8px; border-radius: 12px; }
+      .wk-milestone { font-size: 15px; font-weight: 700; color: var(--text); }
+      .wk-output { font-size: 12px; color: var(--text-muted); background: rgba(255,255,255,0.06); padding: 4px 10px; border-radius: 12px; }
+      .wk-output--final { color: var(--acc); background: rgba(232,112,58,0.12); }
+      .wk-chevron { font-size: 16px; color: var(--text-muted); transition: transform 0.3s; }
+      .wk-item.open .wk-chevron { transform: rotate(180deg); color: var(--acc); }
+      .wk-body { display: none; padding: 0 20px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
+      .wk-item.open .wk-body { display: block; }
+      .wk-section-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--acc); margin: 20px 0 10px; }
+      .wk-list { padding-left: 20px; margin: 0; }
+      .wk-list li { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 6px; }
+      .wk-list li strong { color: var(--text); }
+      .wk-list-dot { list-style: disc; }
+      .wk-quote { margin-top: 20px; padding: 14px 16px; border-left: 3px solid var(--acc); background: rgba(232,112,58,0.06); border-radius: 0 8px 8px 0; font-size: 14px; color: var(--text-sub); line-height: 1.7; font-style: italic; }
+      @media (max-width: 580px) {
+        .wk-header { flex-direction: column; align-items: flex-start; }
+        .wk-header-right { width: 100%; justify-content: space-between; }
+      }
+    </style>
 
     <!-- 운영 방식 5가지 -->
     <div style="margin-top:52px;">
@@ -1837,6 +1944,7 @@
 <section id="pricing" class="section section-alt">
   <div class="inner" style="text-align:center;">
     <span class="sec-label">PRICING</span>
+    <p style="font-size:15px; color:var(--text-muted); margin-bottom:16px; line-height:1.7;">이 4주가 사는 것 — 첫 수익 + 다음 10개를 만드는 능력. <strong style="color:var(--text);">19만원으로.</strong></p>
     <h2 class="sec-title">지금 신청하면<br>얼리버드 가격으로 시작합니다</h2>
     <p class="sec-desc" style="margin: 0 auto 8px; text-align:center;">
       <span id="pricing-deadline-note" style="display:inline-block; background:var(--acc-chip); color:var(--acc-text); font-size:13px; font-weight:700; padding:4px 14px; border-radius:100px; margin-bottom:16px;">🔥 4/30(목) 23:59까지 얼리버드</span>
@@ -2106,16 +2214,18 @@
 ════════════════════════════════════════ -->
 <section id="final-cta">
   <div class="inner" style="max-width:800px; margin:0 auto;">
-    <h2 class="final-title">혼자라서 미뤄왔던 아이디어,<br>이번에는 끝까지 만들어보세요.</h2>
-    <p class="final-sub">
-      같은 꿈을 가진 동료들과 모여서,<br>세상에 없던 무언가를 만들어갑니다.
+    <p class="final-sub" style="color:var(--text-muted); font-size:16px; margin-bottom:16px;">
+      이번에도 그냥 넘기면 몇 주 뒤에는 지금과 똑같이 멈춰있을 겁니다.
     </p>
-    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:28px; font-size:15px; color:var(--text-muted);">
-      <span>📅 1기: 5/16(토) ~ 6/13(토)</span>
-      <span>👥 50명 한정 · 선착순 마감</span>
-      <span>💰 얼리버드 <span id="final-price" style="color:var(--hl); font-weight:800;">199,000원~</span></span>
+    <h2 class="final-title">이번엔 끝까지 같이 만들어 가봐요.</h2>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:24px 0 32px; font-size:15px; color:var(--text-muted);">
+      <span>얼리버드 이번주 목요일 마감</span>
+      <span>·</span>
+      <span>50명 정원</span>
+      <span>·</span>
+      <span>5/16 시작</span>
     </div>
-    <button class="btn-cta btn-cta-lg" onclick="openModal('final')">지금 1기 신청하기</button>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('final')">1기 합류하기</button>
     <p class="final-note">* 다음 기수(2기) 일정은 1기 종료 후 결정됩니다.</p>
   </div>
 </section>
@@ -2566,6 +2676,14 @@
   }
   window.addEventListener('scroll', checkFloatVisibility, { passive: true });
   checkFloatVisibility();
+
+  /* ── Week accordion ────────────────────── */
+  window.toggleWeek = function(id) {
+    const item = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.wk-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  };
 
   /* ── FAQ accordion ─────────────────────── */
   window.toggleFaq = function(btn) {
