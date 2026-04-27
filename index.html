@@ -168,10 +168,10 @@
       background: var(--acc-chip);
       border: 1px solid rgba(249,115,22,0.35);
       color: var(--acc-text);
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 5px 16px;
+      letter-spacing: 0.06em;
+      padding: 8px 20px;
       border-radius: 100px;
       margin-bottom: 32px;
     }
@@ -991,7 +991,7 @@
   <div class="inner" style="position:relative; max-width:860px;">
     <div class="hero-badge">얼리버드 할인 모집 중</div>
     <h1 class="hero-title">
-      AI로 첫 수익화 하는 경험,<br>
+      AI를 활용한 첫 수익화 경험,<br>
       <em>AI 파운더스 1기</em>를 모집합니다.
     </h1>
     <p class="hero-sub">
@@ -1005,37 +1005,45 @@
 <!-- ════════════════════════════════════════
   [1-B] 교육 개요
 ════════════════════════════════════════ -->
-<section id="overview" style="background:var(--bg-alt); padding:40px 24px; border-top:1px solid var(--border);">
+<section id="overview" style="background:var(--bg-alt); padding:0 24px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <div class="inner" style="max-width:860px; margin:0 auto;">
-    <div class="ov-grid">
-      <div class="ov-item">
-        <div class="ov-label">참여 대상</div>
-        <div class="ov-val">AI로 서비스를 만들고 수익화에 도전하고 싶은 분</div>
+    <div class="ov-rows">
+      <div class="ov-row">
+        <span class="ov-label">참여 대상</span>
+        <span class="ov-val">AI로 서비스를 만들고 수익화에 도전하고 싶은 분</span>
       </div>
-      <div class="ov-item">
-        <div class="ov-label">정원</div>
-        <div class="ov-val">1기 50명 한정</div>
+      <div class="ov-row">
+        <span class="ov-label">정원</span>
+        <span class="ov-val">1기 <strong>50명 한정</strong></span>
       </div>
-      <div class="ov-item">
-        <div class="ov-label">참여 기간</div>
-        <div class="ov-val">5/16(토) – 6/13(토) · 4주 과정</div>
+      <div class="ov-row">
+        <span class="ov-label">참여 기간</span>
+        <span class="ov-val">5/16(토) – 6/13(토) · 4주 과정</span>
       </div>
-      <div class="ov-item">
-        <div class="ov-label">참여 방식</div>
-        <div class="ov-val">온라인 (수료식 오프라인)</div>
+      <div class="ov-row">
+        <span class="ov-label">참여 방식</span>
+        <span class="ov-val">온라인 <span style="color:var(--text-muted); font-size:15px;">(수료식 오프라인)</span></span>
       </div>
     </div>
   </div>
   <style>
-    .ov-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-    .ov-item { padding: 20px 20px; border-right: 1px solid var(--border); }
-    .ov-item:last-child { border-right: none; }
-    .ov-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-    .ov-val { font-size: 14px; color: var(--text); font-weight: 500; line-height: 1.55; }
-    @media (max-width: 640px) {
-      .ov-grid { grid-template-columns: repeat(2, 1fr); }
-      .ov-item:nth-child(2) { border-right: none; }
-      .ov-item:nth-child(1), .ov-item:nth-child(2) { border-bottom: 1px solid var(--border); }
+    .ov-rows { display: flex; flex-direction: column; }
+    .ov-row {
+      display: flex; align-items: center; gap: 32px;
+      padding: 22px 0; border-bottom: 1px solid var(--border);
+    }
+    .ov-row:last-child { border-bottom: none; }
+    .ov-label {
+      font-size: 13px; font-weight: 600; color: var(--text-muted);
+      min-width: 88px; flex-shrink: 0;
+    }
+    .ov-val {
+      font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4;
+    }
+    .ov-val strong { color: var(--acc); }
+    @media (max-width: 480px) {
+      .ov-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 0; }
+      .ov-val { font-size: 16px; }
     }
   </style>
 </section>
@@ -1071,7 +1079,7 @@
 
     <div class="pain-conclusion">
       <p>결국 혼자서는 끝까지 가기 어렵습니다.</p>
-      <p>문제는 의지가 아니라, <strong>끝까지 가게 만드는 구조가 없기 때문입니다.</strong></p>
+      <p>문제는 의지가 아니라, <strong style="color:var(--acc);">끝까지 가게 만드는 구조</strong>가 없기 때문입니다.</p>
     </div>
   </div>
 
@@ -1095,7 +1103,7 @@
 <section id="insight" class="section">
   <div class="inner insight-inner">
     <span class="sec-label">HOW WE HELP</span>
-    <h2 class="sec-title">AI 파운더스는<br><em>'끝까지 완주할 수밖에 없는 환경'</em>을 만듭니다.</h2>
+    <h2 class="sec-title">AI 파운더스는<br>'끝까지 완주하게 하는 환경'을 만듭니다.</h2>
     <p class="sec-desc">막히는 순간마다 개입하고, 병목마다 장치가 있습니다.</p>
 
     <!-- 솔루션 4카드 2×2 -->
@@ -1216,25 +1224,13 @@
           </div>
         </button>
         <div class="wk-body">
-          <div class="wk-section-title">이번 주에 배우는 것</div>
-          <ul class="wk-list">
-            <li><strong>검증된 5가지 AI 수익 모델 패턴 분석</strong> — 구독·광고·중개·정보 상품·도구 판매, 각 모델의 단가·전환율·리스크</li>
-            <li><strong>내 아이디어에 맞는 BM 매칭법</strong> — '내가 만들고 싶은 것'과 '사람들이 돈 낼 것' 사이의 거리 좁히기</li>
-            <li><strong>JTBD 기반 고객 페르소나 정의</strong> — 누가 / 어떤 상황에서 / 왜 / 어떻게</li>
-            <li><strong>핵심 가치 제안(UVP) 한 문장 정리</strong> — 한 줄로 표현 못 하면 만들 수 없음</li>
-            <li><strong>가격 가설 설계</strong> — 누구에게·얼마에·왜 받을 수 있는지</li>
-            <li><strong>경쟁 벤치마킹(3~5개)</strong> + 차별점 정리</li>
-            <li><strong>1Page 기획안(PRD-light) 작성법</strong> — 한 장에 고객·기능·가격·차별점</li>
-          </ul>
-          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
-          <ul class="wk-list wk-list-dot">
-            <li>BM 라이브러리 — 5가지 핵심 AI 수익 모델 + 실제 사례</li>
-            <li>1Page 기획 템플릿 (PRD-light)</li>
-            <li>JTBD 기반 페르소나 워크시트</li>
-            <li>경쟁 벤치마킹 시트 + UVP 작성 가이드</li>
-            <li>튜터의 아이디어 개별 피드백 — "이게 진짜 팔릴까" 가설 검토</li>
-          </ul>
-          <div class="wk-quote">"이게 팔릴까?" 고민에서 멈추지 않습니다. 1주차 안에 시장성 검토가 끝나, 2주차로 진입합니다.</div>
+          <div class="wk-tags">
+            <span class="wk-tag">BM 설계</span><span class="wk-tag">고객 정의</span><span class="wk-tag">가격 가설</span><span class="wk-tag">1Page 기획안</span>
+          </div>
+          <p class="wk-desc">5가지 AI 수익 모델 중 내 아이디어에 맞는 BM을 골라 고객·가격·차별점을 한 장으로 정리합니다. <strong>"이게 팔릴까?"</strong> 고민은 이 주에 끝납니다.</p>
+          <div class="wk-resources">
+            <span>📋 BM 라이브러리</span><span>📝 1Page 기획 템플릿</span><span>👥 튜터 아이디어 피드백</span>
+          </div>
         </div>
       </div>
 
@@ -1252,23 +1248,13 @@
           </div>
         </button>
         <div class="wk-body">
-          <div class="wk-section-title">이번 주에 배우는 것</div>
-          <ul class="wk-list">
-            <li><strong>CLAUDE.md / sub-agents / skills 활용법</strong> — 작업별 컨텍스트 분리</li>
-            <li><strong>DB 설계 및 API 호출 패턴</strong></li>
-            <li><strong>MCP 서버 연동</strong> — 자주 쓰는 MCP 활용</li>
-            <li><strong>Vercel 배포 + 도메인 연결</strong> — 가비아·Cloudflare DNS 설정</li>
-            <li><strong>Git 기본 워크플로우</strong> — 브랜치·커밋·머지</li>
-          </ul>
-          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
-          <ul class="wk-list wk-list-dot">
-            <li>Claude Code 활용 자료집 — 설정·프롬프트·디버깅·배포까지 단계별</li>
-            <li>CLAUDE.md / sub-agents / skills 최적화 가이드</li>
-            <li>DB 설계 가이드 & API 호출 + MCP 연동 템플릿 모음</li>
-            <li>Vercel 배포·도메인 체크리스트</li>
-            <li>슬랙 즉문즉답 — 막히면 2시간 안에 튜터가 붙어 함께 해결</li>
-          </ul>
-          <div class="wk-quote">데이터·API 등 어렵고 막막한 때에, 튜터와 압축된 교육자료로 문제를 쉽게 해결할 수 있습니다.</div>
+          <div class="wk-tags">
+            <span class="wk-tag">Claude Code</span><span class="wk-tag">DB · API</span><span class="wk-tag">Vercel 배포</span><span class="wk-tag">도메인 연결</span>
+          </div>
+          <p class="wk-desc">Claude Code로 MVP를 만들고 실제 URL로 배포까지 완료합니다. 막히면 <strong>2시간 내 슬랙 즉문즉답</strong>으로 흐름이 끊기지 않습니다.</p>
+          <div class="wk-resources">
+            <span>⚙️ Claude Code 자료집</span><span>🔗 DB·API·MCP 템플릿</span><span>🚀 Vercel 배포 체크리스트</span>
+          </div>
         </div>
       </div>
 
@@ -1286,26 +1272,13 @@
           </div>
         </button>
         <div class="wk-body">
-          <div class="wk-section-title">이번 주에 배우는 것</div>
-          <ul class="wk-list">
-            <li><strong>전환 중심 랜딩 구조</strong> — Hero·USP·Social Proof·CTA·FAQ 작성법</li>
-            <li><strong>GA4 이벤트 설계</strong> — 핵심 funnel 정의 + 이탈 지점 추적</li>
-            <li><strong>빌드 인 퍼블릭(Build in Public)</strong></li>
-            <li><strong>바이럴 루프 설계</strong></li>
-            <li><strong>A/B 테스트</strong></li>
-            <li><strong>첫 유저 인터뷰 5명</strong> — 인사이트 추출법 + 다음 가설 도출</li>
-          </ul>
-          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
-          <ul class="wk-list wk-list-dot">
-            <li>랜딩 카피 템플릿 — Hero·USP·CTA·FAQ 구조별</li>
-            <li>GA4·Pixel·GTM 세팅 가이드 + 핵심 이벤트 정의서</li>
-            <li>무료 채널 마케팅 플레이북</li>
-            <li>바이럴 루프 설계 패턴집</li>
-            <li>빌드 인 퍼블릭 템플릿</li>
-            <li>첫 유저 인터뷰 스크립트 + 인사이트 정리 워크시트</li>
-            <li>마케팅 셋업 특별강의 — BM 구조에 맞는 단기간 성과 달성 마케팅 방식</li>
-          </ul>
-          <div class="wk-quote">"어디서 사람을 데려오지?" 막막함이, 채널 플레이북과 코칭으로 풀립니다.</div>
+          <div class="wk-tags">
+            <span class="wk-tag">랜딩페이지</span><span class="wk-tag">GA4 트래킹</span><span class="wk-tag">무료 채널</span><span class="wk-tag">첫 유저 인터뷰</span>
+          </div>
+          <p class="wk-desc">전환을 만드는 랜딩 구조를 잡고 GA4로 데이터를 추적합니다. <strong>"어디서 사람을 데려오지?"</strong> 막막함은 채널 플레이북으로 해결합니다.</p>
+          <div class="wk-resources">
+            <span>📄 랜딩 카피 템플릿</span><span>📊 GA4 세팅 가이드</span><span>📣 마케팅 플레이북</span>
+          </div>
         </div>
       </div>
 
@@ -1323,25 +1296,13 @@
           </div>
         </button>
         <div class="wk-body">
-          <div class="wk-section-title">이번 주에 배우는 것</div>
-          <ul class="wk-list">
-            <li><strong>PG 연동 및 결제 흐름 설계</strong></li>
-            <li><strong>Webhook 처리</strong></li>
-            <li><strong>가격 전략</strong></li>
-            <li><strong>첫 유저 onboarding 플로우</strong></li>
-            <li><strong>데모데이 발표 및 3분 발표 스킬</strong></li>
-            <li><strong>다음 스텝</strong> — 4주 이후 실 서비스 운영</li>
-          </ul>
-          <div class="wk-section-title" style="margin-top:20px;">주요 교육 자료·도움</div>
-          <ul class="wk-list wk-list-dot">
-            <li>PG 연동 가이드 & 결제 흐름 설계 패턴집</li>
-            <li>Webhook·이메일 자동화 템플릿</li>
-            <li>가격 전략 워크시트</li>
-            <li>데모데이 발표 템플릿</li>
-            <li>다음 스텝 매뉴얼 — 나만의 비즈니스 복제 가이드 (4주 후 평생 활용)</li>
-            <li>데모데이 + 수익화 개별 코칭 피드백</li>
-          </ul>
-          <div class="wk-quote">결제 붙이고 첫 유저 받는 단계까지 — 혼자라면 흐릿해졌을 마지막을 완성합니다. 그리고 4주 이후에도, 다음을 스스로 만들어 갈 수 있습니다.</div>
+          <div class="wk-tags">
+            <span class="wk-tag">PG 결제 연동</span><span class="wk-tag">가격 전략</span><span class="wk-tag">데모데이</span><span class="wk-tag">다음 스텝</span>
+          </div>
+          <p class="wk-desc">결제를 붙이고 첫 유저·첫 수익을 만드는 마지막 단계. <strong>4주 이후에도 혼자 만들어갈 수 있는 가이드</strong>까지 챙겨갑니다.</p>
+          <div class="wk-resources">
+            <span>💳 PG 연동 가이드</span><span>🎤 데모데이 발표 템플릿</span><span>🗺️ 다음 스텝 매뉴얼</span>
+          </div>
         </div>
       </div>
 
@@ -1376,6 +1337,12 @@
       .wk-list li strong { color: var(--text); }
       .wk-list-dot { list-style: disc; }
       .wk-quote { margin-top: 20px; padding: 14px 16px; border-left: 3px solid var(--acc); background: rgba(232,112,58,0.06); border-radius: 0 8px 8px 0; font-size: 14px; color: var(--text-sub); line-height: 1.7; font-style: italic; }
+      .wk-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 14px; }
+      .wk-tag { font-size: 12px; font-weight: 600; color: var(--acc); background: rgba(232,112,58,0.12); border: 1px solid rgba(232,112,58,0.25); padding: 4px 10px; border-radius: 20px; }
+      .wk-desc { font-size: 15px; color: var(--text-sub); line-height: 1.75; margin: 0 0 16px; }
+      .wk-desc strong { color: var(--text); }
+      .wk-resources { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+      .wk-resources span { font-size: 13px; color: var(--text-muted); background: rgba(255,255,255,0.05); border: 1px solid var(--border); padding: 5px 12px; border-radius: 20px; }
       @media (max-width: 580px) {
         .wk-header { flex-direction: column; align-items: flex-start; }
         .wk-header-right { width: 100%; justify-content: space-between; }
