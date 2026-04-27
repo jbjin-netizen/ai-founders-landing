@@ -1107,59 +1107,96 @@
     <h2 class="sec-title">AI 시대에 관성을 깨고,<br>실행하게 만드는 구조</h2>
     <p class="sec-desc">막히는 모든 단계에, 끝까지 가게 하는 장치가 있습니다.</p>
 
-    <!-- 2-column 비교 테이블 -->
-    <div class="solve-table">
-      <div class="solve-head">
-        <div class="solve-col-stage"></div>
-        <div class="solve-col-a">혼자라면 멈췄을 자리</div>
-        <div class="solve-col-b">AI 파운더스 1기에서</div>
+    <!-- 페인→솔루션 카드 그리드 -->
+    <div class="sv-grid">
+
+      <div class="sv-card">
+        <span class="sv-stage">기획</span>
+        <p class="sv-pain">"이게 팔릴까?" 고민만 하다 멈춤</p>
+        <div class="sv-divider">↓</div>
+        <p class="sv-sol">1주차 기획안 강제 마감</p>
+        <p class="sv-sol-sub">+ 동료·운영진 밀착 피드백</p>
       </div>
-      <div class="solve-row">
-        <div class="solve-stage">기획</div>
-        <div class="solve-pain">"이게 진짜 팔릴까?" 고민만 하다 멈춤</div>
-        <div class="solve-ans">1주차 1Page 기획안 강제 마감<br><span class="solve-plus">+ 동료·운영진 밀착 피드백</span></div>
+
+      <div class="sv-card">
+        <span class="sv-stage">구현</span>
+        <p class="sv-pain">데이터·API, 어디서부터 막막</p>
+        <div class="sv-divider">↓</div>
+        <p class="sv-sol">평일 19~21시 슬랙 즉문즉답</p>
+        <p class="sv-sol-sub">+ Claude A to Z 자료집</p>
       </div>
-      <div class="solve-row">
-        <div class="solve-stage">구현</div>
-        <div class="solve-pain">데이터·API 어디서부터 할지 막막</div>
-        <div class="solve-ans">평일 19~21시 슬랙 즉문즉답 오피스아워<br><span class="solve-plus">+ Claude A to Z 문제해결 자료집</span></div>
+
+      <div class="sv-card">
+        <span class="sv-stage">비즈니스</span>
+        <p class="sv-pain">결제·퍼널 구조 근처에도 못 가봄</p>
+        <div class="sv-divider">↓</div>
+        <p class="sv-sol">BM 라이브러리로 수익 구조 즉시 선택</p>
+        <p class="sv-sol-sub">+ 1기 한정 BM 전문가 특강</p>
       </div>
-      <div class="solve-row">
-        <div class="solve-stage">비즈니스</div>
-        <div class="solve-pain">결제·퍼널 구조 근처에도 못 가봄</div>
-        <div class="solve-ans">BM 라이브러리에서 수익 구조 즉시 선택<br><span class="solve-plus">+ 1기 한정 BM 전문가 특강</span></div>
+
+      <div class="sv-card">
+        <span class="sv-stage">포기</span>
+        <p class="sv-pain">GPT 창으로 회귀, 흐릿해짐</p>
+        <div class="sv-divider">↓</div>
+        <p class="sv-sol">매주 줌 미팅 + 데모데이 발표 의무</p>
+        <p class="sv-sol-sub">+ 이탈 방지 구조 설계</p>
       </div>
-      <div class="solve-row">
-        <div class="solve-stage">포기</div>
-        <div class="solve-pain">GPT 창으로 회귀, 실행이 흐릿해짐</div>
-        <div class="solve-ans">매주 줌 미팅 진행 점검<br><span class="solve-plus">+ 4주차 데모데이 발표 의무</span></div>
+
+      <div class="sv-card">
+        <span class="sv-stage">표류</span>
+        <p class="sv-pain">마감 없이 흘러가다 흐지부지</p>
+        <div class="sv-divider">↓</div>
+        <p class="sv-sol">매주 관문 통과 구조</p>
+        <p class="sv-sol-sub">기획 → 제작 → 마케팅 → 수익화</p>
       </div>
-      <div class="solve-row">
-        <div class="solve-stage">표류</div>
-        <div class="solve-pain">마감 없이 흘러가다 미완성으로 흐지부지</div>
-        <div class="solve-ans">매주 통과해야 할 관문 설계<br><span class="solve-plus">기획 → 제작 → 마케팅 → 수익화 강제 완주</span></div>
-      </div>
+
     </div>
 
     <div class="insight-highlight" style="margin-top:40px;">
-      막막함에 멈춰 섰던 어제의 나는 이제 없습니다.<br>
-      핵심만 압축한 비즈니스 가이드와 끝내 완성하게 만드는 강력한 환경이,<br>
-      아이디어로만 존재하던 당신의 비즈니스를 현실로 끌어냅니다.
+      아이디어는 혼자 가지고 있어도,<br>
+      <strong>완성은 구조가 만듭니다.</strong>
     </div>
 
     <style>
-      .solve-table { margin-top: 32px; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; font-size: 14px; }
-      .solve-head { display: grid; grid-template-columns: 72px 1fr 1fr; background: rgba(255,255,255,0.05); padding: 12px 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); gap: 16px; }
-      .solve-col-b { color: var(--acc-text); }
-      .solve-row { display: grid; grid-template-columns: 72px 1fr 1fr; padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 16px; align-items: start; }
-      .solve-row:last-child { border-bottom: none; }
-      .solve-stage { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; padding-top: 2px; }
-      .solve-pain { color: var(--text-muted); line-height: 1.65; }
-      .solve-ans { color: var(--text); font-weight: 600; line-height: 1.65; }
-      .solve-plus { font-size: 12px; font-weight: 400; color: var(--acc-text); }
-      @media (max-width: 560px) {
-        .solve-head { grid-template-columns: 52px 1fr 1fr; font-size: 10px; padding: 10px 12px; }
-        .solve-row { grid-template-columns: 52px 1fr 1fr; padding: 12px; font-size: 13px; }
+      .sv-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 12px;
+        margin-top: 36px;
+      }
+      .sv-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 20px 16px;
+        display: flex;
+        flex-direction: column;
+      }
+      .sv-stage {
+        font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--text-muted);
+        margin-bottom: 10px;
+      }
+      .sv-pain {
+        font-size: 13px; color: var(--text-muted); line-height: 1.6;
+        margin: 0; flex: 1;
+      }
+      .sv-divider {
+        font-size: 16px; color: var(--acc); text-align: center;
+        margin: 14px 0;
+      }
+      .sv-sol {
+        font-size: 13px; font-weight: 700; color: var(--text);
+        line-height: 1.55; margin: 0 0 4px;
+      }
+      .sv-sol-sub {
+        font-size: 12px; color: var(--acc-text); line-height: 1.5; margin: 0;
+      }
+      @media (max-width: 760px) {
+        .sv-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 420px) {
+        .sv-grid { grid-template-columns: 1fr; }
       }
     </style>
   </div>
