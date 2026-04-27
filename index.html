@@ -1723,7 +1723,7 @@
         <button class="pricing-btn" onclick="startApply('base')">신청하기 →</button>
       </div>
     </div>
-    <p style="margin-top:24px; font-size:13px; color:var(--text-muted);">온보딩 강의 일정 택1: 5/10(일) 11:00~14:00 또는 5/12(화) 20:00~23:00</p>
+    <p style="margin-top:24px; font-size:13px; color:var(--text-muted);">온보딩 강의 일정 택1: 5/10(일) 11:00~14:00 또는 5/13(수) 20:00~23:00</p>
   </div>
 </section>
 
@@ -2452,15 +2452,29 @@
 
   /* ── Phone formatting ──────────────────── */
   document.getElementById('inp-phone').addEventListener('input', function() {
-    let v = this.value.replace(/\D/g, '');
+    const el = this;
+    const cursorPos = el.selectionStart;
+    const prevLen = el.value.length;
+
+    let v = el.value.replace(/\D/g, '');
     if (v.length > 11) v = v.substr(0, 11);
-    if (v.length >= 7) {
-      this.value = v.substr(0,3) + '-' + v.substr(3,4) + '-' + v.substr(7);
+
+    let formatted;
+    if (v.length >= 8) {
+      // 8자리 이상일 때만 두 번째 하이픈 추가 (7자리에서 "-" 무한루프 방지)
+      formatted = v.substr(0,3) + '-' + v.substr(3,4) + '-' + v.substr(7);
     } else if (v.length >= 4) {
-      this.value = v.substr(0,3) + '-' + v.substr(3);
+      formatted = v.substr(0,3) + '-' + v.substr(3);
     } else {
-      this.value = v;
+      formatted = v;
     }
+
+    el.value = formatted;
+
+    // 커서 위치 복원 (백스페이스 등으로 지울 때 끝으로 튀지 않게)
+    const diff = formatted.length - prevLen;
+    const newCursor = Math.max(0, cursorPos + diff);
+    el.setSelectionRange(newCursor, newCursor);
   });
 
   /* ── Motivation counter ────────────────── */
