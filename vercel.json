@@ -3,9 +3,11 @@
   "builds": [
     { "src": "index.html", "use": "@vercel/static" },
     { "src": "og-image.png", "use": "@vercel/static" },
-    { "src": "images/**", "use": "@vercel/static" }
+    { "src": "images/**", "use": "@vercel/static" },
+    { "src": "api/sheets.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/sheets", "dest": "/api/sheets.js" },
     { "src": "/og-image.png", "dest": "/og-image.png" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
     { "src": "/(.*)", "dest": "/index.html" }

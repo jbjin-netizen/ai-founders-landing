@@ -2615,15 +2615,12 @@
   const UTM = getUTM();
 
   /* ── Google Sheets 연동 ────────────────── */
-  // Apps Script 배포 후 아래 URL을 교체하세요
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzWXVHkfY98-Cg4igylspiKrfmarVovgKkVrdBiecBNiek15cqfej6-bPs1JSEyZAU5/exec';
+  const SHEETS_URL = '/api/sheets';
 
   function sendToSheets(payload) {
-    if (!SHEETS_URL || SHEETS_URL.startsWith('PASTE')) return;
     try {
       fetch(SHEETS_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       }).catch(function(){});
