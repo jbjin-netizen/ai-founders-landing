@@ -32,11 +32,23 @@ async function appendRow(sheets, sheetName, values) {
 module.exports = async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
+  }
+
+  if (req.method === 'GET') {
+    const hasKey = !!process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+    let parseOk = false;
+    let email = '';
+    try {
+      const cred = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+      parseOk = true;
+      email = cred.client_email || '';
+    } catch(e) {}
+    return res.status(200).json({ ok: true, hasKey, parseOk, email: email.slice(0, 20) + '...' });
   }
 
   if (req.method !== 'POST') {
