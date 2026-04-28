@@ -2302,7 +2302,7 @@
         화~금요일 &nbsp; 10:30 ~ 17:30<br>
         <span style="color:rgba(255,255,255,0.3)">(점심시간 12:30 ~ 14:00 / 주말, 공휴일 휴무)</span>
       </p>
-      <a class="ft-cs-btn" href="https://support.spartaclub.kr/" target="_blank" rel="noopener">🎧 고객센터 바로가기</a>
+      <a class="ft-cs-btn" href="https://spartaclub.channel.io/workflows/813610" target="_blank" rel="noopener">🎧 고객센터 바로가기</a>
     </div>
 
     <!-- [2단] 정책 링크 -->
@@ -2975,6 +2975,218 @@
   /* ── Expose for pricing table buttons ──── */
   // startApply is already on window
 
+})();
+</script>
+
+<!-- 플로팅 문의하기 버튼 + 팝업 -->
+<div id="float-cs-wrap">
+  <!-- 팝업 카드 -->
+  <div id="float-cs-popup" role="dialog" aria-label="고객센터 문의">
+    <div class="fcs-popup-header">
+      <div class="fcs-popup-brand">
+        <div class="fcs-popup-logo">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="6" fill="#E8703A"/><text x="14" y="20" text-anchor="middle" font-size="15" font-weight="900" fill="white" font-family="sans-serif">S</text></svg>
+        </div>
+        <span class="fcs-popup-brand-name">스파르타클럽</span>
+      </div>
+      <button class="fcs-popup-close" id="float-cs-close" aria-label="닫기">✕</button>
+    </div>
+    <div class="fcs-popup-body">
+      <div class="fcs-agent-row">
+        <div class="fcs-agent-avatar">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#FFF0EA"/><text x="18" y="24" text-anchor="middle" font-size="18" fill="#E8703A">🤖</text></svg>
+        </div>
+        <div class="fcs-agent-bubble">
+          <div class="fcs-agent-name">르탄이</div>
+          <div class="fcs-agent-msg">안녕하세요!<br>AI 파운더스 1기 관련 궁금한 점이 있으신가요? 채널톡으로 연결해드릴게요 😊</div>
+        </div>
+      </div>
+    </div>
+    <div class="fcs-popup-footer">
+      <a class="fcs-cta-btn" href="https://spartaclub.channel.io/workflows/813610" target="_blank" rel="noopener">
+        문의하기 &nbsp;
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align:-2px"><path d="M2 7h10M8 3l4 4-4 4" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="fcs-channel-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="7" fill="#6B6B6B"/><text x="7" y="11" text-anchor="middle" font-size="9" fill="white" font-family="sans-serif">C</text></svg>
+        채널톡 이용중
+      </div>
+    </div>
+  </div>
+
+  <!-- 플로팅 버튼 -->
+  <div id="float-cs-btn" role="button" aria-label="문의하기" tabindex="0">
+    <span class="fcs-btn-label">문의하기</span>
+    <div class="fcs-btn-icon">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="12" r="9" fill="white"/>
+        <path d="M9 11h8M9 14h5" stroke="#E8703A" stroke-width="2" stroke-linecap="round"/>
+        <path d="M10 21l3-4.5" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<style>
+  #float-cs-wrap {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 8000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  /* ── Popup ── */
+  #float-cs-popup {
+    display: none;
+    flex-direction: column;
+    width: 300px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.12);
+    overflow: hidden;
+    animation: fcs-in 0.22s cubic-bezier(0.22,1,0.36,1);
+    transform-origin: bottom right;
+  }
+  #float-cs-popup.open { display: flex; }
+  @keyframes fcs-in {
+    from { opacity: 0; transform: scale(0.85) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .fcs-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px 14px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .fcs-popup-brand { display: flex; align-items: center; gap: 10px; }
+  .fcs-popup-logo { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; }
+  .fcs-popup-brand-name { font-size: 15px; font-weight: 800; color: #111; letter-spacing: -0.02em; }
+  .fcs-popup-close {
+    background: none; border: none; cursor: pointer;
+    color: #aaa; font-size: 16px; line-height: 1;
+    padding: 4px; border-radius: 50%;
+    transition: color 0.15s, background 0.15s;
+  }
+  .fcs-popup-close:hover { color: #333; background: #f3f3f3; }
+  .fcs-popup-body { padding: 18px; background: #fafafa; }
+  .fcs-agent-row { display: flex; align-items: flex-start; gap: 10px; }
+  .fcs-agent-avatar { flex-shrink: 0; }
+  .fcs-agent-bubble { flex: 1; }
+  .fcs-agent-name { font-size: 12px; font-weight: 700; color: #666; margin-bottom: 5px; }
+  .fcs-agent-msg {
+    background: #fff;
+    border: 1px solid #ebebeb;
+    border-radius: 0 12px 12px 12px;
+    padding: 10px 13px;
+    font-size: 13px;
+    color: #222;
+    line-height: 1.6;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .fcs-popup-footer {
+    padding: 14px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    background: #fff;
+  }
+  .fcs-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--acc, #E8703A);
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    border-radius: 50px;
+    padding: 13px 20px;
+    letter-spacing: -0.01em;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .fcs-cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .fcs-channel-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #aaa;
+  }
+  /* ── Floating button ── */
+  #float-cs-btn {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    cursor: pointer;
+    user-select: none;
+  }
+  .fcs-btn-label {
+    background: white;
+    color: var(--acc, #E8703A);
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 18px 0 20px;
+    height: 48px;
+    line-height: 48px;
+    border-radius: 50px 0 0 50px;
+    border: 1.5px solid var(--acc, #E8703A);
+    border-right: none;
+    letter-spacing: -0.01em;
+    box-shadow: 0 4px 20px rgba(232,112,58,0.18);
+    transition: background 0.15s;
+  }
+  #float-cs-btn:hover .fcs-btn-label { background: #fff5f0; }
+  .fcs-btn-icon {
+    width: 52px;
+    height: 52px;
+    background: var(--acc, #E8703A);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(232,112,58,0.38);
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex-shrink: 0;
+  }
+  #float-cs-btn:hover .fcs-btn-icon { transform: scale(1.07); box-shadow: 0 8px 28px rgba(232,112,58,0.45); }
+  @media (max-width: 480px) {
+    #float-cs-wrap { bottom: 20px; right: 16px; }
+    #float-cs-popup { width: calc(100vw - 32px); }
+    .fcs-btn-label { display: none; }
+    .fcs-btn-icon { border-radius: 50%; }
+  }
+</style>
+
+<script>
+(function(){
+  var btn = document.getElementById('float-cs-btn');
+  var popup = document.getElementById('float-cs-popup');
+  var closeBtn = document.getElementById('float-cs-close');
+  var isOpen = false;
+
+  function toggle() {
+    isOpen = !isOpen;
+    if (isOpen) {
+      popup.classList.add('open');
+    } else {
+      popup.classList.remove('open');
+    }
+  }
+  btn.addEventListener('click', toggle);
+  btn.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' ') toggle(); });
+  closeBtn.addEventListener('click', function(){ isOpen=false; popup.classList.remove('open'); });
+  document.addEventListener('click', function(e){
+    if (isOpen && !document.getElementById('float-cs-wrap').contains(e.target)) {
+      isOpen = false;
+      popup.classList.remove('open');
+    }
+  });
 })();
 </script>
 
