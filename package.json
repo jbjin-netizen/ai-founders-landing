@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "googleapis": "^171.4.0",
+    "playwright": "^1.59.1"
+  }
+}
