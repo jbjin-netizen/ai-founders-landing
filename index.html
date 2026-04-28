@@ -637,12 +637,19 @@
       box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
       display: flex;
       align-items: center;
-      gap: 16px;
       justify-content: center;
       transform: translateY(0);
       transition: transform 0.3s;
     }
     #floating-cta.hidden { transform: translateY(110%); }
+    .floating-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      max-width: 640px;
+    }
     .floating-info { font-size: 14px; color: var(--text-muted); line-height: 1.4; flex-shrink: 0; }
     .floating-price { font-size: 18px; font-weight: 900; color: var(--hl); }
     .floating-price-sub { font-size: 13px; color: var(--acc-text); font-weight: 700; }
@@ -662,10 +669,11 @@
     }
     .floating-btn:hover { background: var(--acc-dark); }
     @media (max-width: 480px) {
-      #floating-cta { padding: 10px 20px env(safe-area-inset-bottom, 0); gap: 12px; }
+      #floating-cta { padding: 10px 16px env(safe-area-inset-bottom, 0); }
+      .floating-inner { gap: 14px; }
       .floating-price { font-size: 16px; }
-      .floating-price-sub { font-size: 12px; }
-      .floating-btn { font-size: 14px; padding: 12px 20px; }
+      .floating-price-sub { font-size: 11px; }
+      .floating-btn { font-size: 14px; padding: 12px 18px; }
     }
 
     /* ─── Option Modal ─── */
@@ -2373,11 +2381,13 @@
   Floating CTA
 ════════════════════════════════════════ -->
 <div id="floating-cta">
-  <div class="floating-info">
-    <div class="floating-price" id="float-price">199,000원~</div>
-    <div class="floating-price-sub" id="float-sub">🔥 이번 주 목요일(4/30) 자정 마감 · D-<span id="float-days">-</span>일</div>
+  <div class="floating-inner">
+    <div class="floating-info">
+      <div class="floating-price" id="float-price">199,000원~</div>
+      <div class="floating-price-sub" id="float-sub">🔥 이번 주 목요일(4/30) 자정 마감 · D-<span id="float-days">-</span>일</div>
+    </div>
+    <button class="floating-btn" onclick="openModal('floating')">지금 1기 신청하기</button>
   </div>
-  <button class="floating-btn" onclick="openModal('floating')">지금 1기 신청하기</button>
 </div>
 
 <!-- ════════════════════════════════════════
