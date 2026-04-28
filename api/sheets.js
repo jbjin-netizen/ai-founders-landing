@@ -19,7 +19,35 @@ function uuid() {
   });
 }
 
-async function appendRow(sheets, sheetName, values) {
+const HEADERS_EVENTS = [
+  'id','timestamp','event_type','session_id','applicant_id','location','option',
+  'utm_source','utm_medium','utm_campaign','utm_content','device','referrer','date'
+];
+const HEADERS_APPLICANTS = [
+  'id','created_at','name','phone','motivation','ai_experience','desired_service',
+  'selected_option','payment_link','apply_status',
+  'utm_source','utm_medium','utm_campaign','utm_content'
+];
+
+async function ensureSheet(sheets, sheetName, headers) {
+  const meta = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
+  const exists = meta.data.sheets.some(s => s.properties.title === sheetName);
+  if (!exists) {
+    await sheets.spreadsheets.batchUpdate({
+      spreadsheetId: SPREADSHEET_ID,
+      requestBody: { requests: [{ addSheet: { properties: { title: sheetName } } }] },
+    });
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `${sheetName}!A1`,
+      valueInputOption: 'RAW',
+      requestBody: { values: [headers] },
+    });
+  }
+}
+
+async function appendRow(sheets, sheetName, headers, values) {
+  await ensureSheet(sheets, sheetName, headers);
   await sheets.spreadsheets.values.append({
     spreadsheetId: SPREADSHEET_ID,
     range: `${sheetName}!A:A`,
@@ -63,7 +91,7 @@ module.exports = async function handler(req, res) {
     if (body.type === 'event') {
       const now = body.timestamp || new Date().toISOString();
       const date = now.slice(0, 10);
-      await appendRow(sheets, SHEET_EVENTS, [
+      await appendRow(sheets, SHEET_EVENTS, HEADERS_EVENTS, [
         uuid(),
         now,
         body.event_type || '',
@@ -83,7 +111,7 @@ module.exports = async function handler(req, res) {
     }
 
     if (body.type === 'applicant') {
-      await appendRow(sheets, SHEET_APPLICANTS, [
+      await appendRow(sheets, SHEET_APPLICANTS, HEADERS_APPLICANTS, [
         uuid(),
         body.created_at || '',
         body.name || '',
