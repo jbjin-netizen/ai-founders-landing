@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
       parseOk = true;
       email = cred.client_email || '';
     } catch(e) {}
-    return res.status(200).json({ ok: true, hasKey, parseOk, email: email.slice(0, 20) + '...' });
+    return res.status(200).json({ ok: true, hasKey, parseOk, email });
   }
 
   if (req.method !== 'POST') {
