@@ -629,7 +629,7 @@
       left: 0;
       right: 0;
       z-index: 800;
-      padding: 14px 16px env(safe-area-inset-bottom, 0);
+      padding: 12px 24px env(safe-area-inset-bottom, 0);
       background: rgba(8,9,13,0.88);
       border-top: 1px solid var(--border);
       -webkit-backdrop-filter: blur(16px);
@@ -637,13 +637,13 @@
       box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
       display: flex;
       align-items: center;
-      gap: 12px;
-      justify-content: space-between;
+      gap: 16px;
+      justify-content: center;
       transform: translateY(0);
       transition: transform 0.3s;
     }
     #floating-cta.hidden { transform: translateY(110%); }
-    .floating-info { font-size: 14px; color: var(--text-muted); line-height: 1.4; }
+    .floating-info { font-size: 14px; color: var(--text-muted); line-height: 1.4; flex-shrink: 0; }
     .floating-price { font-size: 18px; font-weight: 900; color: var(--hl); }
     .floating-price-sub { font-size: 13px; color: var(--acc-text); font-weight: 700; }
     .floating-btn {
@@ -652,7 +652,7 @@
       color: white;
       font-size: 15px;
       font-weight: 700;
-      padding: 14px 24px;
+      padding: 14px 28px;
       border-radius: 100px;
       border: none;
       cursor: pointer;
@@ -661,6 +661,12 @@
       transition: background 0.2s;
     }
     .floating-btn:hover { background: var(--acc-dark); }
+    @media (max-width: 480px) {
+      #floating-cta { padding: 10px 20px env(safe-area-inset-bottom, 0); gap: 12px; }
+      .floating-price { font-size: 16px; }
+      .floating-price-sub { font-size: 12px; }
+      .floating-btn { font-size: 14px; padding: 12px 20px; }
+    }
 
     /* ─── Option Modal ─── */
     #modal-overlay {
@@ -3030,7 +3036,7 @@
 <style>
   #float-cs-wrap {
     position: fixed;
-    bottom: 28px;
+    bottom: 100px;
     right: 28px;
     z-index: 8000;
     display: flex;
@@ -3156,7 +3162,7 @@
   }
   #float-cs-btn:hover .fcs-btn-icon { transform: scale(1.07); box-shadow: 0 8px 28px rgba(232,112,58,0.45); }
   @media (max-width: 480px) {
-    #float-cs-wrap { bottom: 20px; right: 16px; }
+    #float-cs-wrap { bottom: 88px; right: 16px; }
     #float-cs-popup { width: calc(100vw - 32px); }
     .fcs-btn-label { display: none; }
     .fcs-btn-icon { border-radius: 50%; }
