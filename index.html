@@ -1138,7 +1138,7 @@
           <p>막히는 부분은 튜터에게 언제든 질문할 수 있고, <strong>평균 2시간 이내 답변</strong>을 받아 흐름이 끊기지 않습니다.</p>
         </div>
         <div class="sol4-img-area">
-          <div class="sol4-img-placeholder">슬랙 Q&A 대화 캡처</div>
+          <img src="images/slack_QnA.jpg" alt="슬랙 Q&A 대화" class="sol4-img"/>
         </div>
       </div>
 
@@ -1153,7 +1153,7 @@
           <p>서비스에 맞는 수익화 방식 제안 받고 가격, 타겟, 구조까지 구체적으로 설계합니다.</p>
         </div>
         <div class="sol4-img-area">
-          <div class="sol4-img-placeholder">BM 라이브러리 / 수익 구조 다이어그램</div>
+          <img src="images/bm_library.jpg" alt="BM 라이브러리" class="sol4-img"/>
         </div>
       </div>
 
@@ -1168,7 +1168,7 @@
           <p>매주 반드시 결과물을 만드는 미션이 주어지고, 운영진과 동료들의 피드백으로 방향을 계속 점검합니다.</p>
         </div>
         <div class="sol4-img-area">
-          <div class="sol4-img-placeholder">리더보드 / 진행 점검 화면</div>
+          <img src="images/leaderboard.jpg" alt="리더보드" class="sol4-img"/>
         </div>
       </div>
 
@@ -1183,7 +1183,7 @@
           <p>DB, API, 결제 구현까지 막히는 모든 구간의 자료가 제공됩니다.</p>
         </div>
         <div class="sol4-img-area">
-          <div class="sol4-img-placeholder">자료집·템플릿 미리보기</div>
+          <img src="images/check_list.jpg" alt="자료집·템플릿" class="sol4-img"/>
         </div>
       </div>
 
@@ -1206,7 +1206,7 @@
       .sol4-body p:last-child { margin-bottom: 0; }
       .sol4-body strong { color: var(--text); }
       .sol4-img-area { padding: 0 24px 24px; }
-      .sol4-img-placeholder { background: rgba(255,255,255,0.04); border: 1px dashed rgba(255,255,255,0.15); border-radius: 8px; padding: 20px; font-size: 12px; color: var(--text-muted); text-align: center; }
+      .sol4-img { width: 100%; border-radius: 8px; display: block; object-fit: cover; max-height: 200px; }
       .sol4-conclusion { margin-top: 32px; text-align: center; padding: 28px 32px; background: rgba(232,112,58,0.08); border: 1px solid rgba(232,112,58,0.3); border-radius: var(--r); font-size: 17px; color: var(--text); line-height: 1.7; }
       .sol4-conclusion strong { color: var(--acc); }
       @media (max-width: 640px) { .sol4-grid { grid-template-columns: 1fr; } }
@@ -1603,10 +1603,7 @@
 
       <div class="case-card">
         <div class="case-img-wrap">
-          <div class="case-img-ph" style="background: linear-gradient(135deg, #180a18 0%, #2a1030 100%);">
-            <span class="case-img-icon">🖼️</span>
-            <span class="case-img-txt">사진 준비 중</span>
-          </div>
+          <img src="images/gunghap.jpg" alt="궁합 플래너 서비스" class="case-img"/>
         </div>
         <div class="case-body">
           <div class="case-service-tag">📌 궁합 플래너</div>
@@ -1618,10 +1615,7 @@
 
       <div class="case-card">
         <div class="case-img-wrap">
-          <div class="case-img-ph" style="background: linear-gradient(135deg, #080e18 0%, #102030 100%);">
-            <span class="case-img-icon">🖼️</span>
-            <span class="case-img-txt">사진 준비 중</span>
-          </div>
+          <img src="images/airbnb.jpg" alt="에어비앤비 매물 찾기 서비스" class="case-img"/>
         </div>
         <div class="case-body">
           <div class="case-service-tag">📌 에어비앤비 매물 찾기</div>
@@ -1633,10 +1627,7 @@
 
       <div class="case-card">
         <div class="case-img-wrap">
-          <div class="case-img-ph" style="background: linear-gradient(135deg, #081208 0%, #102410 100%);">
-            <span class="case-img-icon">🖼️</span>
-            <span class="case-img-txt">사진 준비 중</span>
-          </div>
+          <img src="images/hanson.jpg" alt="마케팅 원데이 서비스" class="case-img"/>
         </div>
         <div class="case-body">
           <div class="case-service-tag">📌 마케팅 원데이 서비스</div>
@@ -1654,9 +1645,8 @@
   .case-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
   .case-card:hover { border-color: var(--border-s); transform: translateY(-4px); }
   .case-img-wrap { width: 100%; aspect-ratio: 4 / 3; overflow: hidden; }
-  .case-img-ph { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-  .case-img-icon { font-size: 28px; opacity: 0.35; }
-  .case-img-txt { font-size: 12px; color: rgba(255,255,255,0.25); font-weight: 500; }
+  .case-img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform 0.4s ease; }
+  .case-card:hover .case-img { transform: scale(1.04); }
   .case-body { padding: 20px 22px 26px; }
   .case-service-tag { display: inline-block; font-size: 13px; font-weight: 700; color: var(--acc-text); background: rgba(232,112,58,0.12); border: 1px solid rgba(232,112,58,0.2); border-radius: 100px; padding: 5px 13px; margin-bottom: 14px; }
   .case-metric { font-size: clamp(20px, 2.5vw, 26px); font-weight: 900; color: var(--text); margin-bottom: 10px; line-height: 1.25; }
