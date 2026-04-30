@@ -67,6 +67,56 @@ async function appendRow(sheets, sheetName, headers, values) {
   });
 }
 
+function normalizePhone(v) {
+  return String(v || '').replace(/\D/g, '');
+}
+
+// 키 컬럼 기준으로 동일 행이 있으면 update, 없으면 append.
+// preserveColumns 에 적힌 컬럼은 기존 행 값을 유지(예: id, created_at).
+async function upsertRow(sheets, sheetName, headers, newValues, keyColumn, preserveColumns) {
+  await ensureSheet(sheets, sheetName, headers);
+
+  const keyIdx = headers.indexOf(keyColumn);
+  const keyVal = keyIdx >= 0 ? normalizePhone(newValues[keyIdx]) : '';
+  if (!keyVal) {
+    return appendRow(sheets, sheetName, headers, newValues);
+  }
+
+  const lastColLetter = String.fromCharCode(65 + headers.length - 1);
+  const resp = await sheets.spreadsheets.values.get({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${sheetName}!A:${lastColLetter}`,
+  });
+  const rows = resp.data.values || [];
+
+  let matchIdx = -1;
+  for (let i = 1; i < rows.length; i++) {
+    if (normalizePhone((rows[i] || [])[keyIdx]) === keyVal) {
+      matchIdx = i;
+      break;
+    }
+  }
+
+  if (matchIdx < 0) {
+    return appendRow(sheets, sheetName, headers, newValues);
+  }
+
+  const existing = rows[matchIdx] || [];
+  const finalValues = newValues.slice();
+  (preserveColumns || []).forEach(function(col) {
+    const idx = headers.indexOf(col);
+    if (idx >= 0 && existing[idx]) finalValues[idx] = existing[idx];
+  });
+
+  const sheetRowNum = matchIdx + 1; // 1-indexed
+  await sheets.spreadsheets.values.update({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${sheetName}!A${sheetRowNum}:${lastColLetter}${sheetRowNum}`,
+    valueInputOption: 'RAW',
+    requestBody: { values: [finalValues] },
+  });
+}
+
 module.exports = async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -121,7 +171,7 @@ module.exports = async function handler(req, res) {
     }
 
     if (body.type === 'partial_applicant') {
-      await appendRow(sheets, SHEET_PARTIAL, HEADERS_PARTIAL, [
+      await upsertRow(sheets, SHEET_PARTIAL, HEADERS_PARTIAL, [
         uuid(),
         body.created_at || nowKST(),
         body.name || '',
@@ -133,12 +183,12 @@ module.exports = async function handler(req, res) {
         body.utm_medium || '',
         body.utm_campaign || '',
         body.utm_content || '',
-      ]);
+      ], 'phone', ['id', 'created_at']);
       return res.status(200).json({ ok: true });
     }
 
     if (body.type === 'applicant') {
-      await appendRow(sheets, SHEET_APPLICANTS, HEADERS_APPLICANTS, [
+      await upsertRow(sheets, SHEET_APPLICANTS, HEADERS_APPLICANTS, [
         uuid(),
         body.created_at || '',
         body.name || '',
@@ -153,7 +203,7 @@ module.exports = async function handler(req, res) {
         body.utm_medium || '',
         body.utm_campaign || '',
         body.utm_content || '',
-      ]);
+      ], 'phone', ['id', 'created_at']);
       return res.status(200).json({ ok: true });
     }
 
