@@ -492,6 +492,68 @@
       box-shadow: 0 4px 20px var(--acc-glow);
     }
     .pricing-card.recommended .pricing-btn:hover { background: var(--acc-dark); }
+    .pricing-badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px auto 0;
+      max-width: 900px;
+    }
+    .pricing-trust-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pricing-assurance {
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--text);
+      background: rgba(232,112,58,0.08);
+      border: 1px solid rgba(232,112,58,0.2);
+      border-radius: 999px;
+      padding: 10px 16px;
+      display: inline-block;
+    }
+    .pricing-flexibility-card {
+      margin: 28px auto 0;
+      max-width: 900px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 26px 28px;
+    }
+    .pricing-flexibility-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .pricing-flexibility-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .pricing-flexibility-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 12px 18px;
+      color: var(--text-sub);
+      font-size: 14px;
+      font-weight: 700;
+    }
 
     /* ─── [11] Who ─── */
     #who { padding: 100px 24px; background: var(--bg); }
@@ -977,7 +1039,26 @@
       .modal-box { padding: 28px 20px; }
       .pricing-grid { grid-template-columns: 1fr; }
     }
-  </style>
+  
+  .timeline-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-left: auto; }
+  .tl-tag {
+    font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 100px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-muted);
+  }
+  .tl-tag--slack {
+    background: rgba(74,21,75,0.2);
+    border-color: rgba(74,21,75,0.4);
+    color: #e8a0e8;
+  }
+  .tl-tag--team {
+    background: var(--acc-chip);
+    border-color: rgba(232,112,58,0.3);
+    color: var(--acc-text);
+  }
+</style>
 </head>
 <body>
 
@@ -1223,6 +1304,8 @@
   </div>
 </section>
 
+
+
 <!-- ════════════════════════════════════════
   FOR YOU
 ════════════════════════════════════════ -->
@@ -1250,6 +1333,71 @@
   </div>
 </section>
 <style>
+  .team-vs-individual {
+    background: var(--bg-alt);
+  }
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .comparison-card {
+    border-radius: var(--r);
+    padding: 28px 26px;
+    border: 1px solid var(--border);
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .comparison-card--misunderstood {
+    background: rgba(255,77,79,0.10);
+    border-color: rgba(255,77,79,0.22);
+  }
+  .comparison-card--reality {
+    background: rgba(68,255,112,0.10);
+    border-color: rgba(68,255,112,0.22);
+  }
+  .comparison-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: #fff;
+    width: fit-content;
+  }
+  .comparison-card--misunderstood .comparison-tag { background: #FF4D4F; }
+  .comparison-card--reality .comparison-tag { background: #5DDB86; }
+  .comparison-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.35;
+    margin: 0;
+  }
+  .comparison-body {
+    font-size: 16px;
+    color: var(--text-sub);
+    line-height: 1.9;
+    margin: 0;
+    flex: 1;
+  }
+  .comparison-note {
+    margin-top: 26px;
+    padding: 22px 24px;
+    background: rgba(232,112,58,0.08);
+    border: 1px solid rgba(232,112,58,0.2);
+    border-radius: var(--r);
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .comparison-note strong { color: var(--acc); }
+
   .target-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 36px; }
   .target-card {
     background: var(--bg-card);
@@ -1273,7 +1421,7 @@
     <span class="sec-label">CURRICULUM</span>
     <h2 class="solution-quote">4주 동안 이렇게 배워요</h2>
     <p class="sec-desc" style="margin-bottom:32px;">
-      실력이 비슷한 동료 5명과 한 팀이 되어, 매주 1회 프로젝트 현황을 점검하고,<br>각자의 개성이 담긴 나만의 서비스를 완성해 나갑니다.
+      실력이 비슷한 동료 5명과 한 팀이 되어, 매주 1회 프로젝트 현황을 점검하고,<br>각자의 개성이 담긴 <strong style="color:#FFFFFF; font-weight:800;">나만의 서비스</strong>를 완성해 나갑니다.
     </p>
 
     <!-- 커리큘럼 탭 UI -->
@@ -1437,27 +1585,87 @@
   </div>
 </section>
 
+<!-- ════════════════════════════════════════
+  [NEW] 직장인 1주차 시간표 시뮬레이션
+════════════════════════════════════════ -->
+<section id="schedule-simulation" class="section">
+  <div class="inner" style="max-width:900px;">
+    <span class="sec-label">HOW IT WORKS</span>
+    <h2 class="sec-title">일주일 5~7시간이면 충분합니다.</h2>
+    <p class="sec-desc">개인의 스케줄에 맞춰 자유롭게 작업합니다.<br>4주 뒤엔 내가 만든 서비스가 생깁니다.</p>
+
+    <div class="cycle-wrap">
+
+      <div class="cycle-card cycle-card--accent">
+        <div class="cycle-left">
+          <div class="cycle-day">목요일</div>
+          <div class="cycle-period">매주</div>
+        </div>
+        <div class="cycle-divider"></div>
+        <div class="cycle-right">
+          <div class="cycle-title">교육자료 오픈</div>
+          <div class="cycle-desc">주차별 교육자료가 공개됩니다. 그 주 작업의 시작점이에요.</div>
+        </div>
+      </div>
+
+      <div class="cycle-card">
+        <div class="cycle-left">
+          <div class="cycle-day">목 – 수</div>
+          <div class="cycle-period">주 5~7시간</div>
+        </div>
+        <div class="cycle-divider"></div>
+        <div class="cycle-right">
+          <div class="cycle-title">데일리 자율 스터디</div>
+          <div class="cycle-desc">원하는 시간대에 자유롭게 서비스를 만들어 나갑니다. 주차별 미션을 수행하며 방향을 잡아가요. 막히면 슬랙 질문방에서 바로 해결하세요.</div>
+          <div class="cycle-tags">
+            <span class="cycle-tag">자율 시간대</span>
+            <span class="cycle-tag cycle-tag--slack">💬 슬랙 질문방</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cycle-card">
+        <div class="cycle-left">
+          <div class="cycle-day">월 – 수</div>
+          <div class="cycle-period">팀 협의</div>
+        </div>
+        <div class="cycle-divider"></div>
+        <div class="cycle-right">
+          <div class="cycle-title">팀 미팅</div>
+          <div class="cycle-desc">각자 만든 서비스 현황과 미션 수행 현황을 공유합니다. 주간 팀 미팅 일정은 팀원들과 조율하여 결정합니다.</div>
+          <div class="cycle-tags">
+            <span class="cycle-tag cycle-tag--slack">💬 슬랙 인증</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <style>
-  .op-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-  .op-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: 22px 18px;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .op-card:hover { border-color: var(--border-s); background: var(--bg-card-h); }
-  .op-icon { font-size: 26px; margin-bottom: 10px; }
-  .op-name { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
-  .op-desc { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
+  .cycle-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
+  .cycle-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px 28px; display: flex; align-items: flex-start; gap: 24px; transition: border-color 0.2s; }
+  .cycle-card:hover { border-color: var(--border-s); }
+  .cycle-card--accent { border-color: rgba(232,112,58,0.3); background: rgba(232,112,58,0.05); }
+  .cycle-left { flex-shrink: 0; width: 80px; }
+  .cycle-day { font-size: 13px; font-weight: 800; color: var(--acc); letter-spacing: 0.06em; margin-bottom: 4px; }
+  .cycle-period { font-size: 12px; color: var(--text-muted); font-weight: 600; line-height: 1.4; }
+  .cycle-divider { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+  .cycle-right { flex: 1; }
+  .cycle-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+  .cycle-desc { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
+  .cycle-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .cycle-tag { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 100px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: var(--text-muted); }
+  .cycle-tag--slack { background: rgba(74,21,75,0.2); border-color: rgba(180,100,180,0.3); color: #e8a0e8; }
   @media (max-width: 640px) {
-    .op-grid { grid-template-columns: 1fr; }
-    .op-grid .op-card:nth-child(4),
-    .op-grid .op-card:nth-child(5) { grid-column: unset; }
+    .cycle-card { flex-direction: column; gap: 12px; }
+    .cycle-divider { width: 100%; height: 1px; align-self: unset; }
+    .cycle-left { width: auto; display: flex; gap: 8px; align-items: center; }
+    .cycle-day { margin-bottom: 0; }
+    .cycle-period::before { content: "·"; margin-right: 4px; }
+    .cycle-title { font-size: 15px; }
+    .cycle-desc { font-size: 13px; }
   }
 </style>
 
@@ -1553,6 +1761,63 @@
     .benefit-grid { grid-template-columns: 1fr; }
     .benefit-session-grid { grid-template-columns: 1fr; }
     .benefit-cert { flex-direction: column; gap: 12px; }
+  }
+</style>
+
+<!-- ════════════════════════════════════════
+  [NEW] 결제 후 들어가는 환경 미리보기
+════════════════════════════════════════ -->
+
+<style>
+  .onboarding-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 38px;
+  }
+  .onboarding-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 28px 24px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .onboarding-card:hover { border-color: var(--border-s); background: var(--bg-card-h); }
+  .onboarding-card--highlight {
+    background: rgba(232,112,58,0.08);
+    border-color: rgba(232,112,58,0.22);
+  }
+  .onboarding-card-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .onboarding-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .onboarding-list li {
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    position: relative;
+    padding-left: 18px;
+  }
+  .onboarding-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--acc);
+    font-weight: 800;
+  }
+  @media (max-width: 900px) {
+    .onboarding-grid { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -1952,7 +2217,7 @@
 <section id="worries" class="section section-alt">
   <div class="inner">
     <span class="sec-label">FAQ</span>
-    <h2 class="sec-title">참여 전에 가장 많이<br>받는 질문 4가지</h2>
+    <h2 class="sec-title">참여 전에 가장 많이<br>받는 질문 6가지</h2>
     <div class="worry-grid">
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q1</span>"꼭 창업까지 해야 하나요?"</div>
@@ -1969,6 +2234,14 @@
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q4</span>"정말 4주 안에 결과가 나오나요?"</div>
         <div class="worry-a">50명이 같은 일정으로 함께 가기 때문에 훨씬 빠릅니다. 4주 안에 배포까지 가는 건 구조의 힘이지 개인의 의지가 아니에요.</div>
+      </div>
+      <div class="worry-card">
+        <div class="worry-q"><span class="worry-q-badge">Q5</span>"팀이 하나의 서비스를 같이 만드는 건가요?"</div>
+        <div class="worry-a">아니요. 각자 본인의 서비스를 만듭니다. 내 아이디어로 내 서비스를 만들되, 4주 동안 같이 갈 동료 4명이 생긴다고 생각하시면 됩니다!</div>
+      </div>
+      <div class="worry-card">
+        <div class="worry-q"><span class="worry-q-badge">Q6</span>"해외 거주자나 중간에 빠지는 주가 있어도 참여 가능한가요?"</div>
+        <div class="worry-a">네, 가능합니다. AI 파운더스는 커뮤니티 기반 스터디 형태이기 때문에 장소에 관계없이 참여할 수 있어요. 팀 미팅 일정은 팀원들과 자유롭게 조율하면 됩니다.</div>
       </div>
     </div>
   </div>
@@ -2052,6 +2325,11 @@
     <p class="sec-desc" style="margin: 0 auto 8px; text-align:center;">
       <span id="pricing-deadline-note" style="display:inline-block; background:var(--acc-chip); color:var(--acc-text); font-size:13px; font-weight:700; padding:4px 14px; border-radius:100px; margin-bottom:16px;">🔥 4/30(목) 23:59까지 얼리버드</span>
     </p>
+    <div class="pricing-badge-row">
+      <span class="pricing-trust-badge">개강 전날까지 100% 환불 보장</span>
+      <span class="pricing-trust-badge">얼리버드 마감</span>
+      <span class="pricing-trust-badge">남은 자리 한정</span>
+    </div>
     <div class="pricing-grid">
       <!-- Standard (메인 강조) -->
       <div class="pricing-card recommended">
@@ -2062,6 +2340,7 @@
         <div class="pricing-regular" id="std-regular">269,000원 (5/1~)</div>
         <div class="pricing-price"><span id="std-price">199,000</span>원</div>
         <div class="pricing-price-note" id="std-note">얼리버드 (~4/30)</div>
+        
         <button class="pricing-btn" onclick="startApply('standard')">신청하기 →</button>
       </div>
       <!-- Base -->
@@ -2072,10 +2351,14 @@
         <div class="pricing-regular" id="base-regular">309,000원 (5/1~)</div>
         <div class="pricing-price"><span id="base-price">249,000</span>원</div>
         <div class="pricing-price-note" id="base-note">얼리버드 (~4/30)</div>
+        
         <button class="pricing-btn" onclick="startApply('base')">신청하기 →</button>
       </div>
     </div>
-    <p style="margin-top:24px; font-size:13px; color:var(--text-muted);">온보딩 강의 일정 택1: 5/10(일) 11:00~14:00 또는 5/13(수) 20:00~23:00</p>
+    </div>
+    
+  </div>
+<p style="margin-top:24px; font-size:13px; color:var(--text-muted); text-align:center;">온보딩 강의 일정 택1: 5/10(일) 11:00~14:00 또는 5/13(수) 20:00~23:00</p>
   </div>
 </section>
 
@@ -2490,19 +2773,6 @@
         <div class="form-hint" id="motivation-counter">자유롭게 적어주세요. (현재 0자)</div>
         <div class="form-error" id="err-motivation" style="display:none;"></div>
       </div>
-
-      <!-- Phase 1 Consent (필수만) -->
-      <div class="form-group">
-        <label class="form-label">개인정보 수집·이용 동의 <span class="req">*</span></label>
-        <div class="consent-group">
-          <div class="check-item" id="chk-privacy-label" onclick="toggleCheck('chk-privacy-label', 'chk-privacy')">
-            <input type="checkbox" id="chk-privacy" />
-            <div class="check-box"></div>
-            <div class="check-text"><strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다.</div>
-          </div>
-        </div>
-        <div class="form-error" id="err-consent">개인정보 수집·이용에 동의해주세요.</div>
-      </div>
     </div>
 
     <!-- Phase 2 -->
@@ -2548,16 +2818,22 @@
         <textarea class="form-textarea" id="inp-service" placeholder="아직 정해지지 않으셨다면 비워두셔도 괜찮아요." rows="3"></textarea>
       </div>
 
-      <!-- Phase 2 Consent (선택 마케팅) -->
+      <!-- Consent -->
       <div class="form-group">
-        <label class="form-label">마케팅 정보 수신 동의 <span style="color:var(--sf-light); font-weight:400; font-size:13px;">(선택)</span></label>
+        <label class="form-label">동의 사항 <span class="req">*</span></label>
         <div class="consent-group">
+          <div class="check-item" id="chk-privacy-label" onclick="toggleCheck('chk-privacy-label', 'chk-privacy')">
+            <input type="checkbox" id="chk-privacy" />
+            <div class="check-box"></div>
+            <div class="check-text"><strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다.</div>
+          </div>
           <div class="check-item" id="chk-marketing-label" onclick="toggleCheck('chk-marketing-label', 'chk-marketing')">
             <input type="checkbox" id="chk-marketing" />
             <div class="check-box"></div>
             <div class="check-text"><strong>[선택]</strong> 마케팅 정보 수신에 동의합니다. (할인·혜택 안내)</div>
           </div>
         </div>
+        <div class="form-error" id="err-consent">개인정보 수집·이용에 동의해주세요.</div>
       </div>
     </div>
   </div><!-- /apply-body -->
@@ -2906,18 +3182,6 @@
     if (counter) counter.textContent = '자유롭게 적어주세요. (현재 ' + len + '자)';
   });
 
-  /* ── Apply input start (phase 1 첫 입력) ─ */
-  let inputStartFired = false;
-  function fireInputStart() {
-    if (inputStartFired) return;
-    inputStartFired = true;
-    track('apply_input_start', { option: selectedOption });
-  }
-  ['inp-name', 'inp-phone', 'inp-motivation'].forEach(function(id) {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', fireInputStart);
-  });
-
   /* ── Phase 1 validation ────────────────── */
   window.goPhase2 = function() {
     let valid = true;
@@ -2927,8 +3191,6 @@
     const errName = document.getElementById('err-name');
     const errPhone = document.getElementById('err-phone');
     const errMotiv = document.getElementById('err-motivation');
-    const errConsent = document.getElementById('err-consent');
-    const privacyChecked = document.getElementById('chk-privacy').checked;
 
     if (!name.value.trim()) {
       name.classList.add('error'); errName.style.display = 'block'; valid = false;
@@ -2941,10 +3203,6 @@
 
     motiv.classList.remove('error'); errMotiv.style.display = 'none';
 
-    if (!privacyChecked) {
-      errConsent.style.display = 'block'; valid = false;
-    } else { errConsent.style.display = 'none'; }
-
     if (!valid) return;
 
     // Save phase 1 data
@@ -2953,22 +3211,6 @@
       phone: phone.value.trim(),
       motivation: motiv.value.trim(),
     });
-
-    // 부분 신청자 1회 저장 (수집 동의 받은 시점)
-    if (!sessionStorage.getItem('af1_partial_saved')) {
-      try { sessionStorage.setItem('af1_partial_saved', '1'); } catch(e) {}
-      sendToSheets(Object.assign({
-        type: 'partial_applicant',
-        created_at: nowKST(),
-        name: name.value.trim(),
-        phone: phone.value.trim(),
-        motivation: motiv.value.trim(),
-        selected_option: selectedOption,
-        session_id: SESSION_ID,
-      }, UTM));
-    }
-    track('apply_phase1_done', { option: selectedOption });
-
     showPhase(2);
   };
 
@@ -3000,10 +3242,16 @@
   window.submitApply = function() {
     let valid = true;
     const errAiExp = document.getElementById('err-aiexp');
+    const errConsent = document.getElementById('err-consent');
+    const privacyChecked = document.getElementById('chk-privacy').checked;
 
     if (aiExpValue === 0) {
       errAiExp.style.display = 'block'; valid = false;
     } else { errAiExp.style.display = 'none'; }
+
+    if (!privacyChecked) {
+      errConsent.style.display = 'block'; valid = false;
+    } else { errConsent.style.display = 'none'; }
 
     if (!valid) return;
 
