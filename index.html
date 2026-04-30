@@ -3239,7 +3239,9 @@
   };
 
   /* ── Phase 2 submit ────────────────────── */
+  let submitInProgress = false;
   window.submitApply = function() {
+    if (submitInProgress) return; // 더블클릭 방지 (redirect 직전 빈 데이터로 재전송 차단)
     let valid = true;
     const errAiExp = document.getElementById('err-aiexp');
     const errConsent = document.getElementById('err-consent');
@@ -3254,6 +3256,7 @@
     } else { errConsent.style.display = 'none'; }
 
     if (!valid) return;
+    submitInProgress = true;
 
     const p1 = getFormData(1);
     const p2 = {

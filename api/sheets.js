@@ -134,16 +134,20 @@ async function dedupeSheet(sheets, sheetName, headers, keyColumn) {
   const createdIdx = headers.indexOf('created_at');
 
   const groups = {};
+  const orphanIndices = []; // key가 비어있는 행 (정상 데이터 아님)
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i] || [];
     const key = normalizePhone(row[keyIdx]);
-    if (!key) continue;
+    if (!key) {
+      orphanIndices.push(i);
+      continue;
+    }
     if (!groups[key]) groups[key] = [];
     groups[key].push({ idx: i, row });
   }
 
   const updates = [];
-  const deleteIndices = [];
+  const deleteIndices = orphanIndices.slice();
 
   Object.keys(groups).forEach(function(key) {
     const group = groups[key];
