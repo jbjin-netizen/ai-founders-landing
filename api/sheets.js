@@ -117,6 +117,90 @@ async function upsertRow(sheets, sheetName, headers, newValues, keyColumn, prese
   });
 }
 
+// 같은 phone 그룹을 1개로 정리. 가장 최근 데이터를 남기되 id/created_at은 첫 행 값을 보존.
+async function dedupeSheet(sheets, sheetName, headers, keyColumn) {
+  await ensureSheet(sheets, sheetName, headers);
+
+  const lastColLetter = String.fromCharCode(65 + headers.length - 1);
+  const resp = await sheets.spreadsheets.values.get({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${sheetName}!A:${lastColLetter}`,
+  });
+  const rows = resp.data.values || [];
+  if (rows.length <= 1) return { sheetName, removed: 0, mergedGroups: 0 };
+
+  const keyIdx = headers.indexOf(keyColumn);
+  const idIdx = headers.indexOf('id');
+  const createdIdx = headers.indexOf('created_at');
+
+  const groups = {};
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i] || [];
+    const key = normalizePhone(row[keyIdx]);
+    if (!key) continue;
+    if (!groups[key]) groups[key] = [];
+    groups[key].push({ idx: i, row });
+  }
+
+  const updates = [];
+  const deleteIndices = [];
+
+  Object.keys(groups).forEach(function(key) {
+    const group = groups[key];
+    if (group.length < 2) return;
+    group.sort(function(a, b) {
+      return String(a.row[createdIdx] || '').localeCompare(String(b.row[createdIdx] || ''));
+    });
+    const oldest = group[0];
+    const newest = group[group.length - 1];
+    const finalRow = newest.row.slice();
+    while (finalRow.length < headers.length) finalRow.push('');
+    if (idIdx >= 0) finalRow[idIdx] = oldest.row[idIdx] || finalRow[idIdx];
+    if (createdIdx >= 0) finalRow[createdIdx] = oldest.row[createdIdx] || finalRow[createdIdx];
+
+    const keepRowNum = newest.idx + 1;
+    updates.push({
+      range: `${sheetName}!A${keepRowNum}:${lastColLetter}${keepRowNum}`,
+      values: [finalRow],
+    });
+    for (let i = 0; i < group.length - 1; i++) {
+      deleteIndices.push(group[i].idx);
+    }
+  });
+
+  if (updates.length > 0) {
+    await sheets.spreadsheets.values.batchUpdate({
+      spreadsheetId: SPREADSHEET_ID,
+      requestBody: { valueInputOption: 'RAW', data: updates },
+    });
+  }
+
+  if (deleteIndices.length > 0) {
+    deleteIndices.sort(function(a, b) { return b - a; });
+    const meta = await sheets.spreadsheets.get({ spreadsheetId: SPREADSHEET_ID });
+    const sheetMeta = meta.data.sheets.find(function(s) { return s.properties.title === sheetName; });
+    if (!sheetMeta) return { sheetName, removed: 0, error: 'sheet not found' };
+    const sheetId = sheetMeta.properties.sheetId;
+    const requests = deleteIndices.map(function(idx) {
+      return {
+        deleteDimension: {
+          range: { sheetId, dimension: 'ROWS', startIndex: idx, endIndex: idx + 1 },
+        },
+      };
+    });
+    await sheets.spreadsheets.batchUpdate({
+      spreadsheetId: SPREADSHEET_ID,
+      requestBody: { requests },
+    });
+  }
+
+  return {
+    sheetName,
+    removed: deleteIndices.length,
+    mergedGroups: updates.length,
+  };
+}
+
 module.exports = async function handler(req, res) {
   // CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -205,6 +289,12 @@ module.exports = async function handler(req, res) {
         body.utm_content || '',
       ], 'phone', ['id', 'created_at']);
       return res.status(200).json({ ok: true });
+    }
+
+    if (body.type === 'dedupe') {
+      const applicants = await dedupeSheet(sheets, SHEET_APPLICANTS, HEADERS_APPLICANTS, 'phone');
+      const partial = await dedupeSheet(sheets, SHEET_PARTIAL, HEADERS_PARTIAL, 'phone');
+      return res.status(200).json({ ok: true, applicants, partial });
     }
 
     return res.status(400).json({ ok: false, error: 'unknown type' });
