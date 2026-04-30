@@ -3,6 +3,7 @@ const { google } = require('googleapis');
 const SPREADSHEET_ID = '1HeDIX4CYqlLJyF4NlvYBFwVFLYi-nMJRJVWtlIvJ7ms';
 const SHEET_EVENTS = 'events';
 const SHEET_APPLICANTS = 'applicants';
+const SHEET_PARTIAL = 'partial_applicants';
 
 function getAuth() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
@@ -31,6 +32,10 @@ const HEADERS_EVENTS = [
 const HEADERS_APPLICANTS = [
   'id','created_at','name','phone','motivation','ai_experience','desired_service',
   'selected_option','payment_link','apply_status',
+  'utm_source','utm_medium','utm_campaign','utm_content'
+];
+const HEADERS_PARTIAL = [
+  'id','created_at','name','phone','motivation','selected_option','session_id',
   'utm_source','utm_medium','utm_campaign','utm_content'
 ];
 
@@ -111,6 +116,23 @@ module.exports = async function handler(req, res) {
         body.device || '',
         body.referrer || '',
         date,
+      ]);
+      return res.status(200).json({ ok: true });
+    }
+
+    if (body.type === 'partial_applicant') {
+      await appendRow(sheets, SHEET_PARTIAL, HEADERS_PARTIAL, [
+        uuid(),
+        body.created_at || nowKST(),
+        body.name || '',
+        body.phone || '',
+        body.motivation || '',
+        body.selected_option || '',
+        body.session_id || '',
+        body.utm_source || '',
+        body.utm_medium || '',
+        body.utm_campaign || '',
+        body.utm_content || '',
       ]);
       return res.status(200).json({ ok: true });
     }
