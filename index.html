@@ -2773,6 +2773,19 @@
         <div class="form-hint" id="motivation-counter">자유롭게 적어주세요. (현재 0자)</div>
         <div class="form-error" id="err-motivation" style="display:none;"></div>
       </div>
+
+      <!-- Phase 1 Consent (필수만) -->
+      <div class="form-group">
+        <label class="form-label">개인정보 수집·이용 동의 <span class="req">*</span></label>
+        <div class="consent-group">
+          <div class="check-item" id="chk-privacy-label" onclick="toggleCheck('chk-privacy-label', 'chk-privacy')">
+            <input type="checkbox" id="chk-privacy" />
+            <div class="check-box"></div>
+            <div class="check-text"><strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다.</div>
+          </div>
+        </div>
+        <div class="form-error" id="err-consent">개인정보 수집·이용에 동의해주세요.</div>
+      </div>
     </div>
 
     <!-- Phase 2 -->
@@ -2818,22 +2831,16 @@
         <textarea class="form-textarea" id="inp-service" placeholder="아직 정해지지 않으셨다면 비워두셔도 괜찮아요." rows="3"></textarea>
       </div>
 
-      <!-- Consent -->
+      <!-- Marketing Consent -->
       <div class="form-group">
-        <label class="form-label">동의 사항 <span class="req">*</span></label>
+        <label class="form-label">마케팅 정보 수신 동의 <span style="color:var(--sf-light); font-weight:400; font-size:13px;">(선택)</span></label>
         <div class="consent-group">
-          <div class="check-item" id="chk-privacy-label" onclick="toggleCheck('chk-privacy-label', 'chk-privacy')">
-            <input type="checkbox" id="chk-privacy" />
-            <div class="check-box"></div>
-            <div class="check-text"><strong>[필수]</strong> 개인정보 수집 및 이용에 동의합니다.</div>
-          </div>
           <div class="check-item" id="chk-marketing-label" onclick="toggleCheck('chk-marketing-label', 'chk-marketing')">
             <input type="checkbox" id="chk-marketing" />
             <div class="check-box"></div>
             <div class="check-text"><strong>[선택]</strong> 마케팅 정보 수신에 동의합니다. (할인·혜택 안내)</div>
           </div>
         </div>
-        <div class="form-error" id="err-consent">개인정보 수집·이용에 동의해주세요.</div>
       </div>
     </div>
   </div><!-- /apply-body -->
@@ -3182,6 +3189,18 @@
     if (counter) counter.textContent = '자유롭게 적어주세요. (현재 ' + len + '자)';
   });
 
+  /* ── Apply input start (phase 1 첫 입력) ─ */
+  let inputStartFired = false;
+  function fireInputStart() {
+    if (inputStartFired) return;
+    inputStartFired = true;
+    track('apply_input_start', { option: selectedOption });
+  }
+  ['inp-name', 'inp-phone', 'inp-motivation'].forEach(function(id) {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', fireInputStart);
+  });
+
   /* ── Phase 1 validation ────────────────── */
   window.goPhase2 = function() {
     let valid = true;
@@ -3191,6 +3210,8 @@
     const errName = document.getElementById('err-name');
     const errPhone = document.getElementById('err-phone');
     const errMotiv = document.getElementById('err-motivation');
+    const errConsent = document.getElementById('err-consent');
+    const privacyChecked = document.getElementById('chk-privacy').checked;
 
     if (!name.value.trim()) {
       name.classList.add('error'); errName.style.display = 'block'; valid = false;
@@ -3203,6 +3224,10 @@
 
     motiv.classList.remove('error'); errMotiv.style.display = 'none';
 
+    if (!privacyChecked) {
+      errConsent.style.display = 'block'; valid = false;
+    } else { errConsent.style.display = 'none'; }
+
     if (!valid) return;
 
     // Save phase 1 data
@@ -3211,6 +3236,22 @@
       phone: phone.value.trim(),
       motivation: motiv.value.trim(),
     });
+
+    // 부분 신청자 1회 저장 (수집 동의 받은 시점)
+    if (!sessionStorage.getItem('af1_partial_saved')) {
+      try { sessionStorage.setItem('af1_partial_saved', '1'); } catch(e) {}
+      sendToSheets(Object.assign({
+        type: 'partial_applicant',
+        created_at: nowKST(),
+        name: name.value.trim(),
+        phone: phone.value.trim(),
+        motivation: motiv.value.trim(),
+        selected_option: selectedOption,
+        session_id: SESSION_ID,
+      }, UTM));
+    }
+    track('apply_phase1_done', { option: selectedOption });
+
     showPhase(2);
   };
 
@@ -3244,16 +3285,10 @@
     if (submitInProgress) return; // 더블클릭 방지 (redirect 직전 빈 데이터로 재전송 차단)
     let valid = true;
     const errAiExp = document.getElementById('err-aiexp');
-    const errConsent = document.getElementById('err-consent');
-    const privacyChecked = document.getElementById('chk-privacy').checked;
 
     if (aiExpValue === 0) {
       errAiExp.style.display = 'block'; valid = false;
     } else { errAiExp.style.display = 'none'; }
-
-    if (!privacyChecked) {
-      errConsent.style.display = 'block'; valid = false;
-    } else { errConsent.style.display = 'none'; }
 
     if (!valid) return;
     submitInProgress = true;
