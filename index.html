@@ -3461,44 +3461,42 @@
   #float-cs-btn {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 12px;
+    background: rgba(20,20,28,0.95);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 100px;
+    padding: 10px 18px 10px 10px;
     cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    transition: border-color 0.2s, transform 0.2s;
     user-select: none;
   }
-  .fcs-btn-label {
-    background: white;
-    color: var(--acc, #E8703A);
-    font-size: 14px;
-    font-weight: 700;
-    padding: 0 18px 0 20px;
-    height: 48px;
-    line-height: 48px;
-    border-radius: 50px 0 0 50px;
-    border: 1.5px solid var(--acc, #E8703A);
-    border-right: none;
-    letter-spacing: -0.01em;
-    box-shadow: 0 4px 20px rgba(232,112,58,0.18);
-    transition: background 0.15s;
-  }
-  #float-cs-btn:hover .fcs-btn-label { background: #fff5f0; }
+  #float-cs-btn:hover { border-color: rgba(232,112,58,0.5); transform: translateY(-2px); }
   .fcs-btn-icon {
-    width: 52px;
-    height: 52px;
+    width: 38px;
+    height: 38px;
     background: var(--acc, #E8703A);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(232,112,58,0.38);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 10px rgba(232,112,58,0.4);
     flex-shrink: 0;
   }
-  #float-cs-btn:hover .fcs-btn-icon { transform: scale(1.07); box-shadow: 0 8px 28px rgba(232,112,58,0.45); }
+  .fcs-btn-label {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
   @media (max-width: 480px) {
     #float-cs-wrap { bottom: 88px; right: 16px; }
     #float-cs-popup { width: calc(100vw - 32px); }
+    #float-cs-btn { padding: 8px; gap: 0; background: transparent; border: none; box-shadow: none; backdrop-filter: none; }
     .fcs-btn-label { display: none; }
-    .fcs-btn-icon { border-radius: 50%; }
+    .fcs-btn-icon { width: 52px; height: 52px; box-shadow: 0 4px 20px rgba(232,112,58,0.45); }
   }
 </style>
 
