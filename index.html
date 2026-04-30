@@ -492,6 +492,68 @@
       box-shadow: 0 4px 20px var(--acc-glow);
     }
     .pricing-card.recommended .pricing-btn:hover { background: var(--acc-dark); }
+    .pricing-badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px auto 0;
+      max-width: 900px;
+    }
+    .pricing-trust-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pricing-assurance {
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--text);
+      background: rgba(232,112,58,0.08);
+      border: 1px solid rgba(232,112,58,0.2);
+      border-radius: 999px;
+      padding: 10px 16px;
+      display: inline-block;
+    }
+    .pricing-flexibility-card {
+      margin: 28px auto 0;
+      max-width: 900px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 26px 28px;
+    }
+    .pricing-flexibility-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .pricing-flexibility-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .pricing-flexibility-list span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 999px;
+      padding: 12px 18px;
+      color: var(--text-sub);
+      font-size: 14px;
+      font-weight: 700;
+    }
 
     /* ─── [11] Who ─── */
     #who { padding: 100px 24px; background: var(--bg); }
@@ -1224,6 +1286,32 @@
 </section>
 
 <!-- ════════════════════════════════════════
+  [NEW] 팀 vs 개인 오해 해소
+════════════════════════════════════════ -->
+<section id="team-vs-individual" class="section section-alt">
+  <div class="inner" style="max-width:940px;">
+    <span class="sec-label">TEAM vs INDIVIDUAL</span>
+    <h2 class="sec-title">5명이 같은 서비스 만드는 게 아닙니다.</h2>
+    <p class="sec-desc">자주 받는 오해와 실제 운영 방식의 차이를 명확하게 보여드립니다.</p>
+    <div class="comparison-grid">
+      <div class="comparison-card comparison-card--misunderstood">
+        <div class="comparison-tag">오해</div>
+        <p class="comparison-title">"5명이 한 팀이 되어 하나의 서비스를 같이 만든다"</p>
+        <p class="comparison-body">내 아이디어를 못 만드는 건가? 걱정이 생기죠.</p>
+      </div>
+      <div class="comparison-card comparison-card--reality">
+        <div class="comparison-tag">실제</div>
+        <p class="comparison-title">각자 본인의 서비스를 만듭니다.</p>
+        <p class="comparison-body">5인 1팀은 매주 진행 점검·피드백·응원의 단위예요.</p>
+      </div>
+    </div>
+    <div class="comparison-note">
+      내 아이디어로 내 서비스를 만들되, <strong>4주 동안 같이 갈 동료 5명이 생긴다</strong>고 생각하시면 됩니다.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
   FOR YOU
 ════════════════════════════════════════ -->
 <section id="target" class="section">
@@ -1250,6 +1338,71 @@
   </div>
 </section>
 <style>
+  .team-vs-individual {
+    background: var(--bg-alt);
+  }
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .comparison-card {
+    border-radius: var(--r);
+    padding: 28px 26px;
+    border: 1px solid var(--border);
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .comparison-card--misunderstood {
+    background: rgba(255,77,79,0.10);
+    border-color: rgba(255,77,79,0.22);
+  }
+  .comparison-card--reality {
+    background: rgba(68,255,112,0.10);
+    border-color: rgba(68,255,112,0.22);
+  }
+  .comparison-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 8px 14px;
+    border-radius: 999px;
+    color: #fff;
+    width: fit-content;
+  }
+  .comparison-card--misunderstood .comparison-tag { background: #FF4D4F; }
+  .comparison-card--reality .comparison-tag { background: #5DDB86; }
+  .comparison-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.35;
+    margin: 0;
+  }
+  .comparison-body {
+    font-size: 16px;
+    color: var(--text-sub);
+    line-height: 1.9;
+    margin: 0;
+    flex: 1;
+  }
+  .comparison-note {
+    margin-top: 26px;
+    padding: 22px 24px;
+    background: rgba(232,112,58,0.08);
+    border: 1px solid rgba(232,112,58,0.2);
+    border-radius: var(--r);
+    font-size: 16px;
+    color: var(--text);
+    line-height: 1.8;
+  }
+  .comparison-note strong { color: var(--acc); }
+
   .target-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 36px; }
   .target-card {
     background: var(--bg-card);
@@ -1437,7 +1590,162 @@
   </div>
 </section>
 
+<!-- ════════════════════════════════════════
+  [NEW] 직장인 1주차 시간표 시뮬레이션
+════════════════════════════════════════ -->
+<section id="schedule-simulation" class="section">
+  <div class="inner" style="max-width:900px;">
+    <span class="sec-label">WEEK 1 SIMULATION</span>
+    <h2 class="sec-title">주 5~7시간, 본업과 함께 충분히 가능합니다.</h2>
+    <p class="sec-desc">코딩 경험 없는 비개발자 30대 직장인 페르소나를 따라 실제 주간 스케줄을 시뮬레이션했습니다.</p>
+
+    <div class="schedule-summary">
+      <img src="images/memoji-laptop.png" alt="미모티콘" class="schedule-memoji" style="width:48px; height:48px; margin-bottom:12px; display:inline-block;">
+      <div style="display:inline-block; margin-left:12px; vertical-align:middle;">
+        <strong>페르소나:</strong> 코딩 경험 없는 비개발자 30대 직장인, 평일 야간과 주말 일부 시간을 활용해 서비스 개발을 진행합니다.
+      </div>
+    </div>
+
+    <div class="schedule-timeline">
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <div class="timeline-day">월</div>
+          <div class="timeline-time">22:00 - 22:30</div>
+          <div class="timeline-activity">아이디어 정리 <span>(자율)</span></div>
+        </div>
+      </div>
+      <div class="timeline-item timeline-item--rest">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <div class="timeline-day">화</div>
+          <div class="timeline-time">휴식</div>
+          <div class="timeline-activity">리프레시 타임</div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <div class="timeline-day">수</div>
+          <div class="timeline-time">21:30 - 22:30</div>
+          <div class="timeline-activity">기획안 작성 <span>(자율)</span></div>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <div class="timeline-day">목</div>
+          <div class="timeline-time">22:00 - 22:30</div>
+          <div class="timeline-activity">슬랙 질문방 참여 <span>(자율)</span></div>
+        </div>
+      </div>
+      <div class="timeline-item timeline-item--rest">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <div class="timeline-day">금</div>
+          <div class="timeline-time">휴식</div>
+          <div class="timeline-activity">충분한 휴식</div>
+        </div>
+      </div>
+      <div class="timeline-item timeline-item--wide">
+        <span class="timeline-dot"></span>
+        <div class="timeline-card">
+          <div class="timeline-day">토</div>
+          <div class="timeline-time">10:00 - 11:00 / 14:00 - 17:00</div>
+          <div class="timeline-activity">팀 미팅 + 집중 작업 <span>(팀/자율)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="schedule-total">총 시간: 약 6시간</div>
+    <div class="schedule-note">
+      팀 미팅 시간은 자유롭게 조정 가능하며, 모각 AI는 자율 참여입니다.
+    </div>
+  </div>
+</section>
+
 <style>
+  .schedule-summary {
+    margin-top: 28px;
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.8;
+  }
+  .schedule-timeline {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    margin-top: 16px;
+    border-radius: 50%;
+    background: var(--acc);
+    box-shadow: 0 0 0 6px rgba(232,112,58,0.08);
+  }
+  .timeline-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 18px 18px;
+    width: 100%;
+  }
+  .timeline-item--rest .timeline-card {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.08);
+  }
+  .timeline-day {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .timeline-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--acc);
+    margin-bottom: 8px;
+  }
+  .timeline-activity {
+    font-size: 14px;
+    color: var(--text-sub);
+    line-height: 1.65;
+  }
+  .timeline-activity span {
+    color: var(--text);
+    font-weight: 700;
+  }
+  @media (max-width: 900px) {
+    .schedule-timeline { grid-template-columns: 1fr; }
+  }
+  .schedule-total {
+    margin-top: 20px;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .schedule-note {
+    margin-top: 14px;
+    padding: 20px 22px;
+    background: rgba(232,112,58,0.08);
+    border: 1px solid rgba(232,112,58,0.2);
+    border-radius: var(--r);
+    color: var(--text);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 640px) {
+    .schedule-timeline { grid-template-columns: 1fr; }
+  }
+
   .op-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1553,6 +1861,99 @@
     .benefit-grid { grid-template-columns: 1fr; }
     .benefit-session-grid { grid-template-columns: 1fr; }
     .benefit-cert { flex-direction: column; gap: 12px; }
+  }
+</style>
+
+<!-- ════════════════════════════════════════
+  [NEW] 결제 후 들어가는 환경 미리보기
+════════════════════════════════════════ -->
+<section id="onboarding-preview" class="section">
+  <div class="inner" style="max-width:980px;">
+    <span class="sec-label">ONBOARDING PREVIEW</span>
+    <h2 class="sec-title">결제 후, 실제로 들어가는 환경입니다.</h2>
+    <p class="sec-desc">막히면 진짜 도와주는 운영 구조와 함께, 처음부터 끝까지 함께하는 멤버를 미리 확인하세요.</p>
+
+    <div class="onboarding-grid">
+      <div class="onboarding-card">
+        <div class="onboarding-card-title">슬랙 워크스페이스</div>
+        <ul class="onboarding-list">
+          <li>#공지</li>
+          <li>#질문방 (평균 2시간 응답)</li>
+          <li>#자랑방</li>
+          <li>#모각AI-인증</li>
+          <li>#팀1 ~ #팀10</li>
+        </ul>
+      </div>
+      <div class="onboarding-card">
+        <div class="onboarding-card-title">정기 루틴</div>
+        <ul class="onboarding-list">
+          <li>데일리 자율 모각AI</li>
+          <li>주간 팀 미팅 1회</li>
+          <li>라이브 세션 2회</li>
+          <li>오프라인 행사 2회</li>
+        </ul>
+      </div>
+      <div class="onboarding-card onboarding-card--highlight">
+        <div class="onboarding-card-title">함께 가는 사람들</div>
+        <ul class="onboarding-list">
+          <li>튜터</li>
+          <li>팀원 4명</li>
+          <li>클럽장</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .onboarding-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 38px;
+  }
+  .onboarding-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 28px 24px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .onboarding-card:hover { border-color: var(--border-s); background: var(--bg-card-h); }
+  .onboarding-card--highlight {
+    background: rgba(232,112,58,0.08);
+    border-color: rgba(232,112,58,0.22);
+  }
+  .onboarding-card-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .onboarding-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .onboarding-list li {
+    font-size: 15px;
+    color: var(--text-sub);
+    line-height: 1.8;
+    position: relative;
+    padding-left: 18px;
+  }
+  .onboarding-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--acc);
+    font-weight: 800;
+  }
+  @media (max-width: 900px) {
+    .onboarding-grid { grid-template-columns: 1fr; }
   }
 </style>
 
@@ -1963,8 +2364,8 @@
         <div class="worry-a">클로드를 한 번이라도 써보셨다면 충분합니다. 더 기본기를 다지고 싶으시면 '온보딩 강의'가 포함된 옵션으로 시작하실 수 있어요.</div>
       </div>
       <div class="worry-card">
-        <div class="worry-q"><span class="worry-q-badge">Q3</span>"시간 부담이 크지 않을까요?"</div>
-        <div class="worry-a">주 5~7시간 정도면 충분합니다. 평일 저녁 + 주말 사용 기준이고, 자율학습 + 팀 미팅 1회 + 제작 시간으로 운영됩니다. 본업과 병행 가능한 수준으로 설계되어 있어요.</div>
+        <div class="worry-q"><span class="worry-q-badge">Q3</span>"중간에 안 맞으면 환불되나요?"</div>
+        <div class="worry-a">네, 개강 전까지 100% 전액 환불됩니다. 개강일(5/16) 전까지 고객센터로 문의 주시면 전액 환불해드립니다.</div>
       </div>
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q4</span>"정말 4주 안에 결과가 나오나요?"</div>
@@ -2052,6 +2453,11 @@
     <p class="sec-desc" style="margin: 0 auto 8px; text-align:center;">
       <span id="pricing-deadline-note" style="display:inline-block; background:var(--acc-chip); color:var(--acc-text); font-size:13px; font-weight:700; padding:4px 14px; border-radius:100px; margin-bottom:16px;">🔥 4/30(목) 23:59까지 얼리버드</span>
     </p>
+    <div class="pricing-badge-row">
+      <span class="pricing-trust-badge">100% 환불 보장 · 개강 7일 전까지</span>
+      <span class="pricing-trust-badge">얼리버드 마감</span>
+      <span class="pricing-trust-badge">남은 자리 한정</span>
+    </div>
     <div class="pricing-grid">
       <!-- Standard (메인 강조) -->
       <div class="pricing-card recommended">
@@ -2062,6 +2468,7 @@
         <div class="pricing-regular" id="std-regular">269,000원 (5/1~)</div>
         <div class="pricing-price"><span id="std-price">199,000</span>원</div>
         <div class="pricing-price-note" id="std-note">얼리버드 (~4/30)</div>
+        <div class="pricing-assurance">개강 전 100% 환불 가능</div>
         <button class="pricing-btn" onclick="startApply('standard')">신청하기 →</button>
       </div>
       <!-- Base -->
@@ -2072,7 +2479,16 @@
         <div class="pricing-regular" id="base-regular">309,000원 (5/1~)</div>
         <div class="pricing-price"><span id="base-price">249,000</span>원</div>
         <div class="pricing-price-note" id="base-note">얼리버드 (~4/30)</div>
+        <div class="pricing-assurance">개강 전 100% 환불 가능</div>
         <button class="pricing-btn" onclick="startApply('base')">신청하기 →</button>
+      </div>
+    </div>
+    <div class="pricing-flexibility-card">
+      <div class="pricing-flexibility-title">이런 분들도 충분히 참여 가능합니다</div>
+      <div class="pricing-flexibility-list">
+        <span>🌏 해외 거주자</span>
+        <span>📅 중간에 빠지는 주 있음</span>
+        <span>⏱️ 본업이 바쁨</span>
       </div>
     </div>
     <p style="margin-top:24px; font-size:13px; color:var(--text-muted);">온보딩 강의 일정 택1: 5/10(일) 11:00~14:00 또는 5/13(수) 20:00~23:00</p>
