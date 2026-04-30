@@ -2631,10 +2631,16 @@
     } catch(e) {}
   }
 
+  /* ── KST 시간 ──────────────────────────── */
+  function nowKST() {
+    const offset = 9 * 60 * 60 * 1000;
+    return new Date(Date.now() + offset).toISOString().replace('Z', '+09:00');
+  }
+
   /* ── Tracking ──────────────────────────── */
   function track(eventType, extra) {
     const ev = Object.assign({
-      timestamp:  new Date().toISOString(),
+      timestamp:  nowKST(),
       event_type: eventType,
       session_id: SESSION_ID,
       device:     window.innerWidth < 768 ? 'mobile' : 'desktop',
@@ -2979,7 +2985,7 @@
       apply_status: 'apply_done',
     }, UTM);
 
-    const createdAt = new Date().toISOString();
+    const createdAt = nowKST();
 
     // Google Sheets 신청자 저장
     sendToSheets(Object.assign({ type: 'applicant', created_at: createdAt }, applyData));

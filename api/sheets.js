@@ -19,6 +19,11 @@ function uuid() {
   });
 }
 
+function nowKST() {
+  const offset = 9 * 60 * 60 * 1000;
+  return new Date(Date.now() + offset).toISOString().replace('Z', '+09:00');
+}
+
 const HEADERS_EVENTS = [
   'id','timestamp','event_type','session_id','applicant_id','location','option',
   'utm_source','utm_medium','utm_campaign','utm_content','device','referrer','date'
@@ -89,7 +94,7 @@ module.exports = async function handler(req, res) {
     const sheets = google.sheets({ version: 'v4', auth });
 
     if (body.type === 'event') {
-      const now = body.timestamp || new Date().toISOString();
+      const now = body.timestamp || nowKST();
       const date = now.slice(0, 10);
       await appendRow(sheets, SHEET_EVENTS, HEADERS_EVENTS, [
         uuid(),
