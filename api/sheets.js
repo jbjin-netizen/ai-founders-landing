@@ -51,6 +51,69 @@ async function ensureSheet(sheets, sheetName, headers) {
   }
 }
 
+function utcToKST(val) {
+  const t = new Date(val).getTime();
+  if (isNaN(t)) return null;
+  return new Date(t + 9 * 60 * 60 * 1000).toISOString().replace('Z', '+09:00');
+}
+
+async function migrateSheetToKST(sheets, sheetName, columnsToConvert) {
+  const resp = await sheets.spreadsheets.values.get({
+    spreadsheetId: SPREADSHEET_ID,
+    range: `${sheetName}!A:Z`,
+  });
+  const rows = resp.data.values || [];
+  if (rows.length <= 1) return { sheetName, updated: 0, skipped: 0 };
+
+  const header = rows[0];
+  const tsIdx = header.indexOf('timestamp');
+  const createdIdx = header.indexOf('created_at');
+
+  const data = [];
+  let updated = 0;
+  let skipped = 0;
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    for (const col of columnsToConvert) {
+      const idx = header.indexOf(col);
+      if (idx < 0) continue;
+      const cur = row[idx];
+      if (!cur) continue;
+      if (typeof cur === 'string' && cur.includes('+09:00')) { skipped++; continue; }
+
+      let newVal;
+      if (col === 'date') {
+        const refIdx = tsIdx >= 0 ? tsIdx : createdIdx;
+        if (refIdx < 0 || !row[refIdx]) continue;
+        const kstTs = (typeof row[refIdx] === 'string' && row[refIdx].includes('+09:00'))
+          ? row[refIdx]
+          : utcToKST(row[refIdx]);
+        if (!kstTs) continue;
+        newVal = kstTs.slice(0, 10);
+      } else {
+        newVal = utcToKST(cur);
+        if (!newVal) continue;
+      }
+
+      if (newVal === cur) { skipped++; continue; }
+
+      const colLetter = String.fromCharCode(65 + idx);
+      data.push({ range: `${sheetName}!${colLetter}${i + 1}`, values: [[newVal]] });
+      updated++;
+    }
+  }
+
+  if (data.length > 0) {
+    await sheets.spreadsheets.values.batchUpdate({
+      spreadsheetId: SPREADSHEET_ID,
+      requestBody: { valueInputOption: 'RAW', data },
+    });
+  }
+
+  return { sheetName, updated, skipped };
+}
+
 async function appendRow(sheets, sheetName, headers, values) {
   await ensureSheet(sheets, sheetName, headers);
   await sheets.spreadsheets.values.append({
@@ -133,6 +196,12 @@ module.exports = async function handler(req, res) {
         body.utm_content || '',
       ]);
       return res.status(200).json({ ok: true });
+    }
+
+    if (body.type === 'migrate_kst') {
+      const events = await migrateSheetToKST(sheets, SHEET_EVENTS, ['timestamp', 'date']);
+      const applicants = await migrateSheetToKST(sheets, SHEET_APPLICANTS, ['created_at']);
+      return res.status(200).json({ ok: true, events, applicants });
     }
 
     return res.status(400).json({ ok: false, error: 'unknown type' });
