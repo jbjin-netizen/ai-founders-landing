@@ -1069,17 +1069,17 @@
   <!-- Desktop -->
   <div class="banner-desktop" id="banner-desktop-text">
     🔥 얼리버드 마감
-    <span class="banner-deadline" id="banner-deadline-note">이번 주 목요일(4/30) 자정까지</span>
+    <span class="banner-deadline" id="banner-deadline-note">5/11(월) 23:59까지</span>
     <span class="banner-divider">|</span>
     <span class="banner-timer"><strong id="cd-days">D-</strong> <span id="cd-time">00:00:00</span></span>
     <span class="banner-divider">|</span>
     <span class="banner-price" id="banner-price-label">199,000원</span>
-    <span class="banner-next" id="banner-next-note">→ 5/1부터 269,000원</span>
+    <span class="banner-next" id="banner-next-note">→ 5/12부터 269,000원</span>
   </div>
   <!-- Mobile -->
   <div class="banner-mobile">
-    <div id="banner-mobile-top" style="font-size:15px; font-weight:800;">🔥 이번 주 목요일 자정 마감 · <span style="color:var(--hl);" id="cd-days-m">D-</span> <span id="cd-time-m">00:00:00</span></div>
-    <div id="banner-mobile-bot" style="font-size:13px; font-weight:700; color:var(--acc-text); margin-top:2px;">얼리버드 199,000원 → 5/1부터 269,000원</div>
+    <div id="banner-mobile-top" style="font-size:15px; font-weight:800;">🔥 5/11(월) 자정 마감 · <span style="color:var(--hl);" id="cd-days-m">D-</span> <span id="cd-time-m">00:00:00</span></div>
+    <div id="banner-mobile-bot" style="font-size:13px; font-weight:700; color:var(--acc-text); margin-top:2px;">얼리버드 199,000원 → 5/12부터 269,000원</div>
   </div>
 </div>
 
@@ -2323,7 +2323,7 @@
     <span class="sec-label">PRICING</span>
     <h2 class="sec-title">지금 신청하면<br>얼리버드 가격으로 시작합니다</h2>
     <p class="sec-desc" style="margin: 0 auto 8px; text-align:center;">
-      <span id="pricing-deadline-note" style="display:inline-block; background:var(--acc-chip); color:var(--acc-text); font-size:13px; font-weight:700; padding:4px 14px; border-radius:100px; margin-bottom:16px;">🔥 4/30(목) 23:59까지 얼리버드</span>
+      <span id="pricing-deadline-note" style="display:inline-block; background:var(--acc-chip); color:var(--acc-text); font-size:13px; font-weight:700; padding:4px 14px; border-radius:100px; margin-bottom:16px;">🔥 5/11(월) 23:59까지 얼리버드</span>
     </p>
     <div class="pricing-badge-row">
       <span class="pricing-trust-badge">개강 전날까지 100% 환불 보장</span>
@@ -2337,9 +2337,9 @@
         <div class="pricing-name">AI 파운더스 1기</div>
         <div class="pricing-includes">4주 본 과정<br>Claude 경험 있는 분께 추천</div>
         <div class="pricing-original">정가 340,000원</div>
-        <div class="pricing-regular" id="std-regular">269,000원 (5/1~)</div>
+        <div class="pricing-regular" id="std-regular">269,000원 (5/12~)</div>
         <div class="pricing-price"><span id="std-price">199,000</span>원</div>
-        <div class="pricing-price-note" id="std-note">얼리버드 (~4/30)</div>
+        <div class="pricing-price-note" id="std-note">얼리버드 (~5/11)</div>
         
         <button class="pricing-btn" onclick="startApply('standard')">신청하기 →</button>
       </div>
@@ -2348,9 +2348,9 @@
         <div class="pricing-name">AI 파운더스 1기 + 온보딩 강의</div>
         <div class="pricing-includes">4주 본 과정 + 사전 라이브 3시간<br>(기초·환경세팅, 개강 전 1회)</div>
         <div class="pricing-original">정가 399,000원</div>
-        <div class="pricing-regular" id="base-regular">309,000원 (5/1~)</div>
+        <div class="pricing-regular" id="base-regular">309,000원 (5/12~)</div>
         <div class="pricing-price"><span id="base-price">249,000</span>원</div>
-        <div class="pricing-price-note" id="base-note">얼리버드 (~4/30)</div>
+        <div class="pricing-price-note" id="base-note">얼리버드 (~5/11)</div>
         
         <button class="pricing-btn" onclick="startApply('base')">신청하기 →</button>
       </div>
@@ -2605,7 +2605,7 @@
     </p>
     <h2 class="final-title">이번엔 끝까지 같이 만들어 가봐요.</h2>
     <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:24px 0 32px; font-size:15px; color:var(--text-muted);">
-      <span>얼리버드 이번주 목요일 마감</span>
+      <span>얼리버드 5/11(월) 마감</span>
       <span>·</span>
       <span>50명 정원</span>
       <span>·</span>
@@ -2704,7 +2704,7 @@
   <div class="floating-inner">
     <div class="floating-info">
       <div class="floating-price" id="float-price">199,000원~</div>
-      <div class="floating-price-sub" id="float-sub">🔥 이번 주 목요일(4/30) 자정 마감 · D-<span id="float-days">-</span>일</div>
+      <div class="floating-price-sub" id="float-sub">🔥 5/11(월) 자정 마감 · D-<span id="float-days">-</span>일</div>
     </div>
     <button class="floating-btn" onclick="openModal('floating')">지금 1기 신청하기</button>
   </div>
@@ -2876,7 +2876,7 @@
   'use strict';
 
   /* ── Constants ─────────────────────────── */
-  const EARLY_DEADLINE = new Date('2026-04-30T23:59:59+09:00').getTime();
+  const EARLY_DEADLINE = new Date('2026-05-11T23:59:59+09:00').getTime();
   const REG_DEADLINE   = new Date('2026-05-14T23:59:59+09:00').getTime();
   const PAY_STANDARD   = 'https://academia.spartaclub.kr/payment/1401';
   const PAY_BASE       = 'https://academia.spartaclub.kr/payment/1400';
@@ -2973,11 +2973,11 @@
     const stdP = document.getElementById('std-price');
     if (stdP) stdP.textContent = fmtPrice(prices.standard);
     const stdNote = document.getElementById('std-note');
-    if (stdNote) stdNote.textContent = mode === 'early' ? '얼리버드 (~4/30)' : '판매가';
+    if (stdNote) stdNote.textContent = mode === 'early' ? '얼리버드 (~5/11)' : '판매가';
     const baseP = document.getElementById('base-price');
     if (baseP) baseP.textContent = fmtPrice(prices.base);
     const baseNote = document.getElementById('base-note');
-    if (baseNote) baseNote.textContent = mode === 'early' ? '얼리버드 (~4/30)' : '판매가';
+    if (baseNote) baseNote.textContent = mode === 'early' ? '얼리버드 (~5/11)' : '판매가';
     // Modal
     const mStd = document.getElementById('modal-std-price');
     if (mStd) mStd.textContent = fmtPrice(prices.standard) + '원 (' + (mode === 'early' ? '얼리버드' : '판매가') + ')';
