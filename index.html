@@ -1720,6 +1720,18 @@
         </div>
       </div>
     </div>
+
+    <!-- VC 데모데이 초청 (1기 한정 혜택) -->
+    <div class="benefit-vc">
+      <span class="benefit-vc-tag">1기 한정 혜택</span>
+      <div class="benefit-vc-body">
+        <span class="benefit-vc-icon">💼</span>
+        <div>
+          <div class="benefit-vc-title">VC 데모데이 초청 — 현직 투자자 피드백</div>
+          <div class="benefit-vc-desc">현직 VC가 데모데이 현장에 직접 참석합니다. 4주간 만든 서비스를 발표하고, 투자자 시각의 아이디어·비즈니스 모델 피드백을 받아갈 수 있어요.</div>
+        </div>
+      </div>
+    </div>
     <p style="font-size:13px; color:var(--text-muted); margin-top:14px; line-height:1.6;">* 초청 연사는 상황에 따라 변경될 수 있습니다.</p>
 
     <!-- 수료증 -->
@@ -1751,6 +1763,13 @@
   .bs-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
   .bs-desc { font-size: 14px; color: var(--text-sub); line-height: 1.75; }
 
+  .benefit-vc { margin-top: 16px; background: rgba(232,112,58,0.08); border: 1px solid rgba(232,112,58,0.32); border-radius: var(--r); padding: 24px; }
+  .benefit-vc-tag { display: inline-block; background: rgba(232,112,58,0.18); color: var(--acc); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 100px; margin-bottom: 14px; }
+  .benefit-vc-body { display: flex; align-items: flex-start; gap: 20px; }
+  .benefit-vc-icon { font-size: 32px; flex-shrink: 0; line-height: 1; }
+  .benefit-vc-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+  .benefit-vc-desc { font-size: 15px; color: var(--text-sub); line-height: 1.75; }
+
   .benefit-cert { margin-top: 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; display: flex; align-items: flex-start; gap: 20px; transition: border-color 0.2s, background 0.2s; }
   .benefit-cert:hover { border-color: var(--border-s); background: var(--bg-card-h); }
   .benefit-cert-icon { font-size: 32px; flex-shrink: 0; line-height: 1; }
@@ -1760,6 +1779,7 @@
   @media (max-width: 640px) {
     .benefit-grid { grid-template-columns: 1fr; }
     .benefit-session-grid { grid-template-columns: 1fr; }
+    .benefit-vc-body { flex-direction: column; gap: 12px; }
     .benefit-cert { flex-direction: column; gap: 12px; }
   }
 </style>
