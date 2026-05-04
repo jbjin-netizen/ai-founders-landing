@@ -4,6 +4,10 @@ const SPREADSHEET_ID = '1HeDIX4CYqlLJyF4NlvYBFwVFLYi-nMJRJVWtlIvJ7ms';
 const SHEET_EVENTS = 'events';
 const SHEET_APPLICANTS = 'applicants';
 const SHEET_PARTIAL = 'partial_applicants';
+const SHEET_PURCHASE = 'purchase';
+
+const COHORT_CAPACITY = 50;
+const SEATS_MIN_DISPLAY = 3;
 
 function getAuth() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
@@ -128,6 +132,37 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
+    const action = (req.query && req.query.action) || '';
+
+    if (action === 'count') {
+      try {
+        const auth = getAuth();
+        const sheets = google.sheets({ version: 'v4', auth });
+        const resp = await sheets.spreadsheets.values.get({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${SHEET_PURCHASE}!A:A`,
+        });
+        const rows = resp.data.values || [];
+        const count = Math.max(0, rows.length - 1); // 헤더 제외
+        const remainingRaw = Math.max(0, COHORT_CAPACITY - count);
+        const remaining = Math.max(remainingRaw, SEATS_MIN_DISPLAY);
+        const filled = COHORT_CAPACITY - remaining;
+        const percent = Math.round(filled / COHORT_CAPACITY * 100);
+
+        // 엣지 캐시 30s + SWR 60s → Sheets API 호출량을 분당 2회 수준으로 고정
+        res.setHeader('Cache-Control', 'public, s-maxage=30, stale-while-revalidate=60');
+        return res.status(200).json({
+          ok: true,
+          count,
+          capacity: COHORT_CAPACITY,
+          remaining,
+          percent,
+        });
+      } catch (err) {
+        return res.status(500).json({ ok: false, error: err.message });
+      }
+    }
+
     const hasKey = !!process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
     let parseOk = false;
     let email = '';
