@@ -134,6 +134,116 @@ module.exports = async function handler(req, res) {
   if (req.method === 'GET') {
     const action = (req.query && req.query.action) || '';
 
+    if (action === 'events_summary') {
+      // 임시 분석용 — 토큰 매치 시에만 events 시트 집계 반환. 분석 끝나면 이 분기 제거 예정.
+      const token = (req.query && req.query.token) || '';
+      const EXPECTED_TOKEN = 'tmp-7f3a9c1e4b2d8a5f6e0d3b2c9a8f7e1d';
+      if (token !== EXPECTED_TOKEN) {
+        return res.status(401).json({ ok: false, error: 'unauthorized' });
+      }
+      try {
+        const auth = getAuth();
+        const sheets = google.sheets({ version: 'v4', auth });
+        const resp = await sheets.spreadsheets.values.get({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${SHEET_EVENTS}!A:N`,
+        });
+        const rows = resp.data.values || [];
+        if (rows.length < 2) {
+          return res.status(200).json({ ok: true, total: 0 });
+        }
+        const hd = rows[0];
+        const iEv = hd.indexOf('event_type');
+        const iSid = hd.indexOf('session_id');
+        const iDev = hd.indexOf('device');
+        const iSrc = hd.indexOf('utm_source');
+        const iMed = hd.indexOf('utm_medium');
+        const iCmp = hd.indexOf('utm_campaign');
+        const iLoc = hd.indexOf('location');
+        const iOpt = hd.indexOf('option');
+        const iDate = hd.indexOf('date');
+        const data = rows.slice(1);
+
+        const byEventType = {};
+        const byDevice = {};
+        const bySource = {};
+        const byDate = {};
+        const byCtaLocation = {};
+        const byApplyOption = {};
+        const sessionsBy = {};       // session unique by event_type
+        const sessionsByDev = { mobile: {}, desktop: {} };
+        const sessionsBySrc = {};    // {source: {event_type: Set}}
+        const allSessions = new Set();
+        const sessionFirstSeen = {};
+
+        for (const r of data) {
+          const ev = r[iEv] || '';
+          const sid = r[iSid] || '';
+          const dev = r[iDev] || '';
+          const src = r[iSrc] || '(none)';
+          const date = r[iDate] || '';
+          const loc = r[iLoc] || '';
+          const opt = r[iOpt] || '';
+
+          byEventType[ev] = (byEventType[ev] || 0) + 1;
+          byDevice[dev] = (byDevice[dev] || 0) + 1;
+          bySource[src] = (bySource[src] || 0) + 1;
+          if (date) byDate[date] = (byDate[date] || 0) + 1;
+          if (ev === 'cta_click' && loc) byCtaLocation[loc] = (byCtaLocation[loc] || 0) + 1;
+          if (ev === 'apply_start' && opt) byApplyOption[opt] = (byApplyOption[opt] || 0) + 1;
+
+          if (sid) {
+            allSessions.add(sid);
+            if (!sessionsBy[ev]) sessionsBy[ev] = new Set();
+            sessionsBy[ev].add(sid);
+            if (dev === 'mobile' || dev === 'desktop') {
+              if (!sessionsByDev[dev][ev]) sessionsByDev[dev][ev] = new Set();
+              sessionsByDev[dev][ev].add(sid);
+            }
+            if (!sessionsBySrc[src]) sessionsBySrc[src] = {};
+            if (!sessionsBySrc[src][ev]) sessionsBySrc[src][ev] = new Set();
+            sessionsBySrc[src][ev].add(sid);
+          }
+        }
+
+        const sessionsByEvent = {};
+        Object.keys(sessionsBy).forEach(k => { sessionsByEvent[k] = sessionsBy[k].size; });
+
+        const funnelEvents = ['landing_view','cta_click','apply_start','apply_input_start','apply_phase1_done','apply_done'];
+        const funnelByDevice = {};
+        ['mobile','desktop'].forEach(d => {
+          funnelByDevice[d] = {};
+          funnelEvents.forEach(ev => {
+            funnelByDevice[d][ev] = (sessionsByDev[d][ev] || new Set()).size;
+          });
+        });
+        const funnelBySource = {};
+        Object.keys(sessionsBySrc).forEach(src => {
+          funnelBySource[src] = {};
+          funnelEvents.forEach(ev => {
+            funnelBySource[src][ev] = (sessionsBySrc[src][ev] || new Set()).size;
+          });
+        });
+
+        return res.status(200).json({
+          ok: true,
+          total_rows: data.length,
+          unique_sessions: allSessions.size,
+          by_event_type: byEventType,
+          sessions_by_event_type: sessionsByEvent,
+          by_device: byDevice,
+          by_utm_source: bySource,
+          by_date: byDate,
+          cta_click_by_location: byCtaLocation,
+          apply_start_by_option: byApplyOption,
+          funnel_by_device: funnelByDevice,
+          funnel_by_utm_source: funnelBySource,
+        });
+      } catch (err) {
+        return res.status(500).json({ ok: false, error: err.message });
+      }
+    }
+
     if (action === 'count') {
       try {
         const auth = getAuth();
