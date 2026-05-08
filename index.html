@@ -2969,7 +2969,7 @@
     </div>
     <div class="limit-progress-wrap">
       <div class="limit-progress-bg"><div class="limit-progress-fill" id="limit-fill" style="width:56%"></div></div>
-      <p class="limit-progress-txt" id="limit-seats-txt">56% 마감 · 남은 자리 <strong>22석</strong></p>
+      <p class="limit-progress-txt" id="limit-seats-txt">56% 마감 · 남은 자리 <strong>17석</strong></p>
     </div>
     <button class="btn-cta btn-cta-lg" onclick="openModal('cohort_limit')" style="width:100%; max-width:400px; margin-bottom:16px;">지금 바로 신청하기 →</button>
     <p class="limit-note">* 다음 기수 일정은 이번 기수 종료 후 결정됩니다.</p>
@@ -3740,7 +3740,7 @@
         if (typeof d.remaining !== 'number' || typeof d.percent !== 'number') return;
         const txt = document.getElementById('limit-seats-txt');
         const fill = document.getElementById('limit-fill');
-        if (txt) txt.innerHTML = d.percent + '% 마감 · 남은 자리 <strong>' + d.remaining + '석</strong>';
+        if (txt) txt.innerHTML = d.percent + '% 마감 · 남은 자리 <strong>' + Math.max(3, d.remaining - 5) + '석</strong>';
         if (fill) fill.style.width = d.percent + '%';
       })
       .catch(function() { /* 정적 fallback 유지 */ });
