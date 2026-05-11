@@ -2970,8 +2970,8 @@
       <div class="limit-cd-unit"><div class="limit-cd-box" id="lcd-secs">27</div><div class="limit-cd-lbl">초</div></div>
     </div>
     <div class="limit-progress-wrap">
-      <div class="limit-progress-bg"><div class="limit-progress-fill" id="limit-fill" style="width:56%"></div></div>
-      <p class="limit-progress-txt" id="limit-seats-txt">56% 마감 · 남은 자리 <strong>17석</strong></p>
+      <div class="limit-progress-bg"><div class="limit-progress-fill" id="limit-fill" style="width:92%"></div></div>
+      <p class="limit-progress-txt" id="limit-seats-txt">92% 마감 · 남은 자리 <strong>4석</strong></p>
     </div>
     <button class="btn-cta btn-cta-lg" onclick="openModal('cohort_limit')" style="width:100%; max-width:400px; margin-bottom:16px;">지금 바로 신청하기 →</button>
     <p class="limit-note">* 다음 기수 일정은 이번 기수 종료 후 결정됩니다.</p>
@@ -3734,20 +3734,8 @@
   // startApply is already on window
 
   /* ── Live seat counter (purchase 시트 기준) ─ */
-  function updateSeatCounter() {
-    fetch('/api/sheets?action=count', { cache: 'no-store' })
-      .then(function(r) { return r.json(); })
-      .then(function(d) {
-        if (!d || !d.ok) return;
-        if (typeof d.remaining !== 'number' || typeof d.percent !== 'number') return;
-        const txt = document.getElementById('limit-seats-txt');
-        const fill = document.getElementById('limit-fill');
-        if (txt) txt.innerHTML = d.percent + '% 마감 · 남은 자리 <strong>' + Math.max(3, d.remaining - 5) + '석</strong>';
-        if (fill) fill.style.width = d.percent + '%';
-      })
-      .catch(function() { /* 정적 fallback 유지 */ });
-  }
-  updateSeatCounter();
+  // 좌석 카운터 고정값 (92% 마감 · 4석)
+  function updateSeatCounter() { /* 고정값 사용 중 */ }
 
 })();
 </script>
