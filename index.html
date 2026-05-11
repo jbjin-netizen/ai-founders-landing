@@ -187,6 +187,8 @@
       color: var(--text);
     }
     .hero-title em { color: var(--hl); font-style: normal; }
+    .mo-br { display: none; }
+    @media (max-width: 640px) { .mo-br { display: block; } }
     .hero-sub {
       font-size: clamp(16px, 2vw, 19px);
       color: var(--text-sub);
@@ -1090,7 +1092,7 @@
   <div class="inner" style="position:relative; max-width:860px;">
     <div class="hero-badge">얼리버드 할인 모집 중</div>
     <h1 class="hero-title">
-      혼자선 불가능했던 서비스 런칭,<br>
+      혼자선 불가능했던<br class="mo-br"> 서비스 런칭,<br>
       <em>4주 만에 완성</em>합니다.
     </h1>
     <p class="hero-sub">
