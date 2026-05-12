@@ -3633,6 +3633,10 @@
     document.querySelectorAll('#ai-exp-group .radio-item').forEach(i => i.classList.remove('selected'));
     el.classList.add('selected');
     aiExpValue = val;
+    const banner = document.getElementById('rec-banner');
+    if (banner) {
+      banner.classList.toggle('visible', val === 1 && selectedOption === 'standard');
+    }
   };
 
   /* ── Checkbox ──────────────────────────── */
