@@ -185,10 +185,17 @@
       font-size: clamp(2.4rem, 7vw, 4.5rem);
       font-weight: 800; line-height: 1.15;
       letter-spacing: -0.04em; margin-bottom: 28px;
+      word-break: keep-all;
     }
 
     header h1 .hl {
       color: #a78bfa;
+    }
+
+    /* 모바일에서만 줄바꿈 추가: 데스크탑 2줄, 모바일 3줄 */
+    header h1 .br-mobile { display: none; }
+    @media (max-width: 640px) {
+      header h1 .br-mobile { display: initial; }
     }
 
     header .subtitle {
@@ -249,11 +256,47 @@
       padding: 56px 16px 20px;
     }
 
-    .cards { column-count: 1; column-gap: 18px; }
+    .cards { column-count: 2; column-gap: 12px; }
 
-    @media (min-width: 560px) { .cards { column-count: 2; } }
+    @media (min-width: 560px) { .cards { column-count: 2; column-gap: 18px; } }
     @media (min-width: 960px) { .cards { column-count: 3; } }
     @media (min-width: 1280px) { .cards { column-count: 4; } }
+
+    /* 모바일: 카드 padding/사이즈 축소(2열 대응) */
+    @media (max-width: 559px) {
+      .card { padding: 20px 18px; margin-bottom: 12px; }
+      .card .message { font-size: 0.92rem; line-height: 1.6; margin-bottom: 14px; }
+      .card .name { font-size: 0.72rem; }
+      .card .role-badge { font-size: 0.58rem; padding: 3px 8px; margin-bottom: 10px; }
+    }
+
+    /* 모바일: 접었을 때 11번째 카드부터 숨김 */
+    @media (max-width: 559px) {
+      .cards.collapsed .card:nth-child(n+11) { display: none; }
+    }
+
+    /* 더 보기 / 접기 토글 */
+    .cards-toggle {
+      display: none;
+      text-align: center;
+      margin: 8px 0 32px;
+    }
+    @media (max-width: 559px) {
+      .cards-toggle.has-overflow { display: block; }
+    }
+    .cards-toggle button {
+      padding: 12px 28px;
+      background: transparent; color: var(--text);
+      border: 1px solid rgba(245, 243, 235, 0.25);
+      border-radius: 100px;
+      font-family: inherit; font-weight: 600; font-size: 0.92rem;
+      letter-spacing: -0.01em; cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cards-toggle button:hover {
+      background: rgba(245, 243, 235, 0.08);
+      border-color: rgba(245, 243, 235, 0.45);
+    }
 
     .card {
       display: inline-block; width: 100%; margin-bottom: 18px;
@@ -553,7 +596,7 @@
 
   <header>
     <div class="eyebrow">AI 파운더스 1기</div>
-    <h1><span class="hl">포기</span>하고 싶을 땐<br><span class="hl">이 응원 페이지</span>를 펼쳐주세요</h1>
+    <h1><span class="hl">포기</span>하고 싶을 땐<br><span class="hl">이 응원 페이지</span>를 <br class="br-mobile">펼쳐주세요</h1>
     <p class="subtitle">동기들과 운영진이 남긴 한마디예요.<br>힘들 때 한 번씩 다시 펼쳐 보세요.</p>
     <div class="count" id="count">49개의 응원이 도착했어요</div>
   </header>
@@ -566,6 +609,9 @@
 
   <main>
     <div class="cards" id="cards"></div>
+    <div class="cards-toggle" id="cardsToggle">
+      <button type="button" id="toggleCardsBtn">더 보기</button>
+    </div>
     <div class="empty" id="empty" style="display:none;">해당 이름의 응원 메시지가 없어요</div>
   </main>
 
@@ -709,11 +755,41 @@
     let currentList = shuffle(getAllMessages());
     const cardsEl = document.getElementById('cards');
     const emptyEl = document.getElementById('empty');
+    const cardsToggleEl = document.getElementById('cardsToggle');
+    const toggleCardsBtn = document.getElementById('toggleCardsBtn');
+
+    // 모바일에서 일정 개수 초과 시 접기/펴기 토글 노출
+    const MOBILE_COLLAPSE_LIMIT = 10;
+    const mobileQuery = window.matchMedia('(max-width: 559px)');
+    let displayedList = [];
+    let userExpanded = false;
+
+    function updateToggleVisibility() {
+      const isMobile = mobileQuery.matches;
+      const overflow = displayedList.length > MOBILE_COLLAPSE_LIMIT;
+      if (isMobile && overflow) {
+        cardsToggleEl.classList.add('has-overflow');
+        if (!userExpanded) cardsEl.classList.add('collapsed');
+      } else {
+        cardsToggleEl.classList.remove('has-overflow');
+        cardsEl.classList.remove('collapsed');
+      }
+      syncToggleLabel();
+    }
+
+    function syncToggleLabel() {
+      const collapsed = cardsEl.classList.contains('collapsed');
+      const more = Math.max(displayedList.length - MOBILE_COLLAPSE_LIMIT, 0);
+      toggleCardsBtn.textContent = collapsed ? `응원 ${more}개 더 보기` : '접기';
+    }
 
     function renderCards(list) {
       cardsEl.innerHTML = '';
+      displayedList = list;
+      userExpanded = false;
       if (list.length === 0) {
         emptyEl.style.display = 'block';
+        cardsToggleEl.classList.remove('has-overflow');
         return;
       }
       emptyEl.style.display = 'none';
@@ -740,7 +816,18 @@
 
         setTimeout(() => card.classList.add('visible'), Math.min(i * 30, 700));
       });
+
+      updateToggleVisibility();
     }
+
+    toggleCardsBtn.addEventListener('click', () => {
+      const collapsed = cardsEl.classList.toggle('collapsed');
+      userExpanded = !collapsed;
+      syncToggleLabel();
+    });
+
+    // 뷰포트 전환 대응
+    mobileQuery.addEventListener('change', updateToggleVisibility);
 
     function updateCount() {
       document.getElementById('count').textContent =
