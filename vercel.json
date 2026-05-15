@@ -2,6 +2,7 @@
   "version": 2,
   "builds": [
     { "src": "index.html", "use": "@vercel/static" },
+    { "src": "cheers/**", "use": "@vercel/static" },
     { "src": "og-image.png", "use": "@vercel/static" },
     { "src": "images/**", "use": "@vercel/static" },
     { "src": "api/sheets.js", "use": "@vercel/node" }
@@ -10,6 +11,10 @@
     { "src": "/api/sheets", "dest": "/api/sheets.js" },
     { "src": "/og-image.png", "dest": "/og-image.png" },
     { "src": "/images/(.*)", "dest": "/images/$1" },
+
+    { "src": "/cheers/(.*)", "has": [{ "type": "host", "value": "ai-founders-landing-psi.vercel.app" }], "dest": "/cheers/$1" },
+    { "src": "/(.*)", "has": [{ "type": "host", "value": "ai-founders-landing-psi.vercel.app" }], "dest": "/cheers/index.html" },
+
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }

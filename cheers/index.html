@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>포기하고 싶을 땐 펼쳐주세요 — AI 파운더스 1기</title>
+  <meta name="description" content="49명의 동기와 운영진이 남긴 응원의 한마디. 힘들 때 다시 펼쳐주세요.">
+  <meta property="og:title" content="포기하고 싶을 땐 펼쳐주세요">
+  <meta property="og:description" content="AI 파운더스 1기, 응원의 한마디">
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050810">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+  <style>
+    :root {
+      --bg-deep:   #050810;
+      --bg-base:   #0a0e1f;
+      --bg-soft:   #131830;
+      --text:      #f5f3eb;
+      --text-dim:  #a8a6a0;
+      --accent:    #c5a572;
+      --card-text: #1a1610;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { overflow-x: hidden; }
+
+    body {
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background:
+        radial-gradient(ellipse at 75% 15%, rgba(140, 90, 60, 0.12) 0%, transparent 45%),
+        radial-gradient(ellipse at 15% 80%, rgba(80, 70, 110, 0.12) 0%, transparent 45%),
+        linear-gradient(180deg, var(--bg-base) 0%, var(--bg-deep) 100%);
+      color: var(--text);
+      min-height: 100vh;
+      position: relative;
+      letter-spacing: -0.01em;
+    }
+
+    /* ─── 별 배경 ─── */
+    .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .star {
+      position: absolute; background: white; border-radius: 50%; opacity: 0;
+      animation: twinkle var(--dur, 4s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+    }
+    @keyframes twinkle {
+      0%   { opacity: 0.15; transform: scale(0.8); }
+      100% { opacity: 0.85; transform: scale(1); }
+    }
+
+    /* 흐르는 별 */
+    .shooting-star {
+      position: fixed; width: 80px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.85));
+      opacity: 0; pointer-events: none; z-index: 0;
+    }
+
+    /* ─── 행성 (CSS 그라데이션 - 고급스러운 입체감) ─── */
+    .cosmos { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+
+    .planet {
+      position: absolute;
+      border-radius: 50%;
+      animation: drift var(--dur, 16s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+    }
+
+    /* 큰 가스 행성 (우상단) */
+    .planet-mars {
+      width: 220px; height: 220px;
+      top: -60px; right: -80px;
+      background:
+        radial-gradient(circle at 30% 25%,
+          #e0a878 0%,
+          #b8794c 28%,
+          #7a4628 60%,
+          #3a2014 90%,
+          #1a0e08 100%);
+      box-shadow:
+        inset -45px -45px 90px rgba(0, 0, 0, 0.65),
+        inset 25px 25px 50px rgba(255, 210, 170, 0.18),
+        0 0 120px rgba(180, 110, 70, 0.18);
+      --dur: 22s;
+    }
+
+    /* 달 (좌하단) */
+    .planet-moon {
+      width: 130px; height: 130px;
+      bottom: 12%; left: -40px;
+      background:
+        radial-gradient(circle at 35% 35%,
+          #ece5d4 0%,
+          #b8b0a0 32%,
+          #6f6a5e 65%,
+          #2a2620 95%,
+          #15120d 100%);
+      box-shadow:
+        inset -28px -28px 55px rgba(0, 0, 0, 0.55),
+        inset 16px 16px 32px rgba(255, 250, 230, 0.18),
+        0 0 100px rgba(200, 190, 170, 0.14);
+      --dur: 18s;
+      --delay: -4s;
+    }
+
+    /* 작은 먼 행성 (중간 우측) */
+    .planet-gas {
+      width: 70px; height: 70px;
+      top: 48%; right: 5%;
+      background:
+        radial-gradient(circle at 32% 32%,
+          #c9b893 0%,
+          #9a8260 38%,
+          #564224 72%,
+          #1f1812 100%);
+      box-shadow:
+        inset -16px -16px 32px rgba(0, 0, 0, 0.6),
+        inset 8px 8px 16px rgba(245, 220, 180, 0.15),
+        0 0 60px rgba(170, 145, 100, 0.2);
+      opacity: 0.7;
+      --dur: 20s;
+      --delay: -7s;
+    }
+
+    /* 미세한 작은 행성 (좌상단) */
+    .planet-dot {
+      width: 32px; height: 32px;
+      top: 18%; left: 8%;
+      background:
+        radial-gradient(circle at 35% 35%,
+          #a0c4d8 0%,
+          #5e8aa0 45%,
+          #1f3a4c 90%);
+      box-shadow:
+        inset -8px -8px 16px rgba(0, 0, 0, 0.55),
+        0 0 30px rgba(120, 160, 190, 0.2);
+      opacity: 0.55;
+      --dur: 24s;
+      --delay: -10s;
+    }
+
+    @keyframes drift {
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(8px, -22px); }
+      100% { transform: translate(-6px, 14px); }
+    }
+
+    @media (max-width: 768px) {
+      .planet-mars { width: 140px; height: 140px; top: -40px; right: -50px; }
+      .planet-moon { width: 80px; height: 80px; left: -25px; }
+      .planet-gas  { width: 44px; height: 44px; }
+      .planet-dot  { width: 22px; height: 22px; }
+    }
+
+    /* ─── 헤더 ─── */
+    header {
+      position: relative; z-index: 1; text-align: center;
+      padding: 120px 24px 60px;
+      max-width: 880px; margin: 0 auto;
+      animation: fadeIn 1.2s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header .eyebrow {
+      font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px; opacity: 0.85;
+    }
+
+    header h1 {
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.04em; margin-bottom: 28px;
+    }
+
+    header h1 .hl {
+      color: #a78bfa;
+    }
+
+    header .subtitle {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      line-height: 1.65; color: var(--text-dim);
+      max-width: 540px; margin: 0 auto 20px;
+    }
+
+    header .count {
+      display: inline-block;
+      font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 16px;
+      border-top: 1px solid rgba(197, 165, 114, 0.25);
+    }
+
+    /* ─── 액션 바 ─── */
+    .actions {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+      padding: 18px 16px;
+      background: linear-gradient(180deg, rgba(5, 8, 16, 0.92) 70%, transparent);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+
+    .actions button, .actions input {
+      padding: 11px 22px; font-size: 0.9rem; font-weight: 600;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(245, 243, 235, 0.18);
+      border-radius: 100px; cursor: pointer;
+      font-family: inherit; background: transparent; color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .actions button.primary {
+      background: var(--text); color: var(--bg-deep);
+      border-color: var(--text);
+    }
+
+    .actions button:hover {
+      background: rgba(245, 243, 235, 0.1);
+      border-color: rgba(245, 243, 235, 0.4);
+    }
+
+    .actions button.primary:hover {
+      background: var(--accent); border-color: var(--accent); color: var(--bg-deep);
+    }
+
+    .actions input { width: 180px; outline: none; }
+    .actions input::placeholder { color: var(--text-dim); }
+    .actions input:focus { border-color: var(--accent); }
+
+    /* ─── 카드 갤러리 ─── */
+    main {
+      position: relative; z-index: 1;
+      max-width: 1280px; margin: 0 auto;
+      padding: 56px 16px 20px;
+    }
+
+    .cards { column-count: 1; column-gap: 18px; }
+
+    @media (min-width: 560px) { .cards { column-count: 2; } }
+    @media (min-width: 960px) { .cards { column-count: 3; } }
+    @media (min-width: 1280px) { .cards { column-count: 4; } }
+
+    .card {
+      display: inline-block; width: 100%; margin-bottom: 18px;
+      padding: 28px 26px;
+      color: var(--card-text);
+      border-radius: 6px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.06),
+        0 8px 20px rgba(0,0,0,0.35),
+        0 16px 40px rgba(0,0,0,0.25);
+      break-inside: avoid;
+      opacity: 0;
+      transform: translateY(20px) rotate(var(--tilt, 0deg));
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s;
+      position: relative; cursor: pointer;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0) rotate(var(--tilt, 0deg));
+    }
+
+    .card:hover {
+      transform: translateY(-5px) rotate(0deg);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.1),
+        0 24px 56px rgba(0,0,0,0.5);
+      z-index: 5;
+    }
+
+    /* 카드 종이 코너 효과 */
+    .card::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.06) 50%);
+      border-radius: 0 0 6px 0;
+    }
+
+    .card .role-badge {
+      display: inline-block;
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 100px;
+      margin-bottom: 14px;
+      background: var(--card-text);
+      color: var(--accent);
+    }
+
+    .card .message {
+      font-size: 1.02rem; line-height: 1.7;
+      letter-spacing: -0.01em; margin-bottom: 18px;
+      white-space: pre-wrap; word-break: keep-all;
+    }
+
+    .card .name {
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(26, 22, 16, 0.55);
+    }
+
+    /* 카드 컬러 팔레트 — 차분하지만 다양한 8색 */
+    .c-cream    { background: linear-gradient(135deg, #f5efde, #ebe3cb); }
+    .c-linen    { background: linear-gradient(135deg, #faf3e6, #efe5d0); }
+    .c-bone     { background: linear-gradient(135deg, #ede6d2, #ddd5be); }
+    .c-mist     { background: linear-gradient(135deg, #e5e9ec, #d6dce1); }
+    .c-rose     { background: linear-gradient(135deg, #efdfdb, #e0c9c4); }
+    .c-celadon  { background: linear-gradient(135deg, #e1e9e3, #cfd9d2); }
+    .c-taupe    { background: linear-gradient(135deg, #e2dcd0, #d2caba); }
+    .c-lavender { background: linear-gradient(135deg, #e6e1ea, #d4cddc); }
+
+    /* ─── 응원 한마디 남기기 CTA ─── */
+    .add-cta {
+      position: relative; z-index: 1; text-align: center;
+      padding: 60px 20px 40px;
+      max-width: 1280px; margin: 0 auto;
+    }
+
+    .add-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 32px;
+      background: transparent; color: var(--text);
+      border: 1px solid rgba(245, 243, 235, 0.3);
+      border-radius: 100px;
+      font-family: inherit; font-weight: 600; font-size: 0.95rem;
+      cursor: pointer; letter-spacing: -0.01em;
+      transition: all 0.2s ease;
+    }
+
+    .add-btn:hover {
+      background: var(--text); color: var(--bg-deep); border-color: var(--text);
+    }
+
+    /* ─── 푸터 ─── */
+    footer {
+      position: relative; z-index: 1; text-align: center;
+      padding: 60px 24px 100px;
+    }
+
+    footer .closing {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      font-weight: 700; line-height: 1.4;
+      margin-bottom: 14px; letter-spacing: -0.03em;
+    }
+
+    footer .closing-sub {
+      font-size: 0.95rem; color: var(--text-dim);
+      margin-bottom: 36px; line-height: 1.6;
+    }
+
+    footer .share-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px;
+      background: var(--text); color: var(--bg-deep);
+      border: 1px solid var(--text); border-radius: 100px;
+      font-family: inherit; font-weight: 700; font-size: 0.95rem;
+      cursor: pointer; letter-spacing: -0.01em;
+      transition: all 0.2s ease;
+    }
+
+    footer .share-btn:hover {
+      background: var(--accent); border-color: var(--accent);
+    }
+
+    /* ─── 모달 공통 ─── */
+    .modal {
+      position: fixed; inset: 0;
+      background: rgba(5, 8, 16, 0.88);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s; padding: 24px;
+    }
+    .modal.visible { opacity: 1; pointer-events: all; }
+
+    /* 응원 보기 모달 */
+    .modal-view-card {
+      background: linear-gradient(135deg, #f5efde, #ebe3cb);
+      color: var(--card-text);
+      padding: 56px 36px 40px;
+      border-radius: 6px;
+      max-width: 520px; width: 100%;
+      text-align: center;
+      transform: scale(0.94);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .modal.visible .modal-view-card { transform: scale(1); }
+
+    .modal-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(26, 22, 16, 0.55);
+      margin-bottom: 24px;
+    }
+
+    .modal-message {
+      font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+      line-height: 1.6; letter-spacing: -0.02em;
+      margin-bottom: 28px;
+      white-space: pre-wrap; word-break: keep-all;
+    }
+
+    .modal-name {
+      font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(26, 22, 16, 0.6);
+      margin-bottom: 36px;
+    }
+
+    .modal-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    .modal-actions button {
+      padding: 11px 22px;
+      border-radius: 100px;
+      font-family: inherit; font-weight: 600; font-size: 0.9rem;
+      cursor: pointer;
+      border: 1px solid var(--card-text);
+      background: transparent; color: var(--card-text);
+      letter-spacing: -0.01em; transition: all 0.15s;
+    }
+    .modal-actions button.primary { background: var(--card-text); color: #f5efde; }
+    .modal-actions button:hover { opacity: 0.85; }
+
+    /* 응원 남기기 모달 (입력 폼) */
+    .modal-form-card {
+      background: linear-gradient(135deg, #f5efde, #ebe3cb);
+      color: var(--card-text);
+      padding: 48px 36px;
+      border-radius: 6px;
+      max-width: 520px; width: 100%;
+      transform: scale(0.94);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .modal.visible .modal-form-card { transform: scale(1); }
+
+    .form-title {
+      font-size: 1.5rem; font-weight: 800;
+      letter-spacing: -0.03em; margin-bottom: 8px;
+    }
+
+    .form-sub {
+      font-size: 0.9rem; color: rgba(26, 22, 16, 0.6);
+      margin-bottom: 28px; line-height: 1.5;
+    }
+
+    .form-field { margin-bottom: 18px; }
+
+    .form-field label {
+      display: block;
+      font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(26, 22, 16, 0.55);
+      margin-bottom: 8px;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: inherit; font-size: 1rem;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(26, 22, 16, 0.2);
+      border-radius: 4px;
+      background: white; color: var(--card-text);
+      outline: none; transition: border-color 0.15s;
+    }
+
+    .form-field textarea {
+      min-height: 120px; resize: vertical; line-height: 1.55;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus { border-color: var(--card-text); }
+
+    .form-actions {
+      display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px;
+    }
+
+    .form-actions button {
+      padding: 12px 24px;
+      border-radius: 100px;
+      font-family: inherit; font-weight: 600; font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid var(--card-text);
+      background: transparent; color: var(--card-text);
+      letter-spacing: -0.01em; transition: all 0.15s;
+    }
+    .form-actions button.primary { background: var(--card-text); color: #f5efde; }
+    .form-actions button:hover:not(:disabled) { opacity: 0.85; }
+    .form-actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* 빈 결과 */
+    .empty {
+      text-align: center; padding: 60px 20px;
+      color: var(--text-dim); font-size: 0.95rem;
+    }
+
+    /* 토스트 */
+    .toast {
+      position: fixed; bottom: 36px; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--text); color: var(--bg-deep);
+      padding: 12px 24px; border-radius: 100px;
+      font-weight: 600; font-size: 0.9rem;
+      letter-spacing: -0.01em;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: none;
+    }
+    .toast.visible { transform: translateX(-50%) translateY(0); }
+
+    /* 컨페티 */
+    .confetti {
+      position: fixed;
+      pointer-events: none; z-index: 50;
+      animation: confettiFall var(--cdur, 2.5s) ease-in forwards;
+    }
+    @keyframes confettiFall {
+      0%   { transform: translateY(-30px) rotate(0deg) scale(1); opacity: 1; }
+      80%  { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg) scale(0.8); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+
+  <div class="cosmos" aria-hidden="true">
+    <div class="planet planet-mars"></div>
+    <div class="planet planet-moon"></div>
+    <div class="planet planet-gas"></div>
+    <div class="planet planet-dot"></div>
+  </div>
+
+  <header>
+    <div class="eyebrow">AI 파운더스 1기</div>
+    <h1><span class="hl">포기</span>하고 싶을 땐<br><span class="hl">이 응원 페이지</span>를 펼쳐주세요</h1>
+    <p class="subtitle">동기들과 운영진이 남긴 한마디예요.<br>힘들 때 한 번씩 다시 펼쳐 보세요.</p>
+    <div class="count" id="count">49개의 응원이 도착했어요</div>
+  </header>
+
+  <div class="actions">
+    <button class="primary" id="randomBtn">🎲 랜덤으로 한 장</button>
+    <button id="shuffleBtn">🔀 다시 섞기</button>
+    <input id="searchInput" placeholder="이름으로 찾기" autocomplete="off">
+  </div>
+
+  <main>
+    <div class="cards" id="cards"></div>
+    <div class="empty" id="empty" style="display:none;">해당 이름의 응원 메시지가 없어요</div>
+  </main>
+
+  <div class="add-cta">
+    <button class="add-btn" id="addBtn">✍️ 나도 응원 한마디 남기기</button>
+  </div>
+
+  <footer>
+    <div class="closing">자, 이제 진짜 새로운 세상으로 가볼까요?</div>
+    <div class="closing-sub">힘들 때 다시 와서 응원 메세지 한 장을 더 펼쳐 보세요.</div>
+    <button class="share-btn" id="shareBtn">
+      💌 이 페이지 공유하기
+    </button>
+  </footer>
+
+  <!-- 응원 보기 모달 -->
+  <div class="modal" id="viewModal">
+    <div class="modal-view-card">
+      <div class="modal-label" id="modalLabel">오늘의 응원</div>
+      <div class="modal-message" id="modalMessage"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-actions">
+        <button id="modalAgain">🎲 한 번 더</button>
+        <button class="primary" id="modalClose">고마워요 🌍</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 응원 남기기 모달 -->
+  <div class="modal" id="formModal">
+    <div class="modal-form-card">
+      <div class="form-title">응원 한마디 남기기</div>
+      <div class="form-sub">동기들에게 따뜻한 한마디를 남겨주세요.</div>
+
+      <form id="cheerForm">
+        <div class="form-field">
+          <label for="cheerName">이름</label>
+          <input type="text" id="cheerName" maxlength="20" required placeholder="예: 김파운더">
+        </div>
+        <div class="form-field">
+          <label for="cheerMessage">응원의 한마디</label>
+          <textarea id="cheerMessage" maxlength="500" required placeholder="끝까지 함께 가요!"></textarea>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="formCancel">취소</button>
+          <button type="submit" class="primary" id="formSubmit">남기기</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">링크가 복사됐어요!</div>
+
+  <script>
+    // ─── 응원 메시지 데이터 ───
+    // 운영진 메시지는 baseMessages에서 crew: true 로 설정
+    const baseMessages = [
+      { name: "김유진", message: "서로서로 좋은 영향 주고 받아서 힘내봐요~" },
+      { name: "김재민", message: "화이팅!" },
+      { name: "정경", message: "화이팅" },
+      { name: "박재혁", message: "서로에게 도움이 되었으면 좋겠습니다" },
+      { name: "홍주연", message: "같이 함께해요 함께해서 서로의 희망을 실현해보아요" },
+      { name: "정경", message: "화이팅" },
+      { name: "김민건", message: "다들 끝까지 화이팅이에요!" },
+      { name: "이규동", message: "앞으로 잘부탁드리겠습니다!" },
+      { name: "박준홍", message: "다 같이 화이팅해요!" },
+      { name: "양준모", message: "화이팅" },
+      { name: "박찬성", message: "끝까지 가려면 함께 가는 것이 좋은 것 같습니다. 혼자만의 아이디어는 없어져도 아무도 모를테니까." },
+      { name: "장윤영", message: "안녕하세요! 앞으로 열심히 배워서 클로드 코드로 업무 생산성은 물론 주변 지인들에게도 필요한 앱같은 걸 만들어 줄 수 있는 쓸모있는 인간(근데 AI의 도움을 곁들인)이 되고 싶습니다. 감사합니다!" },
+      { name: "박지우", message: "서로 좋은 자극 주고받으면서 재밌게 성장해봐요🔥" },
+      { name: "서지윤", message: "직접만든 서비스를 배포하고 많은 사람들이 이용하는 날까지 다같이 끝까지 달려요!!" },
+      { name: "송다니엘", message: "함께하게 되어 정말 든든합니다. 화이팅입니다!" },
+      { name: "김수민", message: "즐겁게, 서로에게 힘이 되는 4주 보내보아요! :)" },
+      { name: "신재영", message: "우리 함께 성공적으로 만들어보아요" },
+      { name: "이승용", message: "같이 하나라도 건져가요" },
+      { name: "조영선", message: "모두 화이팅!" },
+      { name: "정효균", message: "화이팅!" },
+      { name: "홍주연", message: "우리 서로가 필요한 사람들이잖아요 함께 힘내요" },
+      { name: "전은주", message: "좋은 아이디어 공유하면서 서로에게 도움이 되었으면 좋겠습니다" },
+      { name: "백일선", message: "끝까지 완주해요 화이팅!" },
+      { name: "김성일", message: "이번엔 정말 끝까지 완성해봅시다." },
+      { name: "이창수", message: "화이팅입나다!!" },
+      { name: "정준희", message: "잘 부탁드립니다 화이팅!" },
+      { name: "이창열", message: "이해 수준이 떨어져도 낙오하지 않게 열심히 하겠습니다! 그래도 함께 잘 부탁드려요 :)" },
+      { name: "김지혜", message: "같이 공부하시면서 4주 끝까지 달릴 수 있었으면 좋겠습니다! 부족하지만 잘 부탁드려요." },
+      { name: "강보연", message: "서로 같이 으쌰으쌰해서 불가능을 가능으로 만들어요." },
+      { name: "박세현", message: "화이팅입니다." },
+      { name: "조성훈", message: "힘내세요" },
+      { name: "홍영택", message: "우리는 지금과 4주 뒤가 완전히 달라질거에요. 같이 달려보시죠!" },
+      { name: "손수정", message: "엉덩이가 무거우면 다 할수있다" },
+      { name: "유동길", message: "모두 목표로 한 작업 완수해요." },
+      { name: "최유진", message: "멋진 결과물을 위해 화이팅!" },
+      { name: "홍소형", message: "화이팅!" },
+      { name: "김세림", message: "화이팅! 바쁘고 힘들어도 끝까지 가봐요!" },
+      { name: "강지원", message: "민폐는 되지 않도록 열심히 해보겠습니다. 모두 하나라도 얻어가는 시간이 되었으면 좋겠습니다." },
+      { name: "양한슬", message: "함께 즐겁게 소통하고 좋은 자극 받으면서 잘 완주했으면 좋겠습니다. 화이팅!!" },
+      { name: "박주연", message: "서로 으쌰으쌰하면서 화이팅 해보아요!!!" },
+      { name: "이다은", message: "서로서로 페이스메이커가 되어줍시다! 화이팅!" },
+      { name: "진현서", message: "각자 역량에 맞게 열심히 해서 원히는 목표 이루기를 비랍니다." },
+      { name: "임원호", message: "수고" },
+      { name: "채문기", message: "화이팅" },
+      { name: "황성배", message: "화이팅입니다." },
+      { name: "박근형", message: "4주 후 만족스러운 결과 모두 내기바랍니다." },
+      { name: "장세희", message: "낙오자 없이 끝까지 함께해요. 할 수 있다고 믿으면 할 수 있다." },
+      { name: "김현수", message: "서로 힘이 되고 자극이 되어서 서로에게 필요한 우리가 되어서 끝까지 포기하지 말고 만들어봐요!! :)" },
+      { name: "전은미", message: "화이팅" }
+    ];
+
+    let extraMessages = [];
+    function getAllMessages() { return [...baseMessages, ...extraMessages]; }
+
+    const palette = ['cream', 'linen', 'bone', 'mist', 'rose', 'celadon', 'taupe', 'lavender'];
+
+    // ─── 별 생성 ───
+    function createStars() {
+      const container = document.getElementById('stars');
+      const count = window.innerWidth < 768 ? 60 : 120;
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 1.6 + 0.8;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.setProperty('--dur', (3 + Math.random() * 3) + 's');
+        star.style.setProperty('--delay', Math.random() * 4 + 's');
+        container.appendChild(star);
+      }
+    }
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    let currentList = shuffle(getAllMessages());
+    const cardsEl = document.getElementById('cards');
+    const emptyEl = document.getElementById('empty');
+
+    function renderCards(list) {
+      cardsEl.innerHTML = '';
+      if (list.length === 0) {
+        emptyEl.style.display = 'block';
+        return;
+      }
+      emptyEl.style.display = 'none';
+
+      list.forEach((m, i) => {
+        const color = palette[Math.floor(Math.random() * palette.length)];
+        const tilt = (Math.random() - 0.5) * 1.6; // -0.8 ~ 0.8deg (미묘하게)
+        const card = document.createElement('div');
+        card.className = `card c-${color}`;
+        card.style.setProperty('--tilt', `${tilt}deg`);
+
+        const badgeHtml = m.crew ? '<span class="role-badge">운영진</span>' : '';
+
+        card.innerHTML = `
+          ${badgeHtml}
+          <div class="message"></div>
+          <div class="name"></div>
+        `;
+        card.querySelector('.message').textContent = m.message;
+        card.querySelector('.name').textContent = '— ' + m.name;
+        cardsEl.appendChild(card);
+
+        card.addEventListener('click', () => openViewModal(m));
+
+        setTimeout(() => card.classList.add('visible'), Math.min(i * 30, 700));
+      });
+    }
+
+    function updateCount() {
+      document.getElementById('count').textContent =
+        getAllMessages().length + '개의 응원이 도착했어요';
+    }
+
+    // ─── 응원 보기 모달 ───
+    const viewModalEl = document.getElementById('viewModal');
+    const modalMessage = document.getElementById('modalMessage');
+    const modalName = document.getElementById('modalName');
+    const modalLabel = document.getElementById('modalLabel');
+
+    function openViewModal(m) {
+      modalMessage.textContent = m.message;
+      modalName.textContent = '— ' + m.name;
+      modalLabel.textContent = m.crew ? '운영진이 보낸 응원' : '오늘의 응원';
+      viewModalEl.classList.add('visible');
+      sprayConfetti();
+    }
+    function closeViewModal() { viewModalEl.classList.remove('visible'); }
+
+    document.getElementById('randomBtn').addEventListener('click', () => {
+      const all = getAllMessages();
+      openViewModal(all[Math.floor(Math.random() * all.length)]);
+    });
+
+    document.getElementById('modalAgain').addEventListener('click', () => {
+      const all = getAllMessages();
+      openViewModal(all[Math.floor(Math.random() * all.length)]);
+    });
+
+    document.getElementById('modalClose').addEventListener('click', closeViewModal);
+    viewModalEl.addEventListener('click', (e) => {
+      if (e.target === viewModalEl) closeViewModal();
+    });
+
+    // ─── 응원 남기기 모달 ───
+    const formModalEl = document.getElementById('formModal');
+    const formEl = document.getElementById('cheerForm');
+    const submitBtn = document.getElementById('formSubmit');
+
+    function openFormModal() {
+      formModalEl.classList.add('visible');
+      setTimeout(() => document.getElementById('cheerName').focus(), 350);
+    }
+    function closeFormModal() {
+      formModalEl.classList.remove('visible');
+      formEl.reset();
+    }
+
+    document.getElementById('addBtn').addEventListener('click', openFormModal);
+    document.getElementById('formCancel').addEventListener('click', closeFormModal);
+    formModalEl.addEventListener('click', (e) => {
+      if (e.target === formModalEl) closeFormModal();
+    });
+
+    formEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('cheerName').value.trim();
+      const message = document.getElementById('cheerMessage').value.trim();
+      if (!name || !message) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '남기는 중...';
+
+      try {
+        const res = await fetch('/api/sheets', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'cheer_message', name, message })
+        });
+        if (!res.ok) throw new Error('네트워크 오류');
+
+        extraMessages.push({ name, message });
+        currentList = shuffle(getAllMessages());
+        renderCards(currentList);
+        updateCount();
+
+        showToast('응원이 도착했어요! 고마워요 💛');
+        sprayConfetti();
+        closeFormModal();
+      } catch (err) {
+        showToast('전송 실패. 잠시 후 다시 시도해주세요');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '남기기';
+      }
+    });
+
+    // ─── 셔플 ───
+    document.getElementById('shuffleBtn').addEventListener('click', () => {
+      currentList = shuffle(getAllMessages());
+      renderCards(currentList);
+      sprayConfetti();
+    });
+
+    // ─── 검색 ───
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = q
+        ? getAllMessages().filter(m => m.name.toLowerCase().includes(q))
+        : currentList;
+      renderCards(filtered);
+    });
+
+    // ─── 공유 ───
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const url = window.location.href;
+      const shareData = {
+        title: '포기하고 싶을 땐 펼쳐주세요',
+        text: 'AI 파운더스 1기 응원의 한마디',
+        url: url
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          sprayConfetti();
+        } catch (e) {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(url);
+          showToast('링크가 복사됐어요!');
+          sprayConfetti();
+        } catch (e) {
+          showToast('링크 복사 실패');
+        }
+      }
+    });
+
+    // ─── 토스트 ───
+    const toastEl = document.getElementById('toast');
+    let toastTimer = null;
+    function showToast(text) {
+      toastEl.textContent = text;
+      toastEl.classList.add('visible');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('visible'), 2800);
+    }
+
+    // ─── 컨페티 (대량) ───
+    function sprayConfetti() {
+      const emojis = ['🚀', '✨', '💛', '🎉', '⭐', '🔥', '💫', '🌟', '🛸'];
+      const count = 60;
+      for (let i = 0; i < count; i++) {
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        c.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = '-30px';
+        c.style.fontSize = (14 + Math.random() * 18) + 'px';
+        const dur = (1.8 + Math.random() * 1.8);
+        c.style.setProperty('--cdur', dur + 's');
+        c.style.animationDelay = (Math.random() * 0.8) + 's';
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 4200);
+      }
+    }
+
+    // ─── 흐르는 별 ───
+    function shootStar() {
+      const s = document.createElement('div');
+      s.className = 'shooting-star';
+      const startX = Math.random() * window.innerWidth;
+      const startY = Math.random() * window.innerHeight * 0.4;
+      const endX = startX + 180 + Math.random() * 180;
+      const endY = startY + 90 + Math.random() * 80;
+
+      s.style.left = startX + 'px';
+      s.style.top = startY + 'px';
+      s.style.transform = 'rotate(30deg)';
+      document.body.appendChild(s);
+
+      s.animate([
+        { left: startX + 'px', top: startY + 'px', opacity: 0 },
+        { offset: 0.1, opacity: 1 },
+        { left: endX + 'px', top: endY + 'px', opacity: 0 }
+      ], { duration: 1500, easing: 'ease-out', fill: 'forwards' });
+
+      setTimeout(() => s.remove(), 1600);
+    }
+
+    // ─── 추가 응원 시트에서 fetch ───
+    async function loadExtraMessages() {
+      try {
+        const res = await fetch('/api/sheets?action=cheers');
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.ok && Array.isArray(data.messages)) {
+          extraMessages = data.messages.map(m => ({
+            name: m.name,
+            message: m.message,
+            ...(m.crew ? { crew: true } : {})
+          }));
+          currentList = shuffle(getAllMessages());
+          renderCards(currentList);
+          updateCount();
+        }
+      } catch (e) {}
+    }
+
+    // ─── 초기화 ───
+    document.addEventListener('DOMContentLoaded', () => {
+      createStars();
+      renderCards(currentList);
+      updateCount();
+      loadExtraMessages();
+
+      setInterval(shootStar, 5000 + Math.random() * 4000);
+      setTimeout(shootStar, 1500);
+      setTimeout(shootStar, 3500);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeViewModal();
+        closeFormModal();
+      }
+    });
+  </script>
+</body>
+</html>

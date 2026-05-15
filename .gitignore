@@ -1,3 +1,7 @@
 .vercel
 node_modules
 .DS_Store
+.lazyweb/
+.env
+.env.*
+.env*.local
