@@ -6,20 +6,28 @@ const SHEET_APPLICANTS = 'applicants';
 const SHEET_PARTIAL = 'partial_applicants';
 const SHEET_PURCHASE = 'purchase';
 const SHEET_CHEERS = 'cheers';
-const SHEET_STUDENTS = '1st_students';
-const SHEET_SCORES = '1st_scores';
 
-// 1st_scores 스키마: name | score | planet_count | notes
-// 운영진이 매주 점수를 누적해서 갱신. 기본값은 OT 참석 5점.
-const HEADERS_SCORES = ['name', 'score', 'planet_count', 'notes'];
+// AI 파운더스 1기 명단·사전리포트 (별도 운영용 시트, 링크만 있으면 접근 가능)
+// 팀배정 탭: name | phone_last4 | team_num | team_channel_id | slack_user_id | joined_at | score_count
+// 사전리포트 응답 내용 탭: 제출시간 | 이름 | 전화번호 | 환경세팅 현황 | 서비스 분야 | 만들고 싶은 서비스 | 작업 가능 시간대 | 나에게 한마디 | 주 투자 시간 | ...
+const STUDENTS_SPREADSHEET_ID = '1XmhdS0yzH9eZCD3ftEfFJ3vRqjrSe2OAOekZL0jUfgI';
+const SHEET_STUDENTS = '팀배정';
+const SHEET_PRE_REPORT = '사전리포트 응답 내용';
+
+// 학생이 카드에서 직접 수정한 mission/pledge 저장용 (우리 시트, write 권한 있음)
+const SHEET_STUDENT_INPUTS = '1st_student_inputs';
+const HEADERS_STUDENT_INPUTS = ['name', 'phone_last4', 'mission', 'pledge', 'updated_at'];
+
+// 테스트 계정 (개발/QA용. 시트 명단에 없어도 로그인 가능)
+const TEST_STUDENTS = [
+  { name: '백유진', phone_last4: '2222', team: 99, score: 5 },
+  { name: '편서윤', phone_last4: '2222', team: 99, score: 5 },
+  { name: '진종범', phone_last4: '2222', team: 99, score: 5 },
+];
+
 const DEFAULT_OT_SCORE = 5;
-
 const COHORT_CAPACITY = 50;
 const SEATS_MIN_DISPLAY = 3;
-
-// 1st_students 스키마 (운영진이 시트에서 직접 관리)
-// name, phone, team, seat, pledge, desired_service, score, planet_count
-// 헤더 순서는 시트의 실제 헤더 행을 읽어 동적으로 매핑하므로 컬럼 위치 변경에 안전
 
 function getAuth() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
@@ -122,12 +130,48 @@ function parseCSV(text) {
   return rows;
 }
 
-// 1st_scores 시트 로드 → name → {score, planet_count, notes} 맵
-async function loadScores(sheets) {
-  await ensureSheet(sheets, SHEET_SCORES, HEADERS_SCORES);
+// 사전리포트 응답 내용 시트 로드 → name → {desired_service, pledge, ...}
+// 같은 이름의 응답이 여러 개면 가장 최근(아래쪽 행) 응답 우선
+async function loadPreReport(sheets) {
+  try {
+    const resp = await sheets.spreadsheets.values.get({
+      spreadsheetId: STUDENTS_SPREADSHEET_ID,
+      range: `${SHEET_PRE_REPORT}!A:Z`,
+    });
+    const rows = resp.data.values || [];
+    if (rows.length < 2) return new Map();
+    const header = (rows[0] || []).map(h => String(h || '').trim());
+    const idx = (key) => header.indexOf(key);
+    const i_name = idx('이름');
+    const i_phone = idx('전화번호');
+    const i_service = idx('만들고 싶은 서비스');
+    const i_pledge = idx('나에게 한마디');
+
+    const map = new Map();
+    for (let r = 1; r < rows.length; r++) {
+      const row = rows[r] || [];
+      const name = i_name >= 0 ? String(row[i_name] || '').trim() : '';
+      if (!name) continue;
+      // 같은 이름 중복 시 마지막 응답으로 덮어쓰기 (가장 최근 응답)
+      map.set(name, {
+        phone: i_phone >= 0 ? normalizePhone(row[i_phone]) : '',
+        desired_service: i_service >= 0 ? String(row[i_service] || '').trim() : '',
+        pledge: i_pledge >= 0 ? String(row[i_pledge] || '').trim() : '',
+      });
+    }
+    return map;
+  } catch (err) {
+    console.error('loadPreReport error:', err.message);
+    return new Map();
+  }
+}
+
+// 학생이 카드에서 직접 수정한 입력값 시트 (우리 시트에 저장) → name → {mission, pledge}
+async function loadStudentInputs(sheets) {
+  await ensureSheet(sheets, SHEET_STUDENT_INPUTS, HEADERS_STUDENT_INPUTS);
   const resp = await sheets.spreadsheets.values.get({
     spreadsheetId: SPREADSHEET_ID,
-    range: `${SHEET_SCORES}!A:D`,
+    range: `${SHEET_STUDENT_INPUTS}!A:E`,
   });
   const rows = resp.data.values || [];
   const map = new Map();
@@ -136,19 +180,20 @@ async function loadScores(sheets) {
     const name = String(row[0] || '').trim();
     if (!name) continue;
     map.set(name, {
-      score: parseFloat(row[1]) || 0,
-      planet_count: parseInt(row[2], 10) || 0,
-      notes: String(row[3] || '').trim(),
+      phone_last4: String(row[1] || '').replace(/\D/g, ''),
+      mission: String(row[2] || '').trim(),
+      pledge: String(row[3] || '').trim(),
     });
   }
   return map;
 }
 
-// 1st_students 시트 + 1st_scores 시트를 머지해서 반환.
-// 점수 데이터가 없는 학생은 OT 참석 기본 5점.
+// 팀배정 시트 + 사전리포트 + 학생 수정 입력 머지해서 반환.
+// 우선순위: 학생 수정 입력 > 사전 리포트 > 빈 값
+// 매칭 키: 이름. 폰은 last4만 명단에 저장됨.
 async function loadStudents(sheets) {
   const resp = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
+    spreadsheetId: STUDENTS_SPREADSHEET_ID,
     range: `${SHEET_STUDENTS}!A:Z`,
   });
   const rows = resp.data.values || [];
@@ -156,30 +201,51 @@ async function loadStudents(sheets) {
   const header = (rows[0] || []).map(h => String(h || '').trim().toLowerCase());
   const idx = (key) => header.indexOf(key);
   const i_name = idx('name');
-  const i_phone = idx('phone');
-  const i_team = idx('team');
-  const i_pledge = idx('pledge');
-  const i_service = idx('desired_service');
+  const i_phone4 = idx('phone_last4');
+  const i_team = idx('team_num');
+  const i_score = idx('score_count');
 
-  const scoreMap = await loadScores(sheets);
+  const preReport = await loadPreReport(sheets);
+  const inputs = await loadStudentInputs(sheets);
   const students = [];
   for (let r = 1; r < rows.length; r++) {
     const row = rows[r] || [];
     const name = i_name >= 0 ? String(row[i_name] || '').trim() : '';
     if (!name) continue;
-    const phoneRaw = i_phone >= 0 ? String(row[i_phone] || '').trim() : '';
+    const last4 = i_phone4 >= 0 ? String(row[i_phone4] || '').replace(/\D/g, '').padStart(4, '0') : '';
     const teamNum = i_team >= 0 ? parseInt(String(row[i_team] || '').replace(/\D/g, ''), 10) : 0;
-    const sc = scoreMap.get(name);
+    const score = i_score >= 0 ? (parseFloat(row[i_score]) || DEFAULT_OT_SCORE) : DEFAULT_OT_SCORE;
+    const pre = preReport.get(name);
+    const inp = inputs.get(name);
+    // 우선순위: 학생 수정 입력 > 사전 리포트 > 빈 값
+    const mission = (inp && inp.mission) || (pre && pre.desired_service) || '';
+    const pledge = (inp && inp.pledge) || (pre && pre.pledge) || '';
     students.push({
       name,
-      phone: normalizePhone(phoneRaw),
+      phone_last4: last4,
+      phone: last4, // 호환성
       team: Number.isFinite(teamNum) ? teamNum : 0,
-      pledge: i_pledge >= 0 ? String(row[i_pledge] || '').trim() : '',
-      desired_service: i_service >= 0 ? String(row[i_service] || '').trim() : '',
-      score: sc ? sc.score : DEFAULT_OT_SCORE,
-      planet_count: sc ? sc.planet_count : 0,
+      pledge: pledge,
+      desired_service: mission,
+      score: score,
+      planet_count: Math.max(1, Math.floor(score / 5)),
     });
   }
+  // 테스트 계정 append (시트 명단에 없는 학생들도 로그인 가능)
+  TEST_STUDENTS.forEach(t => {
+    const inp = inputs.get(t.name);
+    const pre = preReport.get(t.name);
+    students.push({
+      name: t.name,
+      phone_last4: t.phone_last4,
+      phone: t.phone_last4,
+      team: t.team,
+      pledge: (inp && inp.pledge) || (pre && pre.pledge) || '',
+      desired_service: (inp && inp.mission) || (pre && pre.desired_service) || '',
+      score: t.score,
+      planet_count: Math.max(1, Math.floor(t.score / 5)),
+    });
+  });
   return students;
 }
 
@@ -390,104 +456,71 @@ module.exports = async function handler(req, res) {
     const auth = getAuth();
     const sheets = google.sheets({ version: 'v4', auth });
 
+    // 학생 본인 인증 + 1st_student_inputs 시트 row upsert helper
+    async function authAndUpsertInput(name, phone, field, value) {
+      const last4 = phone.slice(-4);
+      // 본인 검증: 팀배정 시트에서 name+last4 매칭
+      const allStudents = await loadStudents(sheets);
+      const verified = allStudents.find(s => s.name === name && s.phone_last4 === last4);
+      if (!verified) {
+        return { ok: false, status: 404, error: '본인 확인 실패. 이름·연락처 확인해주세요.' };
+      }
+      // inputs 시트 upsert (우리 SPREADSHEET_ID, write 권한 있음)
+      await ensureSheet(sheets, SHEET_STUDENT_INPUTS, HEADERS_STUDENT_INPUTS);
+      const resp = await sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `${SHEET_STUDENT_INPUTS}!A:E`,
+      });
+      const rows = resp.data.values || [];
+      let matchRow = -1;
+      for (let r = 1; r < rows.length; r++) {
+        if (String((rows[r] || [])[0] || '').trim() === name) { matchRow = r; break; }
+      }
+      if (matchRow < 0) {
+        // 신규 row append
+        const newRow = ['', '', '', '', nowKST()];
+        newRow[0] = name;
+        newRow[1] = last4;
+        if (field === 'mission') newRow[2] = value;
+        if (field === 'pledge')  newRow[3] = value;
+        await sheets.spreadsheets.values.append({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${SHEET_STUDENT_INPUTS}!A:E`,
+          valueInputOption: 'RAW', insertDataOption: 'INSERT_ROWS',
+          requestBody: { values: [newRow] },
+        });
+      } else {
+        // 기존 row update
+        const existing = rows[matchRow] || [];
+        const mission = field === 'mission' ? value : (existing[2] || '');
+        const pledge  = field === 'pledge'  ? value : (existing[3] || '');
+        await sheets.spreadsheets.values.update({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${SHEET_STUDENT_INPUTS}!A${matchRow+1}:E${matchRow+1}`,
+          valueInputOption: 'RAW',
+          requestBody: { values: [[name, last4, mission, pledge, nowKST()]] },
+        });
+      }
+      return { ok: true };
+    }
+
     if (body.type === 'update_mission') {
-      // 본인의 만들고 싶은 서비스(desired_service) 갱신. 이름+전화 매칭 후 본인 row만 수정.
       const name = String(body.name || '').trim();
       const phone = normalizePhone(body.phone);
       const mission = String(body.mission || '').trim().slice(0, 200);
-      if (!name || !phone) {
-        return res.status(400).json({ ok: false, error: '인증 정보 누락' });
-      }
-      // 시트 row + 컬럼 동적 매핑
-      const resp = await sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_STUDENTS}!A:Z`,
-      });
-      const rows = resp.data.values || [];
-      if (rows.length < 2) return res.status(404).json({ ok: false, error: '명단 비어있음' });
-      const header = (rows[0] || []).map(h => String(h || '').trim().toLowerCase());
-      const i_name = header.indexOf('name');
-      const i_phone = header.indexOf('phone');
-      let i_service = header.indexOf('desired_service');
-      // desired_service 컬럼이 없으면 헤더에 추가
-      if (i_service < 0) {
-        i_service = header.length;
-        const colLetter = String.fromCharCode(65 + i_service);
-        await sheets.spreadsheets.values.update({
-          spreadsheetId: SPREADSHEET_ID,
-          range: `${SHEET_STUDENTS}!${colLetter}1`,
-          valueInputOption: 'RAW',
-          requestBody: { values: [['desired_service']] },
-        });
-      }
-      let matchRow = -1;
-      for (let r = 1; r < rows.length; r++) {
-        const row = rows[r] || [];
-        const rName = i_name >= 0 ? String(row[i_name] || '').trim() : '';
-        const rPhone = i_phone >= 0 ? normalizePhone(row[i_phone]) : '';
-        if (rName === name && rPhone === phone) { matchRow = r; break; }
-      }
-      if (matchRow < 0) {
-        return res.status(404).json({ ok: false, error: '본인 확인 실패' });
-      }
-      const colLetter = String.fromCharCode(65 + i_service);
-      const sheetRowNum = matchRow + 1; // 1-indexed
-      await sheets.spreadsheets.values.update({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_STUDENTS}!${colLetter}${sheetRowNum}`,
-        valueInputOption: 'RAW',
-        requestBody: { values: [[mission]] },
-      });
+      if (!name || !phone) return res.status(400).json({ ok: false, error: '인증 정보 누락' });
+      const r = await authAndUpsertInput(name, phone, 'mission', mission);
+      if (!r.ok) return res.status(r.status || 500).json({ ok: false, error: r.error });
       return res.status(200).json({ ok: true, mission });
     }
 
     if (body.type === 'update_pledge') {
-      // 본인의 다짐 한 줄(pledge) 갱신. 이름+전화 매칭 후 본인 row만 수정.
       const name = String(body.name || '').trim();
       const phone = normalizePhone(body.phone);
       const pledge = String(body.pledge || '').trim().slice(0, 200);
-      if (!name || !phone) {
-        return res.status(400).json({ ok: false, error: '인증 정보 누락' });
-      }
-      const resp = await sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_STUDENTS}!A:Z`,
-      });
-      const rows = resp.data.values || [];
-      if (rows.length < 2) return res.status(404).json({ ok: false, error: '명단 비어있음' });
-      const header = (rows[0] || []).map(h => String(h || '').trim().toLowerCase());
-      const i_name = header.indexOf('name');
-      const i_phone = header.indexOf('phone');
-      let i_pledge = header.indexOf('pledge');
-      // pledge 컬럼이 없으면 헤더에 추가
-      if (i_pledge < 0) {
-        i_pledge = header.length;
-        const colLetter = String.fromCharCode(65 + i_pledge);
-        await sheets.spreadsheets.values.update({
-          spreadsheetId: SPREADSHEET_ID,
-          range: `${SHEET_STUDENTS}!${colLetter}1`,
-          valueInputOption: 'RAW',
-          requestBody: { values: [['pledge']] },
-        });
-      }
-      let matchRow = -1;
-      for (let r = 1; r < rows.length; r++) {
-        const row = rows[r] || [];
-        const rName = i_name >= 0 ? String(row[i_name] || '').trim() : '';
-        const rPhone = i_phone >= 0 ? normalizePhone(row[i_phone]) : '';
-        if (rName === name && rPhone === phone) { matchRow = r; break; }
-      }
-      if (matchRow < 0) {
-        return res.status(404).json({ ok: false, error: '본인 확인 실패' });
-      }
-      const colLetter = String.fromCharCode(65 + i_pledge);
-      const sheetRowNum = matchRow + 1; // 1-indexed
-      await sheets.spreadsheets.values.update({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_STUDENTS}!${colLetter}${sheetRowNum}`,
-        valueInputOption: 'RAW',
-        requestBody: { values: [[pledge]] },
-      });
+      if (!name || !phone) return res.status(400).json({ ok: false, error: '인증 정보 누락' });
+      const r = await authAndUpsertInput(name, phone, 'pledge', pledge);
+      if (!r.ok) return res.status(r.status || 500).json({ ok: false, error: r.error });
       return res.status(200).json({ ok: true, pledge });
     }
 
@@ -596,14 +629,15 @@ module.exports = async function handler(req, res) {
     }
 
     if (body.type === 'student_login') {
-      // 1기 수강생 로그인 검증. 이름+전화번호 전체 자리수 매칭.
+      // 1기 수강생 로그인 검증. 이름+폰 마지막 4자리 매칭 (팀배정 시트는 last4만 저장).
       const name = String(body.name || '').trim();
       const phone = normalizePhone(body.phone);
       if (!name || !phone) {
         return res.status(400).json({ ok: false, error: '이름과 연락처를 모두 입력해주세요.' });
       }
+      const last4 = phone.slice(-4);
       const students = await loadStudents(sheets);
-      const match = students.find(s => s.name === name && s.phone && s.phone === phone);
+      const match = students.find(s => s.name === name && s.phone_last4 && s.phone_last4 === last4);
       if (!match) {
         return res.status(404).json({ ok: false, error: '이름 또는 연락처를 찾을 수 없어요. 다시 확인해주세요.' });
       }
