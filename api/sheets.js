@@ -188,9 +188,19 @@ async function loadStudentInputs(sheets) {
   return map;
 }
 
+// 행성 컬럼 값을 boolean으로 정규화. TRUE/1/O/✓/획득 등 truthy 처리.
+function isPlanetAcquired(val) {
+  const v = String(val || '').trim().toUpperCase();
+  if (!v) return false;
+  return v === 'TRUE' || v === '1' || v === 'O' || v === '✓' || v === '획득' || v === 'YES' || v === 'Y';
+}
+
+const PLANET_SLUGS = ['earth', 'moon', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto'];
+
 // 팀배정 시트 + 사전리포트 + 학생 수정 입력 머지해서 반환.
 // 우선순위: 학생 수정 입력 > 사전 리포트 > 빈 값
 // 매칭 키: 이름. 폰은 last4만 명단에 저장됨.
+// 행성 획득: 팀배정 시트의 earth/moon/.../pluto 컬럼 (truthy → 획득)
 async function loadStudents(sheets) {
   const resp = await sheets.spreadsheets.values.get({
     spreadsheetId: STUDENTS_SPREADSHEET_ID,
@@ -204,6 +214,8 @@ async function loadStudents(sheets) {
   const i_phone4 = idx('phone_last4');
   const i_team = idx('team_num');
   const i_score = idx('score_count');
+  // 행성 8개 컬럼 인덱스 사전 계산
+  const planetIdx = PLANET_SLUGS.map(s => idx(s));
 
   const preReport = await loadPreReport(sheets);
   const inputs = await loadStudentInputs(sheets);
@@ -217,21 +229,26 @@ async function loadStudents(sheets) {
     const score = i_score >= 0 ? (parseFloat(row[i_score]) || DEFAULT_OT_SCORE) : DEFAULT_OT_SCORE;
     const pre = preReport.get(name);
     const inp = inputs.get(name);
-    // 우선순위: 학생 수정 입력 > 사전 리포트 > 빈 값
     const mission = (inp && inp.mission) || (pre && pre.desired_service) || '';
     const pledge = (inp && inp.pledge) || (pre && pre.pledge) || '';
+    // 행성별 획득 여부 (시트 컬럼 직접 read)
+    const acquired_planets = PLANET_SLUGS.filter((slug, i) => {
+      const ci = planetIdx[i];
+      return ci >= 0 && isPlanetAcquired(row[ci]);
+    });
     students.push({
       name,
       phone_last4: last4,
-      phone: last4, // 호환성
+      phone: last4,
       team: Number.isFinite(teamNum) ? teamNum : 0,
       pledge: pledge,
       desired_service: mission,
       score: score,
-      planet_count: Math.max(1, Math.floor(score / 5)),
+      acquired_planets,
+      planet_count: acquired_planets.length, // 호환성: 획득한 행성 개수
     });
   }
-  // 테스트 계정 append (시트 명단에 없는 학생들도 로그인 가능)
+  // 테스트 계정 append (지구만 기본 획득)
   TEST_STUDENTS.forEach(t => {
     const inp = inputs.get(t.name);
     const pre = preReport.get(t.name);
@@ -243,7 +260,8 @@ async function loadStudents(sheets) {
       pledge: (inp && inp.pledge) || (pre && pre.pledge) || '',
       desired_service: (inp && inp.mission) || (pre && pre.desired_service) || '',
       score: t.score,
-      planet_count: Math.max(1, Math.floor(t.score / 5)),
+      acquired_planets: ['earth'],
+      planet_count: 1,
     });
   });
   return students;
@@ -651,6 +669,7 @@ module.exports = async function handler(req, res) {
           desired_service: match.desired_service,
           score: match.score,
           planet_count: match.planet_count,
+          acquired_planets: match.acquired_planets || [],
         },
       });
     }
