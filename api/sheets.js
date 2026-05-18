@@ -350,13 +350,16 @@ module.exports = async function handler(req, res) {
     }
 
     if (action === 'leaderboard') {
-      // 리더보드 (개인 + 팀 집계). 전화번호 미노출
+      // 리더보드 (개인 + 팀 집계). 전화번호 미노출.
+      // team이 없는 학생(테스트 계정)은 개인·팀 랭킹 둘 다 제외.
       try {
         const auth = getAuth();
         const sheets = google.sheets({ version: 'v4', auth });
         const students = await loadStudents(sheets);
 
-        const individual = students
+        const operational = students.filter(s => s.team && s.team > 0);
+
+        const individual = operational
           .map(s => ({
             name: s.name,
             team: s.team,
@@ -366,8 +369,7 @@ module.exports = async function handler(req, res) {
           .sort((a, b) => b.score - a.score || b.planet_count - a.planet_count);
 
         const teamMap = new Map();
-        students.forEach(s => {
-          if (!s.team) return;
+        operational.forEach(s => {
           const cur = teamMap.get(s.team) || { team: s.team, score: 0, planet_count: 0, members: 0 };
           cur.score += s.score;
           cur.planet_count += s.planet_count;
