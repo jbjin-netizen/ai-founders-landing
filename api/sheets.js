@@ -18,12 +18,8 @@ const SHEET_PRE_REPORT = '사전리포트 응답 내용';
 const SHEET_STUDENT_INPUTS = '1st_student_inputs';
 const HEADERS_STUDENT_INPUTS = ['name', 'phone_last4', 'mission', 'pledge', 'updated_at'];
 
-// 테스트 계정 (개발/QA용. 시트 명단에 없어도 로그인 가능)
-const TEST_STUDENTS = [
-  { name: '백유진', phone_last4: '2222', team: 99, score: 5 },
-  { name: '편서윤', phone_last4: '2222', team: 99, score: 5 },
-  { name: '진종범', phone_last4: '2222', team: 99, score: 5 },
-];
+// 테스트 계정은 이제 시트 (팀배정 탭)에 직접 등록 — 하드코딩 제거
+// 운영진이 시트에서 score/행성/팀 변경 시 즉시 QA 가능
 
 const DEFAULT_OT_SCORE = 5;
 const COHORT_CAPACITY = 50;
@@ -248,22 +244,6 @@ async function loadStudents(sheets) {
       planet_count: acquired_planets.length, // 호환성: 획득한 행성 개수
     });
   }
-  // 테스트 계정 append (지구만 기본 획득)
-  TEST_STUDENTS.forEach(t => {
-    const inp = inputs.get(t.name);
-    const pre = preReport.get(t.name);
-    students.push({
-      name: t.name,
-      phone_last4: t.phone_last4,
-      phone: t.phone_last4,
-      team: t.team,
-      pledge: (inp && inp.pledge) || (pre && pre.pledge) || '',
-      desired_service: (inp && inp.mission) || (pre && pre.desired_service) || '',
-      score: t.score,
-      acquired_planets: ['earth'],
-      planet_count: 1,
-    });
-  });
   return students;
 }
 
