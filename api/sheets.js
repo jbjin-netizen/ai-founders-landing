@@ -204,7 +204,18 @@ async function loadStudents(sheets) {
   });
   const rows = resp.data.values || [];
   if (rows.length < 2) return [];
-  const header = (rows[0] || []).map(h => String(h || '').trim().toLowerCase());
+  // 헤더 row 자동 감지: 첫 5행 중 'name' 컬럼이 있는 row를 헤더로 사용
+  // (운영진이 헤더 위에 행성 설명 행 같은 안내를 넣어도 자동 대응)
+  let headerRowIdx = 0;
+  for (let i = 0; i < Math.min(5, rows.length); i++) {
+    const cells = (rows[i] || []).map(c => String(c || '').trim().toLowerCase());
+    if (cells.includes('name') && cells.includes('phone_last4')) {
+      headerRowIdx = i;
+      break;
+    }
+  }
+  const header = (rows[headerRowIdx] || []).map(h => String(h || '').trim().toLowerCase());
+  const dataStartRow = headerRowIdx + 1;
   const idx = (key) => header.indexOf(key);
   const i_name = idx('name');
   const i_phone4 = idx('phone_last4');
@@ -216,7 +227,7 @@ async function loadStudents(sheets) {
   const preReport = await loadPreReport(sheets);
   const inputs = await loadStudentInputs(sheets);
   const students = [];
-  for (let r = 1; r < rows.length; r++) {
+  for (let r = dataStartRow; r < rows.length; r++) {
     const row = rows[r] || [];
     const name = i_name >= 0 ? String(row[i_name] || '').trim() : '';
     if (!name) continue;
