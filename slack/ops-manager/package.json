@@ -1,0 +1,16 @@
+{
+  "name": "ops-manager-slack-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI 파운더스 운영 슬랙용 운영매니저 봇 (Notion 학습 기반 응답)",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel deploy"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "@notionhq/client": "^2.2.15",
+    "@slack/bolt": "^4.1.0"
+  }
+}
