@@ -376,6 +376,7 @@ module.exports = async function handler(req, res) {
             team: s.team,
             score: s.score,
             planet_count: s.planet_count,
+            acquired_planets: s.acquired_planets,
           }))
           .sort((a, b) => b.score - a.score || b.planet_count - a.planet_count);
 
