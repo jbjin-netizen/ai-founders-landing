@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>AI 파운더스 — 기업 단체 수강 안내 & 신청</title>
+  <meta name="description" content="4주 완성 AI 전환 교육. 5/16 개강. 기업 단체 수강 시 최대 20% 할인 + 온보딩 강의 무료 제공." />
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <style>
+    :root {
+      --bg:#08090D; --bg-alt:#0D0E14; --bg-card:rgba(255,255,255,0.04); --bg-card-h:rgba(255,255,255,0.07);
+      --text:#FFFFFF; --text-sub:rgba(255,255,255,0.62); --text-muted:rgba(255,255,255,0.38);
+      --border:rgba(255,255,255,0.10); --border-s:rgba(255,255,255,0.20);
+      --acc:#E8703A; --acc-dark:#CF5C28; --acc-glow:rgba(232,112,58,0.32); --acc-chip:rgba(232,112,58,0.15); --acc-text:#F5A070;
+      --hl:#FFB800; --hl-chip:rgba(255,184,0,0.12);
+      --green:#22c55e; --green-chip:rgba(34,197,94,0.12);
+      --max-w:960px; --r:12px; --r-lg:20px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Pretendard Variable','Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--text);background:var(--bg);line-height:1.75;overflow-x:hidden;-webkit-text-size-adjust:100%;word-break:keep-all;}
+    a{color:inherit;text-decoration:none;}
+    button{cursor:pointer;border:none;outline:none;font-family:inherit;}
+    .inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
+    .section{padding:80px 24px;}
+    .section-alt{background:var(--bg-alt);}
+
+    .btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--acc);color:#fff;font-size:17px;font-weight:800;padding:18px 40px;border-radius:100px;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;letter-spacing:-0.01em;}
+    .btn-cta:hover{background:var(--acc-dark);transform:translateY(-2px);box-shadow:0 8px 36px var(--acc-glow);}
+    .btn-cta-lg{font-size:18px;padding:20px 48px;}
+    .sec-label{display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--acc);margin-bottom:14px;}
+    .sec-title{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.3;letter-spacing:-0.02em;margin-bottom:16px;}
+    .sec-desc{font-size:16px;color:var(--text-sub);line-height:1.85;max-width:600px;}
+
+    /* ── Header ── */
+    #site-header{position:sticky;top:0;z-index:900;background:rgba(8,9,13,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px;}
+    .header-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .header-logo{font-size:15px;font-weight:800;letter-spacing:-0.02em;}
+    .header-logo span{color:var(--acc);}
+    .header-badge{display:inline-flex;align-items:center;gap:6px;background:var(--hl-chip);border:1px solid rgba(255,184,0,0.25);color:var(--hl);font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;}
+    .header-cta{display:inline-flex;align-items:center;gap:6px;background:var(--acc);color:#fff;font-size:14px;font-weight:700;padding:10px 22px;border-radius:100px;transition:background 0.2s;}
+    .header-cta:hover{background:var(--acc-dark);}
+
+    /* ── Hero ── */
+    #hero{padding:88px 24px 72px;text-align:center;position:relative;overflow:hidden;}
+    #hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(249,115,22,0.08) 0%,transparent 65%);pointer-events:none;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--acc-chip);border:1px solid rgba(249,115,22,0.35);color:var(--acc-text);font-size:13px;font-weight:700;padding:7px 18px;border-radius:100px;margin-bottom:28px;}
+    .hero-h1{font-size:clamp(28px,5vw,52px);font-weight:900;line-height:1.15;letter-spacing:-0.03em;margin-bottom:20px;}
+    .hero-h1 .hl{color:var(--acc);}
+    .hero-sub{font-size:clamp(15px,2vw,17px);color:var(--text-sub);max-width:560px;margin:0 auto 16px;line-height:1.85;}
+    .hero-meta{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:36px;}
+    .hero-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-sub);font-size:13px;font-weight:600;padding:6px 14px;border-radius:100px;}
+    .hero-chip .dot{width:6px;height:6px;border-radius:50%;background:var(--green);}
+    .hero-chip .dot-hl{background:var(--acc);}
+    .hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .hero-note{font-size:13px;color:var(--text-muted);}
+    .hero-note strong{color:var(--acc-text);}
+
+    /* ── Why Now ── */
+    #why-now{padding:0 24px 72px;}
+    .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+    .why-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px 24px;transition:border-color 0.2s,transform 0.2s;}
+    .why-card:hover{border-color:rgba(232,112,58,0.35);transform:translateY(-3px);}
+    .why-num{font-size:11px;font-weight:800;letter-spacing:0.10em;color:var(--acc);text-transform:uppercase;margin-bottom:14px;}
+    .why-title{font-size:16px;font-weight:800;line-height:1.3;margin-bottom:10px;letter-spacing:-0.01em;}
+    .why-desc{font-size:13px;color:var(--text-sub);line-height:1.7;}
+    .why-desc strong{color:var(--text);font-weight:700;}
+
+    /* ── Curriculum ── */
+    #curriculum{padding:80px 24px;background:var(--bg-alt);}
+    .curr-grid{display:grid;gap:12px;margin-top:36px;}
+    .curr-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px 28px;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;transition:border-color 0.2s;}
+    .curr-item:hover{border-color:var(--border-s);}
+    .curr-week{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:52px;}
+    .curr-week-num{font-size:11px;font-weight:800;letter-spacing:0.10em;color:var(--acc);text-transform:uppercase;}
+    .curr-week-circle{width:44px;height:44px;border-radius:50%;background:var(--acc-chip);border:1px solid rgba(232,112,58,0.30);display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .curr-body{}
+    .curr-milestone{font-size:12px;font-weight:700;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;margin-bottom:6px;}
+    .curr-title{font-size:16px;font-weight:800;margin-bottom:8px;letter-spacing:-0.01em;}
+    .curr-desc{font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:12px;}
+    .curr-tags{display:flex;flex-wrap:wrap;gap:6px;}
+    .curr-tag{display:inline-block;background:rgba(255,255,255,0.06);border:1px solid var(--border);color:var(--text-muted);font-size:11px;font-weight:700;padding:3px 9px;border-radius:100px;}
+    .curr-output{display:inline-flex;align-items:center;gap:5px;background:var(--acc-chip);border:1px solid rgba(232,112,58,0.25);color:var(--acc-text);font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;}
+
+    /* ── AX Sessions ── */
+    #ax-sessions{padding:80px 24px;}
+    .sessions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:32px;}
+    .session-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;transition:border-color 0.2s,transform 0.2s;}
+    .session-card:hover{border-color:rgba(255,184,0,0.30);transform:translateY(-3px);}
+    .session-num{font-size:11px;font-weight:800;letter-spacing:0.10em;color:var(--hl);text-transform:uppercase;margin-bottom:10px;}
+    .session-title{font-size:14px;font-weight:800;line-height:1.4;margin-bottom:8px;}
+    .session-desc{font-size:12px;color:var(--text-sub);line-height:1.65;}
+
+    /* ── Tutors ── */
+    #tutors{padding:80px 24px;background:var(--bg-alt);}
+    .tutor-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:32px;}
+    .tutor-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 28px;display:flex;gap:20px;}
+    .tutor-photo{width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--border-s);flex-shrink:0;}
+    .tutor-info{}
+    .tutor-role{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--acc);margin-bottom:6px;}
+    .tutor-name{font-size:17px;font-weight:800;margin-bottom:3px;letter-spacing:-0.01em;}
+    .tutor-title-txt{font-size:13px;color:var(--text-muted);margin-bottom:12px;}
+    .tutor-creds{list-style:none;display:flex;flex-direction:column;gap:5px;}
+    .tutor-creds li{font-size:12px;color:var(--text-sub);display:flex;align-items:flex-start;gap:6px;}
+    .tutor-creds li::before{content:'·';color:var(--acc);font-weight:800;flex-shrink:0;}
+
+    /* ── Benefits Included ── */
+    #included{padding:80px 24px;}
+    .included-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:32px;}
+    .inc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;}
+    .inc-icon{font-size:24px;margin-bottom:12px;line-height:1;}
+    .inc-title{font-size:14px;font-weight:800;margin-bottom:6px;}
+    .inc-desc{font-size:12px;color:var(--text-sub);line-height:1.65;}
+
+    /* ── Group Discounts ── */
+    #group-discounts{padding:80px 24px;background:var(--bg-alt);}
+    .discount-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:32px;margin-bottom:20px;}
+    .disc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 28px;transition:border-color 0.2s,transform 0.2s;}
+    .disc-card:hover{transform:translateY(-3px);}
+    .disc-card--best{border-color:rgba(232,112,58,0.45);background:linear-gradient(135deg,rgba(232,112,58,0.08) 0%,var(--bg-card) 100%);}
+    .disc-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:14px;}
+    .disc-badge--outline{background:transparent;border:1px solid var(--border-s);color:var(--text-muted);}
+    .disc-badge--fill{background:var(--acc);color:#fff;}
+    .disc-people{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-0.03em;margin-bottom:5px;}
+    .disc-people span{color:var(--acc);}
+    .disc-pct{display:inline-flex;align-items:center;background:var(--hl-chip);border:1px solid rgba(255,184,0,0.25);color:var(--hl);font-size:14px;font-weight:800;padding:5px 12px;border-radius:100px;margin-bottom:14px;}
+    .disc-original{font-size:13px;color:var(--text-muted);text-decoration:line-through;margin-bottom:3px;}
+    .disc-final{font-size:clamp(20px,2.8vw,26px);font-weight:900;letter-spacing:-0.02em;margin-bottom:16px;}
+    .disc-final span{color:var(--acc-text);font-size:0.60em;font-weight:600;}
+    .disc-perks{list-style:none;display:flex;flex-direction:column;gap:7px;}
+    .disc-perks li{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--text-sub);}
+    .disc-perks li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;margin-top:2px;}
+    .disc-cta{display:block;margin-top:20px;text-align:center;background:var(--acc);color:#fff;font-size:14px;font-weight:700;padding:12px 20px;border-radius:100px;transition:background 0.2s;}
+    .disc-cta:hover{background:var(--acc-dark);}
+    .disc-bonus{background:linear-gradient(135deg,rgba(255,184,0,0.08) 0%,rgba(255,184,0,0.03) 100%);border:1px solid rgba(255,184,0,0.25);border-radius:var(--r);padding:20px 22px;display:flex;gap:12px;align-items:flex-start;}
+    .disc-bonus-icon{font-size:24px;flex-shrink:0;line-height:1;margin-top:2px;}
+    .disc-bonus-title{font-size:14px;font-weight:800;color:var(--hl);margin-bottom:5px;}
+    .disc-bonus-desc{font-size:13px;color:var(--text-sub);line-height:1.7;}
+
+    /* ── Final CTA ── */
+    #final-cta{padding:96px 24px 110px;text-align:center;position:relative;overflow:hidden;}
+    #final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(232,112,58,0.09) 0%,transparent 65%);pointer-events:none;}
+    .final-eyebrow{display:inline-block;background:var(--hl-chip);border:1px solid rgba(255,184,0,0.25);color:var(--hl);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:24px;}
+    #final-cta h2{font-size:clamp(26px,4vw,44px);font-weight:900;letter-spacing:-0.03em;line-height:1.2;margin-bottom:16px;}
+    #final-cta h2 .hl{color:var(--acc);}
+    #final-cta p{font-size:16px;color:var(--text-sub);max-width:500px;margin:0 auto 36px;line-height:1.85;}
+    .pay-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:16px;}
+    .btn-pay{display:inline-flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;background:var(--acc);color:#fff;font-size:16px;font-weight:800;padding:18px 40px;border-radius:var(--r);transition:background 0.2s,transform 0.15s,box-shadow 0.2s;min-width:200px;}
+    .btn-pay:hover{background:var(--acc-dark);transform:translateY(-2px);box-shadow:0 8px 36px var(--acc-glow);}
+    .btn-pay-sub{font-size:12px;font-weight:500;opacity:0.75;}
+    .btn-pay--outline{background:transparent;border:1px solid var(--border-s);color:var(--text-sub);}
+    .btn-pay--outline:hover{background:var(--bg-card-h);border-color:var(--border-s);transform:translateY(-2px);box-shadow:none;}
+    .final-note{font-size:12px;color:var(--text-muted);}
+    .final-note strong{color:var(--acc-text);}
+
+    /* ── Footer ── */
+    #footer{padding:28px 24px;border-top:1px solid var(--border);text-align:center;}
+    .footer-copy{font-size:12px;color:var(--text-muted);opacity:0.55;}
+
+    @media(max-width:640px){
+      .curr-item{grid-template-columns:1fr;}
+      .curr-week{flex-direction:row;align-items:center;gap:8px;margin-bottom:4px;}
+      .tutor-card{flex-direction:column;}
+      .pay-btns{flex-direction:column;align-items:stretch;}
+      .btn-pay{width:100%;}
+    }
+    @media(max-width:480px){
+      .section{padding:64px 20px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="header-inner">
+    <div class="header-logo">AI <span>파운더스</span></div>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="header-badge">5/16 개강 · 50명 한정</div>
+      <a href="#final-cta" class="header-cta">신청하기 →</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="inner">
+    <div class="hero-eyebrow">🏢 기업 단체 수강 안내</div>
+    <h1 class="hero-h1">
+      4주 만에 팀 전체가<br>
+      <span class="hl">AI로 일하는 방식</span>을 바꿉니다
+    </h1>
+    <p class="hero-sub">
+      Claude AI 기반 4주 완성 프로그램. 기획·제작·배포·마케팅·수익화까지.<br>
+      팀이 함께 수강하면 더 빠르게, 더 큰 폭으로 전환됩니다.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-chip"><span class="dot"></span> 5/16 개강</div>
+      <div class="hero-chip"><span class="dot dot-hl"></span> 1기 50명 한정</div>
+      <div class="hero-chip">얼리버드 199,000원</div>
+      <div class="hero-chip">단체 최대 20% 추가 할인</div>
+    </div>
+    <div class="hero-cta-wrap">
+      <a href="#final-cta" class="btn-cta btn-cta-lg">지금 단체 신청하기 →</a>
+      <div class="hero-note">5인 이상부터 <strong>단체 할인 자동 적용</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section id="why-now">
+  <div class="inner">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="sec-label">왜 지금인가</span>
+      <h2 class="sec-title" style="margin-bottom:0;">지금 이 격차가 벌어지고 있습니다</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">📈 Reason 01</div>
+        <div class="why-title">경쟁사는 이미 3배 빨라졌습니다</div>
+        <div class="why-desc">AI 전환을 마친 10인 기업이 <strong>30명 인원의 일을 처리</strong>하고 있습니다. 인건비는 그대로, 아웃풋만 3배. 이 격차는 매달 벌어집니다.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">🔧 Reason 02</div>
+        <div class="why-title">대시보드부터 CS, 마케팅까지 전 직무 적용 가능</div>
+        <div class="why-desc">코딩 지식 없이도 대시보드 제작, CS 자동응대, 마케팅 콘텐츠, 랜딩 페이지까지. <strong>여러분 팀의 실무 전반</strong>에 AX를 적용할 수 있습니다.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">🚀 Reason 03</div>
+        <div class="why-title">팀 단위로 배우면 더 빠르게 전환됩니다</div>
+        <div class="why-desc">같은 언어를 배운 팀원들끼리 업무 자동화를 함께 설계하면 <strong>전환 속도가 3-5배 빠릅니다</strong>. 혼자 배우고 혼자 적용하는 한계를 넘어서세요.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="curriculum" class="section-alt" style="padding:80px 24px;">
+  <div class="inner">
+    <span class="sec-label">CURRICULUM</span>
+    <h2 class="sec-title">4주 동안 이렇게 배워요</h2>
+    <p class="sec-desc">주 5~7시간 투자로, 아이디어 기획부터 배포·마케팅·수익화까지 실제로 만들어냅니다.</p>
+    <div class="curr-grid">
+      <div class="curr-item">
+        <div class="curr-week">
+          <div class="curr-week-num">Week 1</div>
+          <div class="curr-week-circle">💡</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-milestone">막연한 아이디어 → 1Page 기획안</div>
+          <div class="curr-title">아이디어 · 기획</div>
+          <div class="curr-desc">풀고 싶은 문제와 타겟을 1페이지로 정리합니다. "이걸 만드는 게 맞을까"라는 고민이 "이렇게 시작하면 되겠다"라는 확신으로 바뀝니다.</div>
+          <div class="curr-tags">
+            <span class="curr-tag">문제 정의</span><span class="curr-tag">타겟 설정</span><span class="curr-tag">BM 설계</span>
+            <span class="curr-output">완성물: 1Page 기획안</span>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-week">
+          <div class="curr-week-num">Week 2</div>
+          <div class="curr-week-circle">⚙️</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-milestone">MVP 제작 → 동작하는 서비스</div>
+          <div class="curr-title">MVP · 배포</div>
+          <div class="curr-desc">Claude Code로 DB·API를 연결해 핵심 기능을 구현하고, Vercel로 실제 URL에 배포합니다. 막히는 구간마다 슬랙 즉문즉답으로 2시간 내 답변.</div>
+          <div class="curr-tags">
+            <span class="curr-tag">Claude Code</span><span class="curr-tag">DB · API</span><span class="curr-tag">Vercel 배포</span>
+            <span class="curr-output">완성물: 동작하는 제품</span>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-week">
+          <div class="curr-week-num">Week 3</div>
+          <div class="curr-week-circle">📣</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-milestone">첫 유저 만남 → 데이터로 다듬기</div>
+          <div class="curr-title">마케팅 · 유입</div>
+          <div class="curr-desc">AI로 전환율 높은 랜딩페이지 카피를 작성하고, GA4로 유입 채널과 사용자 행동을 직접 확인합니다.</div>
+          <div class="curr-tags">
+            <span class="curr-tag">마케팅</span><span class="curr-tag">랜딩 카피</span><span class="curr-tag">GA4 트래킹</span>
+            <span class="curr-output">완성물: 첫 유입 데이터</span>
+          </div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-week">
+          <div class="curr-week-num">Week 4</div>
+          <div class="curr-week-circle">🏆</div>
+        </div>
+        <div class="curr-body">
+          <div class="curr-milestone">수익 구조 완성 → 데모데이</div>
+          <div class="curr-title">정식 공개 · 수익화</div>
+          <div class="curr-desc">PG 결제 연동으로 실제 돈을 받을 수 있는 구조를 완성합니다. 데모데이에서 서비스를 발표하고, 이후 혼자 이어갈 다음 스텝 매뉴얼을 챙겨갑니다.</div>
+          <div class="curr-tags">
+            <span class="curr-tag">PG 결제 연동</span><span class="curr-tag">가격 전략</span><span class="curr-tag">데모데이</span>
+            <span class="curr-output">완성물: 이용 가능한 서비스 · 데모데이 발표</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AX SESSIONS -->
+<section id="ax-sessions" class="section">
+  <div class="inner">
+    <span class="sec-label">특별 세션</span>
+    <h2 class="sec-title">이번 기수 한정 특별 강의</h2>
+    <p class="sec-desc">현직 전문가가 직접 공유하는 AI 전환 현장 이야기.</p>
+    <div class="sessions-grid">
+      <div class="session-card">
+        <div class="session-num">SESSION 01</div>
+        <div class="session-title">창업부터 엑싯까지, 아이디어를 제품화하는 실전 로드맵</div>
+        <div class="session-desc">실제 엑싯을 경험한 창업자가 아이디어 제품화 → BM 설계 → 리스크 헷지까지 공유합니다.</div>
+      </div>
+      <div class="session-card">
+        <div class="session-num">SESSION 02</div>
+        <div class="session-title">연매출 4억 1인 창업가 세션</div>
+        <div class="session-desc">1인 창업가가 BM에 맞는 마케팅 실험부터 스케일 확장까지의 실전을 직접 공유합니다.</div>
+      </div>
+      <div class="session-card">
+        <div class="session-num">AX SESSION 01</div>
+        <div class="session-title">IT 업계의 일하는 방식이 바뀌고 있다</div>
+        <div class="session-desc">IT 현직자가 직접 공유하는 AI 전환 현장. 에이전트가 실무에 어떻게 스며들고 있는지 공유합니다.</div>
+      </div>
+      <div class="session-card">
+        <div class="session-num">AX SESSION 02</div>
+        <div class="session-title">의료·금융·프리랜서 각 업계의 AI 전환 현장</div>
+        <div class="session-desc">AI가 바꾸고 있는 다양한 업계의 현실. 우리 업계는 어떻게 변화하고 있는지 함께 짚어봅니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TUTORS -->
+<section id="tutors" class="section section-alt">
+  <div class="inner">
+    <span class="sec-label">MENTORS</span>
+    <h2 class="sec-title">전문 튜터진과 함께합니다</h2>
+    <div class="tutor-wrap">
+      <div class="tutor-card">
+        <img src="images/tutor_jinho.jpg" alt="조진호 튜터" class="tutor-photo" />
+        <div class="tutor-info">
+          <div class="tutor-role">기술 튜터</div>
+          <div class="tutor-name">조진호</div>
+          <div class="tutor-title-txt">AX 강사 · 전 프로덕트 개발자</div>
+          <ul class="tutor-creds">
+            <li>삼성전자 AI센터 바이브코딩</li>
+            <li>네이버파이낸셜 바이브코딩 교육</li>
+            <li>한솔그룹 AX 역량강화 캠프</li>
+            <li>SK E&amp;S · 신세계 DF 외 다수</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED BENEFITS -->
+<section id="included" class="section">
+  <div class="inner">
+    <span class="sec-label">WHAT'S INCLUDED</span>
+    <h2 class="sec-title">수강 시 포함된 혜택</h2>
+    <div class="included-grid">
+      <div class="inc-card">
+        <div class="inc-icon">👥</div>
+        <div class="inc-title">5인 피어 팀 매칭</div>
+        <div class="inc-desc">비슷한 관심사의 동료 5명과 팀이 되어 매주 진행 상황을 점검합니다.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">💬</div>
+        <div class="inc-title">슬랙 즉문즉답 (2시간 내)</div>
+        <div class="inc-desc">막히는 구간에 슬랙으로 질문하면 평균 2시간 내에 튜터가 직접 답변합니다.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">🚀</div>
+        <div class="inc-title">오프라인 데모데이 (6/13)</div>
+        <div class="inc-desc">4주간의 결과를 함께 나누는 오프라인 행사. 팀스파르타 본사(선릉역 인근).</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">💼</div>
+        <div class="inc-title">VC 데모데이 초청</div>
+        <div class="inc-desc">현직 VC가 데모데이에 직접 참석. 투자자 시각의 BM 피드백을 받아갑니다.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">🏆</div>
+        <div class="inc-title">MVP 시상 & 30만원 상금</div>
+        <div class="inc-desc">미션 수행 및 서비스 완성도에 따라 최우수 MVP에게 상금이 수여됩니다.</div>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">📜</div>
+        <div class="inc-title">수료증 발급</div>
+        <div class="inc-desc">4주를 완주하면 데모데이 발표 기회와 수료증이 주어집니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUP DISCOUNTS -->
+<section id="group-discounts" class="section section-alt">
+  <div class="inner">
+    <span class="sec-label">단체 수강 혜택</span>
+    <h2 class="sec-title">팀이 함께 신청하면<br>더 큰 폭으로 할인됩니다</h2>
+    <p class="sec-desc">인원이 많을수록 할인폭이 커집니다. 얼리버드 혜택가에 추가 할인이 적용됩니다.</p>
+    <div class="discount-grid">
+      <div class="disc-card">
+        <div class="disc-badge disc-badge--outline">5인 이상</div>
+        <div class="disc-people"><span>5</span>명 이상</div>
+        <div class="disc-pct">10% 추가 할인</div>
+        <div class="disc-original">199,000원 / 1인</div>
+        <div class="disc-final">179,100원 <span>/ 1인</span></div>
+        <ul class="disc-perks">
+          <li>얼리버드 혜택가 전원 적용</li>
+          <li>추가 10% 할인</li>
+          <li>5만원 온보딩 강의 녹화본 무료</li>
+        </ul>
+        <a href="https://academia.spartaclub.kr/payment/1401" target="_blank" class="disc-cta">5인 이상 신청하기 →</a>
+      </div>
+      <div class="disc-card disc-card--best">
+        <div class="disc-badge disc-badge--fill">10인 이상 — 최대 혜택</div>
+        <div class="disc-people"><span>10</span>명 이상</div>
+        <div class="disc-pct">20% 추가 할인</div>
+        <div class="disc-original">199,000원 / 1인</div>
+        <div class="disc-final">159,200원 <span>/ 1인</span></div>
+        <ul class="disc-perks">
+          <li>얼리버드 혜택가 전원 적용</li>
+          <li>추가 20% 할인</li>
+          <li>5만원 온보딩 강의 녹화본 무료</li>
+        </ul>
+        <a href="https://academia.spartaclub.kr/payment/1401" target="_blank" class="disc-cta">10인 이상 신청하기 →</a>
+      </div>
+    </div>
+    <div class="disc-bonus">
+      <div class="disc-bonus-icon">🎁</div>
+      <div>
+        <div class="disc-bonus-title">추가 보너스 — 5인 이상 전원 공통 제공</div>
+        <div class="disc-bonus-desc">5만원 상당의 온보딩 강의 녹화본을 전원 무료로 드립니다. 수강 전 팀 전체가 기초를 빠르게 다질 수 있도록 설계된 사전 학습 자료입니다.</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:16px;text-align:center;">* 단체 할인 적용을 위해 담당자에게 인원 확인 후 결제 링크를 별도 안내드립니다.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final-cta">
+  <div class="inner">
+    <div class="final-eyebrow">지금 신청하기</div>
+    <h2>
+      5/16 개강 · 1기 50명 한정.<br>
+      <span class="hl">자리가 빠르게 마감되고 있습니다.</span>
+    </h2>
+    <p>
+      단체 할인 적용을 위해 먼저 담당자에게 인원을 알려주시면,<br>
+      맞춤 결제 안내를 드립니다.
+    </p>
+    <div class="pay-btns">
+      <a href="https://academia.spartaclub.kr/payment/1401" target="_blank" class="btn-pay">
+        개인 / 소규모 신청하기
+        <span class="btn-pay-sub">얼리버드 199,000원</span>
+      </a>
+      <!-- ⚠️ 단체 할인 신청 폼 링크로 교체하세요 -->
+      <a href="https://forms.gle/REPLACE_ME" target="_blank" class="btn-pay">
+        단체 할인 신청하기 (5인+)
+        <span class="btn-pay-sub">최대 20% 추가 할인</span>
+      </a>
+    </div>
+    <div class="final-note">
+      결제 후 <strong>즉시 온보딩</strong> 시작 · 얼리버드 마감 전 신청 시 혜택가 보장
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-copy">© 2025 TeamSparta · AI 파운더스</div>
+</footer>
+
+</body>
+</html>

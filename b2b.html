@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>우리 팀 AX화, 지금이 마지막 타이밍 | AI 파운더스</title>
+  <meta name="description" content="경쟁사는 이미 AI로 3배 빠르게 달리고 있습니다. 우리 팀에 AI를 어떻게 적용할 수 있는지 무료 통화로 확인하세요." />
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <style>
+    :root {
+      --bg:#08090D; --bg-alt:#0D0E14; --bg-card:rgba(255,255,255,0.04); --bg-card-h:rgba(255,255,255,0.07);
+      --text:#FFFFFF; --text-sub:rgba(255,255,255,0.62); --text-muted:rgba(255,255,255,0.38);
+      --border:rgba(255,255,255,0.10); --border-s:rgba(255,255,255,0.20);
+      --acc:#E8703A; --acc-dark:#CF5C28; --acc-glow:rgba(232,112,58,0.32); --acc-chip:rgba(232,112,58,0.15); --acc-text:#F5A070;
+      --hl:#FFB800; --hl-chip:rgba(255,184,0,0.12);
+      --green:#22c55e; --green-chip:rgba(34,197,94,0.12);
+      --max-w:920px; --r:12px; --r-lg:20px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Pretendard Variable','Pretendard',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--text);background:var(--bg);line-height:1.75;overflow-x:hidden;-webkit-text-size-adjust:100%;word-break:keep-all;}
+    a{color:inherit;text-decoration:none;}
+    button{cursor:pointer;border:none;outline:none;font-family:inherit;}
+    .inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;}
+
+    /* ── CTA Button ── */
+    .btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--acc);color:#fff;font-size:17px;font-weight:800;padding:18px 40px;border-radius:100px;transition:background 0.2s,transform 0.15s,box-shadow 0.2s;letter-spacing:-0.01em;white-space:nowrap;}
+    .btn-cta:hover{background:var(--acc-dark);transform:translateY(-2px);box-shadow:0 8px 36px var(--acc-glow);}
+    .btn-cta:active{transform:translateY(0);}
+    .btn-cta-lg{font-size:19px;padding:22px 52px;}
+    .sec-label{display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--acc);margin-bottom:14px;}
+
+    /* ── Header ── */
+    #site-header{position:sticky;top:0;z-index:900;background:rgba(8,9,13,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px;}
+    .header-inner{max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .header-logo{font-size:15px;font-weight:800;letter-spacing:-0.02em;}
+    .header-logo span{color:var(--acc);}
+    .header-cta{display:inline-flex;align-items:center;gap:6px;background:var(--acc);color:#fff;font-size:14px;font-weight:700;padding:10px 22px;border-radius:100px;transition:background 0.2s;}
+    .header-cta:hover{background:var(--acc-dark);}
+
+    /* ── Hero ── */
+    #hero{padding:96px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+    #hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(249,115,22,0.08) 0%,transparent 65%);pointer-events:none;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--acc-chip);border:1px solid rgba(249,115,22,0.35);color:var(--acc-text);font-size:13px;font-weight:700;letter-spacing:0.04em;padding:7px 18px;border-radius:100px;margin-bottom:30px;}
+    .hero-h1{font-size:clamp(30px,5.5vw,56px);font-weight:900;line-height:1.15;letter-spacing:-0.03em;margin-bottom:22px;}
+    .hero-h1 .hl{color:var(--acc);}
+    .hero-sub{font-size:clamp(15px,2vw,18px);color:var(--text-sub);line-height:1.85;max-width:540px;margin:0 auto 40px;}
+    .hero-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+    .hero-note{font-size:13px;color:var(--text-muted);}
+    .hero-note strong{color:var(--acc-text);font-weight:700;}
+
+    /* ── Urgency ── */
+    #urgency{padding:0 24px 72px;}
+    .urgency-box{background:linear-gradient(135deg,rgba(232,112,58,0.10) 0%,rgba(232,112,58,0.04) 100%);border:1px solid rgba(232,112,58,0.28);border-radius:var(--r-lg);padding:48px 40px;text-align:center;position:relative;overflow:hidden;}
+    .urgency-box::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:280px;height:180px;background:radial-gradient(ellipse,rgba(232,112,58,0.14) 0%,transparent 70%);pointer-events:none;}
+    .urgency-stat{font-size:clamp(56px,10vw,100px);font-weight:900;color:var(--acc);line-height:1;letter-spacing:-0.04em;margin-bottom:14px;}
+    .urgency-stat span{color:var(--text-muted);font-size:0.52em;}
+    .urgency-headline{font-size:clamp(18px,3vw,26px);font-weight:800;line-height:1.35;margin-bottom:14px;letter-spacing:-0.02em;}
+    .urgency-desc{font-size:15px;color:var(--text-sub);max-width:500px;margin:0 auto 28px;line-height:1.85;}
+    .urgency-desc strong{color:var(--text);font-weight:700;}
+    .urgency-compare{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .uc-chip{display:inline-flex;align-items:center;gap:6px;padding:10px 16px;border-radius:100px;font-size:13px;font-weight:700;}
+    .uc-chip--bad{background:rgba(239,68,68,0.10);border:1px solid rgba(239,68,68,0.25);color:#f87171;}
+    .uc-chip--good{background:var(--green-chip);border:1px solid rgba(34,197,94,0.25);color:var(--green);}
+
+    /* ── Use Cases ── */
+    #usecases{padding:72px 24px;background:var(--bg-alt);}
+    .section-header{text-align:center;margin-bottom:44px;}
+    .section-header h2{font-size:clamp(22px,3.5vw,34px);font-weight:800;letter-spacing:-0.02em;line-height:1.3;margin-bottom:12px;}
+    .section-header p{font-size:15px;color:var(--text-sub);}
+    .uc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;}
+    .uc-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;transition:border-color 0.2s,background 0.2s,transform 0.2s;}
+    .uc-card:hover{border-color:rgba(232,112,58,0.40);background:var(--bg-card-h);transform:translateY(-3px);}
+    .uc-icon{font-size:26px;margin-bottom:12px;line-height:1;}
+    .uc-title{font-size:14px;font-weight:800;margin-bottom:6px;letter-spacing:-0.01em;}
+    .uc-desc{font-size:12px;color:var(--text-sub);line-height:1.65;}
+
+    /* ── Group Benefits ── */
+    #benefits{padding:72px 24px;}
+    .benefits-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-bottom:24px;}
+    .benefit-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);padding:32px 28px;transition:border-color 0.2s,transform 0.2s;}
+    .benefit-card:hover{transform:translateY(-3px);}
+    .benefit-card--best{border-color:rgba(232,112,58,0.45);background:linear-gradient(135deg,rgba(232,112,58,0.08) 0%,var(--bg-card) 100%);}
+    .benefit-badge{display:inline-block;background:var(--acc);color:#fff;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:16px;}
+    .benefit-badge--outline{background:transparent;border:1px solid var(--border-s);color:var(--text-muted);}
+    .benefit-people{font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-0.03em;margin-bottom:6px;}
+    .benefit-people span{color:var(--acc);}
+    .benefit-discount{display:inline-flex;align-items:center;background:var(--hl-chip);border:1px solid rgba(255,184,0,0.25);color:var(--hl);font-size:15px;font-weight:800;padding:5px 12px;border-radius:100px;margin-bottom:16px;}
+    .benefit-price-wrap{margin-bottom:16px;}
+    .benefit-original{font-size:13px;color:var(--text-muted);text-decoration:line-through;margin-bottom:3px;}
+    .benefit-final{font-size:clamp(20px,2.8vw,26px);font-weight:900;letter-spacing:-0.02em;}
+    .benefit-final span{color:var(--acc-text);font-size:0.62em;font-weight:600;}
+    .benefit-perks{list-style:none;display:flex;flex-direction:column;gap:7px;}
+    .benefit-perks li{display:flex;align-items:flex-start;gap:7px;font-size:13px;color:var(--text-sub);}
+    .benefit-perks li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0;margin-top:2px;}
+    .bonus-box{background:linear-gradient(135deg,rgba(255,184,0,0.08) 0%,rgba(255,184,0,0.03) 100%);border:1px solid rgba(255,184,0,0.25);border-radius:var(--r);padding:22px 24px;display:flex;align-items:flex-start;gap:14px;}
+    .bonus-icon{font-size:26px;flex-shrink:0;line-height:1;margin-top:2px;}
+    .bonus-title{font-size:14px;font-weight:800;color:var(--hl);margin-bottom:5px;}
+    .bonus-desc{font-size:13px;color:var(--text-sub);line-height:1.7;}
+
+    /* ── Final CTA ── */
+    #final-cta{padding:96px 24px 110px;text-align:center;position:relative;overflow:hidden;}
+    #final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(232,112,58,0.09) 0%,transparent 65%);pointer-events:none;}
+    .final-eyebrow{display:inline-block;background:var(--hl-chip);border:1px solid rgba(255,184,0,0.25);color:var(--hl);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:26px;}
+    #final-cta h2{font-size:clamp(26px,4.5vw,46px);font-weight:900;letter-spacing:-0.03em;line-height:1.2;margin-bottom:18px;}
+    #final-cta h2 .hl{color:var(--acc);}
+    #final-cta p{font-size:16px;color:var(--text-sub);max-width:460px;margin:0 auto 40px;line-height:1.85;}
+    .final-note{margin-top:14px;font-size:12px;color:var(--text-muted);}
+    .final-note strong{color:var(--acc-text);}
+
+    /* ── Footer ── */
+    #footer{padding:28px 24px;border-top:1px solid var(--border);text-align:center;}
+    .footer-copy{font-size:12px;color:var(--text-muted);opacity:0.55;}
+
+    @media(max-width:600px){
+      #hero{padding:64px 20px 56px;}
+      .urgency-box{padding:32px 20px;}
+      .btn-cta-lg{font-size:16px;padding:18px 32px;}
+      .uc-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:380px){.uc-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="header-inner">
+    <div class="header-logo">AI <span>파운더스</span> · 기업 문의</div>
+    <a href="#final-cta" class="header-cta">무료 미팅 신청 →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="inner">
+    <div class="hero-eyebrow">⚡ 기업 단체 수강 혜택 안내</div>
+    <h1 class="hero-h1">
+      경쟁사는 이미<br>
+      <span class="hl">3배 빠르게 달리고</span> 있습니다.<br>
+      우리 회사만 늦춰지고 있진 않나요?
+    </h1>
+    <p class="hero-sub">
+      AI 전환(AX)을 마친 10인 기업이 30인 인원의 일을 처리하는 시대입니다.<br>
+      우리 팀에 어떻게 적용할 수 있는지, 30분 무료 통화로 먼저 확인해보세요.
+    </p>
+    <div class="hero-cta-wrap">
+      <a href="#final-cta" class="btn-cta btn-cta-lg">무료 미팅 30분 신청하기 →</a>
+      <div class="hero-note">완전 무료 · 부담 없는 화상 통화 · <strong>의무 없음</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<section id="urgency">
+  <div class="inner">
+    <div class="urgency-box">
+      <div class="urgency-stat">3<span>배</span></div>
+      <div class="urgency-headline">AX화 이후 실질 생산성 증가</div>
+      <p class="urgency-desc">
+        비슷한 규모의 기업이 AI 전환 후, <strong>10명이 30명의 일을 해내고 있습니다.</strong><br>
+        인건비는 그대로, 아웃풋은 3배. 이 격차는 지금 이 순간에도 벌어지고 있습니다.
+      </p>
+      <div class="urgency-compare">
+        <div class="uc-chip uc-chip--bad">❌ AX 없는 회사 — 10명이 10명 몫</div>
+        <div class="uc-chip uc-chip--good">✅ AX 있는 회사 — 10명이 30명 몫</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section id="usecases">
+  <div class="inner">
+    <div class="section-header">
+      <span class="sec-label">실제 적용 사례</span>
+      <h2>어디에 활용할 수 있나요?</h2>
+      <p>업종·직무 불문, 여러 회사의 실무 전반에 AX를 적용할 수 있습니다.</p>
+    </div>
+    <div class="uc-grid">
+      <div class="uc-card">
+        <div class="uc-icon">📊</div>
+        <div class="uc-title">대시보드 제작</div>
+        <div class="uc-desc">데이터 분석·보고서 자동화·KPI 대시보드를 코딩 없이 구축</div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-icon">💬</div>
+        <div class="uc-title">CS 자동 응대</div>
+        <div class="uc-desc">반복 문의 자동화, 챗봇 구축, 고객 응대 템플릿 자동 생성</div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-icon">✍️</div>
+        <div class="uc-title">마케팅 콘텐츠</div>
+        <div class="uc-desc">SNS 카피, 블로그, 광고 소재를 AI로 빠르고 대량으로 제작</div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-icon">🚀</div>
+        <div class="uc-title">랜딩 페이지</div>
+        <div class="uc-desc">신규 서비스·이벤트 페이지를 당일 배포까지</div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-icon">📋</div>
+        <div class="uc-title">내부 문서 자동화</div>
+        <div class="uc-desc">회의록 요약, 제안서 초안, 프로세스 문서를 AI가 작성</div>
+      </div>
+      <div class="uc-card">
+        <div class="uc-icon">🔧</div>
+        <div class="uc-title">사내 도구 제작</div>
+        <div class="uc-desc">계산기, 자동화 스크립트, 내부 전용 툴을 직접 만들기</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GROUP BENEFITS -->
+<section id="benefits">
+  <div class="inner">
+    <div class="section-header">
+      <span class="sec-label">단체 수강 혜택</span>
+      <h2>우리 팀이 함께 들으면<br>더 큰 혜택이 있습니다</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-badge benefit-badge--outline">5인 이상</div>
+        <div class="benefit-people"><span>5</span>명 이상</div>
+        <div class="benefit-discount">10% 할인</div>
+        <div class="benefit-price-wrap">
+          <div class="benefit-original">199,000원</div>
+          <div class="benefit-final">179,100원 <span>/ 1인</span></div>
+        </div>
+        <ul class="benefit-perks">
+          <li>얼리버드 혜택가 전원 적용</li>
+          <li>추가 10% 할인</li>
+          <li>5만원 온보딩 강의 무료 제공</li>
+        </ul>
+      </div>
+      <div class="benefit-card benefit-card--best">
+        <div class="benefit-badge">10인 이상 — 최대 혜택</div>
+        <div class="benefit-people"><span>10</span>명 이상</div>
+        <div class="benefit-discount">20% 할인</div>
+        <div class="benefit-price-wrap">
+          <div class="benefit-original">199,000원</div>
+          <div class="benefit-final">159,200원 <span>/ 1인</span></div>
+        </div>
+        <ul class="benefit-perks">
+          <li>얼리버드 혜택가 전원 적용</li>
+          <li>추가 20% 할인</li>
+          <li>5만원 온보딩 강의 무료 제공</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bonus-box">
+      <div class="bonus-icon">🎁</div>
+      <div>
+        <div class="bonus-title">추가 보너스 혜택 — 5인 이상 전원 공통</div>
+        <div class="bonus-desc">5만원 상당의 온보딩 강의 녹화본을 전원 무료로 드립니다. 수강 전 팀 전체가 기초를 빠르게 다질 수 있는 사전 학습 자료입니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final-cta">
+  <div class="inner">
+    <div class="final-eyebrow">무료 미팅 신청</div>
+    <h2>
+      일단 통화해봐요.<br>
+      <span class="hl">30분이면 충분합니다.</span>
+    </h2>
+    <p>
+      "우리 회사 일에도 AI가 적용될까?" 이 질문에<br>
+      직접 답해드리는 무료 화상 통화를 신청하세요.
+    </p>
+    <!-- ⚠️ 아래 href를 실제 미팅 신청 링크(구글폼, 캘린들리 등)로 교체하세요 -->
+    <a href="https://forms.gle/REPLACE_ME" target="_blank" class="btn-cta btn-cta-lg">
+      무료 미팅 30분 신청하기 →
+    </a>
+    <div class="final-note">
+      <strong>영업 전화 없음</strong> · 화상 통화 30분 · 의무 없음
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="footer-copy">© 2025 TeamSparta · AI 파운더스</div>
+</footer>
+
+</body>
+</html>
