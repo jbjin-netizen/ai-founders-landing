@@ -1087,7 +1087,7 @@
     <p class="hero-sub">
       AI를 잘 쓰는 사람 1명이 AI를 모르는 10명을 대체합니다.<br>AI 시대에 생존력을 높이세요.
     </p>
-    <button class="btn-cta btn-cta-lg" onclick="openModal('hero')">AI 파운더스 2기 사전 신청하기</button>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('hero')">AI 파운더스 모집 신청하기</button>
   </div>
 
   <!-- Mountain Divider: jagged rock line between hero photo and dark section -->
@@ -1104,6 +1104,56 @@
     <span class="basecamp-label">AI FOUNDERS BASE CAMP</span>
     <span class="basecamp-sub">정상을 향한 4주간의 여정이 시작됩니다</span>
   </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  [1-B] 교육 개요
+════════════════════════════════════════ -->
+<section id="overview" style="background:var(--bg-alt); padding:0 24px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="inner" style="max-width:860px; margin:0 auto;">
+    <div class="ov-rows">
+      <div class="ov-row">
+        <span class="ov-label">참여 대상</span>
+        <span class="ov-val">AI로 업무 생산성을 확실히 높이고 싶은 직장인</span>
+      </div>
+      <div class="ov-row">
+        <span class="ov-label">참여 기간</span>
+        <span class="ov-val">4주 (매주 목요일 신규 미션 오픈) <span style="color:var(--text-muted); font-size:15px;">· 본 모집 시 일정 안내</span></span>
+      </div>
+      <div class="ov-row">
+        <span class="ov-label">참여 방식</span>
+        <span class="ov-val">온라인 <span style="color:var(--text-muted); font-size:15px;">(입소식·수료식만 오프라인)</span></span>
+      </div>
+      <div class="ov-row">
+        <span class="ov-label">캠프 입소식</span>
+        <span class="ov-val">6월 27일 (토) 오전 10시 <span style="color:var(--text-muted); font-size:15px;">*팀스파르타 본사</span></span>
+      </div>
+      <div class="ov-row">
+        <span class="ov-label">캠프 수료식</span>
+        <span class="ov-val">7월 25일 (토) 오후 14시 <span style="color:var(--text-muted); font-size:15px;">*팀스파르타 본사 (선릉역 도보 5분)</span></span>
+      </div>
+    </div>
+  </div>
+  <style>
+    .ov-rows { display: flex; flex-direction: column; }
+    .ov-row {
+      display: flex; align-items: center; gap: 32px;
+      padding: 22px 0; border-bottom: 1px solid var(--border);
+    }
+    .ov-row:last-child { border-bottom: none; }
+    .ov-label {
+      font-size: 15px; font-weight: 700; color: var(--text-sub);
+      min-width: 100px; flex-shrink: 0;
+    }
+    .ov-val {
+      font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4;
+    }
+    .ov-val strong { color: var(--acc); }
+    @media (max-width: 480px) {
+      .ov-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 0; }
+      .ov-val { font-size: 16px; }
+    }
+  </style>
 </section>
 
 <!-- FOMO News Section (below hero) -->
@@ -1491,56 +1541,6 @@
 </style>
 
 <!-- ════════════════════════════════════════
-  [1-B] 교육 개요
-════════════════════════════════════════ -->
-<section id="overview" style="background:var(--bg-alt); padding:0 24px; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-  <div class="inner" style="max-width:860px; margin:0 auto;">
-    <div class="ov-rows">
-      <div class="ov-row">
-        <span class="ov-label">참여 대상</span>
-        <span class="ov-val">AI로 업무 생산성을 확실히 높이고 싶은 직장인</span>
-      </div>
-      <div class="ov-row">
-        <span class="ov-label">참여 기간</span>
-        <span class="ov-val">4주 (매주 목요일 신규 미션 오픈) <span style="color:var(--text-muted); font-size:15px;">· 본 모집 시 일정 안내</span></span>
-      </div>
-      <div class="ov-row">
-        <span class="ov-label">참여 방식</span>
-        <span class="ov-val">온라인 <span style="color:var(--text-muted); font-size:15px;">(입소식·수료식만 오프라인)</span></span>
-      </div>
-      <div class="ov-row">
-        <span class="ov-label">캠프 입소식</span>
-        <span class="ov-val">6월 27일 (토) 오전 10시 <span style="color:var(--text-muted); font-size:15px;">*팀스파르타 본사</span></span>
-      </div>
-      <div class="ov-row">
-        <span class="ov-label">캠프 수료식</span>
-        <span class="ov-val">7월 25일 (토) 오후 14시 <span style="color:var(--text-muted); font-size:15px;">*팀스파르타 본사 (선릉역 도보 5분)</span></span>
-      </div>
-    </div>
-  </div>
-  <style>
-    .ov-rows { display: flex; flex-direction: column; }
-    .ov-row {
-      display: flex; align-items: center; gap: 32px;
-      padding: 22px 0; border-bottom: 1px solid var(--border);
-    }
-    .ov-row:last-child { border-bottom: none; }
-    .ov-label {
-      font-size: 15px; font-weight: 700; color: var(--text-sub);
-      min-width: 100px; flex-shrink: 0;
-    }
-    .ov-val {
-      font-size: 18px; font-weight: 600; color: var(--text); line-height: 1.4;
-    }
-    .ov-val strong { color: var(--acc); }
-    @media (max-width: 480px) {
-      .ov-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 0; }
-      .ov-val { font-size: 16px; }
-    }
-  </style>
-</section>
-
-<!-- ════════════════════════════════════════
   [2] Hook
 ════════════════════════════════════════ -->
 <section id="hook" class="section section-alt">
@@ -1830,7 +1830,7 @@
         <div class="curr-panel-tags">
           <span class="curr-ctag">Claude Code</span><span class="curr-ctag">환경 세팅</span><span class="curr-ctag">미니 서비스</span>
         </div>
-        <p class="curr-panel-goal"><strong>교육 목표:</strong> 클로드 코드(Claude Code) 초고속 환경 세팅 & 미니 서비스 빌딩 실습</p>
+        <p class="curr-panel-goal"><strong>미션 목표:</strong> 클로드 코드(Claude Code) 초고속 환경 세팅 & 미니 서비스 빌딩 실습</p>
         <ul class="curr-panel-bullets">
           <li>✨ 코딩 몰라도 <strong>단 10분 만에 내 손으로 첫 웹 서비스 배포(URL 획득)</strong> 완료!</li>
           <li>AI 기반 업무 환경 세팅을 전문 튜터가 8단계 실습 과제를 통해 지원합니다.</li>
@@ -1850,7 +1850,7 @@
         <div class="curr-panel-tags">
           <span class="curr-ctag">업무 프로세스 분석</span><span class="curr-ctag">자동화 구간 발굴</span><span class="curr-ctag">에이전트 설계</span>
         </div>
-        <p class="curr-panel-goal"><strong>교육 목표:</strong> 내 업무 프로세스를 쪼개고 자동화 가능 구간을 발굴해 AI 에이전트 설계도를 작성합니다.</p>
+        <p class="curr-panel-goal"><strong>미션 목표:</strong> 내 업무 프로세스를 쪼개고 자동화 가능 구간을 발굴해 AI 에이전트 설계도를 작성합니다.</p>
         <ul class="curr-panel-bullets">
           <li>✨ 내가 평소 쓰던 회사 템플릿과 톤앤매너를 100% 이해한 '나만의 맞춤형 초안 작성 비서'의 탄탄한 기본기 확인.</li>
           <li>프롬프트 설계부터 문서 구조화, 톤앤매너 조정까지 실무 문서 템플릿과 함께 바로 적용합니다.</li>
@@ -1870,7 +1870,7 @@
         <div class="curr-panel-tags">
           <span class="curr-ctag">에이전트 빌딩</span><span class="curr-ctag">크롤링</span><span class="curr-ctag">자동 보고서</span>
         </div>
-        <p class="curr-panel-goal"><strong>교육 목표:</strong> 내 업무 데이터를 학습한 핵심 기능 에이전트를 구축합니다.</p>
+        <p class="curr-panel-goal"><strong>미션 목표:</strong> 내 업무 데이터를 학습한 핵심 기능 에이전트를 구축합니다.</p>
         <ul class="curr-panel-bullets">
           <li>✨ 실제 KPI를 견인하는 KEY 에이전트 구축.</li>
           <li><strong>AI가 알아서 정보를 크롤링해 오고, 보고서를 작성해 내 메일로 쏴주는 무인 시스템</strong>을 확인하며 압도적인 해방감을 경험합니다.</li>
@@ -1890,7 +1890,7 @@
         <div class="curr-panel-tags">
           <span class="curr-ctag">워크플로우 연결</span><span class="curr-ctag">자동화</span><span class="curr-ctag">수료식</span>
         </div>
-        <p class="curr-panel-goal"><strong>교육 목표:</strong> 무인 워크플로우를 연결하고 최종 상용화 URL을 확보합니다. 수료식에서 성과를 발표합니다.</p>
+        <p class="curr-panel-goal"><strong>미션 목표:</strong> 무인 워크플로우를 연결하고 최종 상용화 URL을 확보합니다. 수료식에서 성과를 발표합니다.</p>
         <ul class="curr-panel-bullets">
           <li>데이터 수집 → 요약 및 가공 → 이메일/슬랙 발송까지 원클릭 전체 자동화 워크플로우를 연결합니다.</li>
           <li>캠프의 '2시간 데드라인 안전망'을 활용해 장애물을 잡고 최종 상용화 URL을 확보합니다.</li>
@@ -2159,8 +2159,8 @@
         </div>
         <div class="cycle-divider"></div>
         <div class="cycle-right">
-          <div class="cycle-title">교육자료 오픈</div>
-          <div class="cycle-desc">주차별 교육자료가 공개됩니다. 그 주 작업의 시작점이에요.</div>
+          <div class="cycle-title">미션 자료 오픈</div>
+          <div class="cycle-desc">주차별 미션 자료가 공개됩니다. 그 주 작업의 시작점이에요.</div>
         </div>
       </div>
 
@@ -2222,7 +2222,7 @@
     <div style="margin-top:24px; padding:20px 24px; background:rgba(232,112,58,0.06); border:1px solid rgba(232,112,58,0.2); border-radius:var(--r); font-size:15px; color:var(--text-sub); line-height:1.8;">
       <p style="margin-bottom:12px;"><strong style="color:var(--acc);">💡 평일 저녁 30분 + 주말 2~3시간</strong>이면 충분합니다.</p>
       <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:6px;">
-        <li style="padding-left:16px; position:relative;"><span style="position:absolute;left:0;">·</span>모든 교육 자료는 <strong style="color:var(--text);">녹화본+교안</strong>으로 제공 — 놓쳐도 다시 볼 수 있어요</li>
+        <li style="padding-left:16px; position:relative;"><span style="position:absolute;left:0;">·</span>모든 미션 자료는 <strong style="color:var(--text);">녹화본+교안</strong>으로 제공 — 놓쳐도 다시 볼 수 있어요</li>
         <li style="padding-left:16px; position:relative;"><span style="position:absolute;left:0;">·</span>팀 미팅 일정은 팀원들과 <strong style="color:var(--text);">자유롭게 조율</strong> 가능</li>
         <li style="padding-left:16px; position:relative;"><span style="position:absolute;left:0;">·</span>출장·휴가로 빠지는 주가 있어도 괜찮습니다</li>
       </ul>
@@ -2277,7 +2277,7 @@
     <span class="sec-label">WHAT'S INCLUDED</span>
     <h2 class="sec-title">AI 파운더스에서 제공하는 혜택</h2>
     <!-- 핵심 교육 -->
-    <div class="benefit-special-label" style="margin-top:40px;">📚 핵심 교육</div>
+    <div class="benefit-special-label" style="margin-top:40px;">📚 핵심 콘텐츠</div>
     <div class="benefit-grid">
       <div class="benefit-card">
         <span class="benefit-icon">📹</span>
@@ -2341,7 +2341,7 @@
       </div>
       <div class="benefit-card">
         <span class="benefit-icon">🔓</span>
-        <div class="benefit-name">교육 자료 평생 소장</div>
+        <div class="benefit-name">실습 자료 평생 소장</div>
         <div class="benefit-desc">종강 이후에도 영상·교안·템플릿 언제든 다시 열람 가능</div>
       </div>
     </div>
@@ -2566,7 +2566,7 @@
   <div class="inner" style="margin-bottom:40px;">
     <span class="sec-label">REAL CASES</span>
     <h2 class="sec-title">그 외에도 세상에 탄생한<br>수많은 서비스</h2>
-    <p class="sec-desc">배우고 끝나는 교육이 아니에요.<br>직접 만들고, 배포하고, 결과물을 세상에 보여줘요.</p>
+    <p class="sec-desc">배우고 끝나는 강의가 아니에요.<br>직접 만들고, 배포하고, 결과물을 세상에 보여줘요.</p>
     <p style="font-size:13px; color:var(--text-muted); margin-top:12px; line-height:1.7;">1기 수료생들의 실제 배포 서비스입니다.</p>
   </div>
 
@@ -2894,11 +2894,11 @@
       </div>
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q2</span>"내 직군에도 도움이 되나요?"</div>
-        <div class="worry-a">영업/마케팅, 사무/관리, IT/개발, 디자인, 교육 등 다양한 직군의 참여자가 함께합니다. 직군별로 가장 필요한 AI 활용법(제안서 작성, 업무 자동화, 데이터 분석 등)을 맞춤 제공하기 때문에 어떤 직무든 바로 적용 가능합니다.</div>
+        <div class="worry-a">영업/마케팅, 사무/관리, IT/개발, 디자인 등 다양한 직군의 참여자가 함께합니다. 직군별로 가장 필요한 AI 활용법(제안서 작성, 업무 자동화, 데이터 분석 등)을 맞춤 제공하기 때문에 어떤 직무든 바로 적용 가능합니다.</div>
       </div>
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q3</span>"시간 부담이 크지 않을까요?"</div>
-        <div class="worry-a">주 5시간 — 퇴근 후 1시간 + 주말 2~3시간이면 충분합니다. 모든 교육 자료는 녹화본으로 제공되어 원하는 시간에 학습 가능하고, 팀 미팅 일정도 팀원들과 자유롭게 조율할 수 있어요.</div>
+        <div class="worry-a">주 5시간 — 퇴근 후 1시간 + 주말 2~3시간이면 충분합니다. 모든 미션 자료는 녹화본으로 제공되어 원하는 시간에 학습 가능하고, 팀 미팅 일정도 팀원들과 자유롭게 조율할 수 있어요.</div>
       </div>
       <div class="worry-card">
         <div class="worry-q"><span class="worry-q-badge">Q4</span>"정말 4주 안에 결과가 나오나요?"</div>
@@ -3005,14 +3005,14 @@
         <div class="who-icon">🏆</div>
         <div>
           <div class="who-name">스파르타클럽</div>
-          <div class="who-desc">누적 수강생 70만+ · 코딩·AI 교육 분야 1위 브랜드</div>
+          <div class="who-desc">누적 수강생 70만+ · 코딩·AI 분야 1위 브랜드</div>
         </div>
       </div>
       <div class="who-item">
         <div class="who-icon">👥</div>
         <div>
           <div class="who-name">검증된 운영진</div>
-          <div class="who-desc">70만 수강생을 길러낸 코딩·AI 교육 노하우로, 운영팀이 직접 케어합니다.</div>
+          <div class="who-desc">70만 수강생을 길러낸 코딩·AI 실전 노하우로, 운영팀이 직접 케어합니다.</div>
         </div>
       </div>
       <div class="who-item">
@@ -3138,9 +3138,9 @@
     <div class="faq-list">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          2기 일정은 언제 알 수 있나요?<span class="faq-chevron">▾</span>
+          일정은 언제 확정되나요?<span class="faq-chevron">▾</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">현재 사전 모집 기간입니다. 사전 신청해주신 분께 본 모집이 열리는 즉시 <strong>가장 먼저</strong> 일정·가격·신청 방법을 안내드려요.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">현재 모집 기간입니다. 신청해주신 분께 확정되는 즉시 <strong>가장 먼저</strong> 일정·가격·신청 방법을 안내드려요.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
@@ -3158,7 +3158,7 @@
         <button class="faq-q" onclick="toggleFaq(this)">
           AI 구독료는 별도인가요?<span class="faq-chevron">▾</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">4주 동안 AI 툴 Claude Code를 주로 사용하며, Claude 구독이 필요합니다. 해당 구독료는 교육비와 별도로 개인 부담이에요. 구독 방법이 어려우시면 튜터와 운영진이 개강 당일 도와드립니다.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">4주 동안 AI 툴 Claude Code를 주로 사용하며, Claude 구독이 필요합니다. 해당 구독료는 캠프 참가비와 별도로 개인 부담이에요. 구독 방법이 어려우시면 튜터와 운영진이 개강 당일 도와드립니다.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
@@ -3168,9 +3168,9 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          교육 자료는 종강 이후에도 이용할 수 있나요?<span class="faq-chevron">▾</span>
+          미션 자료는 종강 이후에도 이용할 수 있나요?<span class="faq-chevron">▾</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">교육 중 제공된 영상·교안·템플릿 모두 <strong>평생 소장</strong>입니다. 종강 이후에도 언제든 다시 꺼내 확인할 수 있어요.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">캠프 중 제공된 영상·교안·템플릿 모두 <strong>평생 소장</strong>입니다. 종강 이후에도 언제든 다시 꺼내 확인할 수 있어요.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
@@ -3180,7 +3180,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          교육은 온라인으로 진행하나요?<span class="faq-chevron">▾</span>
+          미션은 온라인으로 수행하나요?<span class="faq-chevron">▾</span>
         </button>
         <div class="faq-a"><div class="faq-a-inner">입소식과 수료식을 제외하고 <strong>모두 온라인</strong>입니다. 입소식과 수료식은 오프라인(선릉역 팀스파르타 본사)이지만 의무는 아니에요. 수료식 녹화본도 제공됩니다.</div></div>
       </div>
@@ -3188,7 +3188,7 @@
         <button class="faq-q" onclick="toggleFaq(this)">
           출장·휴가로 빠지는 기간이 있어도 되나요?<span class="faq-chevron">▾</span>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">괜찮습니다. 개강일만 참석해주시면, 이후에는 본인 스케줄에 맞춰 자율 진행이에요. 모든 교육 자료는 녹화본·교안으로 매주 목요일 오후 3시에 오픈됩니다.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">괜찮습니다. 개강일만 참석해주시면, 이후에는 본인 스케줄에 맞춰 자율 진행이에요. 모든 미션 자료는 녹화본·교안으로 매주 목요일 오후 3시에 오픈됩니다.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
@@ -3217,8 +3217,8 @@
       <span>·</span>
       <span>본 모집 시작 시 가장 먼저 안내드려요</span>
     </div>
-    <button class="btn-cta btn-cta-lg" onclick="openModal('final')">AI 파운더스 2기 사전 신청하기</button>
-    <p class="final-note">* 본 모집 일정·가격·옵션은 확정되는 대로 사전 신청자에게 가장 먼저 안내드립니다.</p>
+    <button class="btn-cta btn-cta-lg" onclick="openModal('final')">AI 파운더스 모집 신청하기</button>
+    <p class="final-note">* 일정·가격·옵션은 확정되는 대로 신청자에게 가장 먼저 안내드립니다.</p>
   </div>
 </section>
 
@@ -3312,7 +3312,7 @@
       <div class="floating-price">AI 파운더스 2기</div>
       <div class="floating-price-sub">사전 모집 중</div>
     </div>
-    <button class="floating-btn" onclick="openModal('floating')">사전 신청하기</button>
+    <button class="floating-btn" onclick="openModal('floating')">모집 신청하기</button>
   </div>
 </div>
 
@@ -3321,14 +3321,14 @@
 ════════════════════════════════════════ -->
 <div id="apply-overlay">
   <div class="apply-header">
-    <div class="apply-header-title">AI 파운더스 2기 사전 신청</div>
+    <div class="apply-header-title">AI 파운더스 모집 신청</div>
     <button class="apply-close" onclick="closeApply()">✕</button>
   </div>
 
   <div class="apply-body">
 
     <div id="phase1" class="apply-phase active">
-      <h2 class="apply-phase-title">2기 사전 신청 정보를 입력해주세요.</h2>
+      <h2 class="apply-phase-title">모집 신청 정보를 입력해주세요.</h2>
       <p class="apply-phase-sub">본 모집이 시작되면 가장 먼저 안내드리기 위해 정확히 입력해 주세요.</p>
 
       <div class="form-group">
@@ -3393,7 +3393,7 @@
     <div id="phase-complete" class="apply-phase">
       <div style="text-align:center; padding:40px 0 24px;">
         <div style="font-size:56px; line-height:1; margin-bottom:20px;">✅</div>
-        <h2 class="apply-phase-title" style="margin-bottom:12px;">사전 신청이 완료되었어요</h2>
+        <h2 class="apply-phase-title" style="margin-bottom:12px;">신청이 완료되었어요</h2>
         <p class="apply-phase-sub" style="margin-bottom:0;">
           2기 본 모집이 시작되면 입력해주신 연락처로 가장 먼저 안내드릴게요.<br>
           궁금한 점이 있으시면 우측 하단 [문의하기]로 편하게 연락주세요.
@@ -3403,7 +3403,7 @@
   </div><!-- /apply-body -->
 
   <div class="apply-footer-btns" id="phase1-btns">
-    <button class="btn-submit" onclick="submitApply()">사전 신청 완료하기</button>
+    <button class="btn-submit" onclick="submitApply()">신청 완료하기</button>
   </div>
   <div class="apply-footer-btns" id="phase-complete-btns" style="display:none;">
     <button class="btn-submit" onclick="closeApply()">닫기</button>
