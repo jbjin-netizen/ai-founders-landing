@@ -3541,6 +3541,7 @@
     restoreFormData();
     showApply();
     track('apply_start', { option: selectedOption, location: location });
+    if (window.rrbTrack) rrbTrack('apply_start', { option: selectedOption, location: location });
   };
 
   function showApply() {
@@ -3692,6 +3693,10 @@
     const createdAt = nowKST();
 
     sendToSheets(Object.assign({ type: 'applicant', created_at: createdAt }, applyData));
+
+    // recruitment-saas: 신청 완료 이벤트 + 신청자 데이터
+    if (window.rrbTrack) rrbTrack('apply_done', { option: selectedOption });
+    if (window.rrbApplicant) rrbApplicant(applyData);
 
     try {
       const applicants = JSON.parse(localStorage.getItem('af1_applicants') || '[]');
