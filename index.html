@@ -1286,7 +1286,7 @@
   }
   .fomo-tag:hover { background:rgba(77,217,192,0.14); transform:translateY(-2px); }
 
-  @media(max-width:768px) {
+  @media(max-width:900px) {
     #fomo-news { min-height:auto; padding:64px 20px 56px; }
     .fomo-float-area { height:auto; display:flex; flex-direction:column; gap:14px; }
     .fomo-float-card { position:relative !important; inset:auto !important; transform:none !important; max-width:100%; }
@@ -2559,7 +2559,8 @@
   .case-name { font-size: 14px; font-weight: 700; color: var(--text-sub); margin-bottom: 10px; }
   .case-role { font-size: 13px; font-weight: 400; color: var(--text-muted); margin-left: 4px; }
   .case-quote { font-size: 15px; color: var(--text-sub); line-height: 1.8; }
-  @media (max-width: 900px) { .case-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+  @media (max-width: 900px) { .case-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; } }
+  @media (max-width: 640px) { .case-grid { grid-template-columns: 1fr; } }
 </style>
 
 <!-- 그 외에도 세상에 탄생한 수많은 서비스 -->
@@ -3914,6 +3915,256 @@
     .fcs-btn-label { display: none; }
     .fcs-btn-icon { width: 52px; height: 52px; box-shadow: 0 4px 20px rgba(232,112,58,0.45); }
   }
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
+  RESPONSIVE PERFECTION — All Devices 10/10
+  Breakpoints: 1024 → 768 → 640 → 480 → 360
+═══════════════════════════════════════════════════════════ -->
+<style>
+/* ── Tablet Landscape (max-width: 1024px) ─────────────── */
+@media (max-width: 1024px) {
+  .section { padding: 80px 24px; }
+  #hero { padding: 80px 24px 140px; }
+  #hook { padding: 72px 24px; }
+  #final-cta { padding: 96px 24px; }
+  #limit { padding: 80px 24px; }
+
+  /* Sol4: 3→2 on tablet */
+  .sol4-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Cases: 3→2 on tablet */
+  .case-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; margin-left: auto; margin-right: auto; }
+}
+
+/* ── Tablet Portrait (max-width: 768px) ───────────────── */
+@media (max-width: 768px) {
+  .section { padding: 64px 20px; }
+  #hero { padding: 72px 20px 130px; min-height: 88vh; }
+  #hook { padding: 56px 20px; }
+  #final-cta { padding: 72px 20px; }
+  #limit { padding: 64px 20px; }
+
+  h2.sec-title { margin-bottom: 16px; }
+  .sec-desc { font-size: 16px; }
+
+  /* Curriculum: 4→2 tabs */
+  .curr-tabs { grid-template-columns: repeat(2, 1fr); }
+  .curr-panel-wrap { padding: 26px 22px; }
+  .curr-panel-milestone { font-size: 22px; }
+
+  /* Overview */
+  .ov-row { gap: 16px; }
+  .ov-val { font-size: 16px; }
+
+  /* Grids */
+  .worry-grid { grid-template-columns: 1fr; }
+  .who-grid { grid-template-columns: 1fr; gap: 20px; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+  .comparison-grid { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .ft-biz-body { word-break: keep-all; }
+}
+
+/* ── Mobile (max-width: 640px) — supplement existing ──── */
+@media (max-width: 640px) {
+  .section { padding: 56px 20px; }
+
+  /* Hero refinements */
+  .hero-badge { font-size: 13px; padding: 7px 16px; margin-bottom: 24px; }
+  .hero-sub { font-size: 15px; margin-bottom: 32px; }
+
+  /* Buttons */
+  .btn-cta { font-size: 16px; padding: 15px 32px; }
+  .btn-cta-lg { font-size: 17px; padding: 17px 40px; }
+
+  /* Hook / Pain */
+  .pain-copy { font-size: 15px; }
+  .pain-conclusion p { font-size: 16px; }
+  .pain-conclusion { padding: 16px 20px; }
+
+  /* Sol4: 2→1 on mobile */
+  .sol4-grid { grid-template-columns: 1fr; }
+  .sol4-conclusion { font-size: 15px; padding: 22px 20px; }
+
+  /* Overview: column on mobile */
+  .ov-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px 0; }
+  .ov-val { font-size: 15px; }
+  .ov-label { min-width: unset; }
+
+  /* Target */
+  .target-desc { font-size: 14px; }
+
+  /* Curriculum */
+  .curr-tab { padding: 14px 12px; }
+  .curr-tab-week { font-size: 12px; }
+  .curr-tab-theme { font-size: 13px; }
+  .curr-panel-wrap { padding: 20px 16px; }
+  .curr-panel-milestone { font-size: 18px; }
+  .curr-panel-output { font-size: 12px; padding: 5px 12px; }
+  .curr-ctag { font-size: 12px; padding: 5px 12px; }
+  .curr-panel-goal { font-size: 15px; }
+  .curr-panel-bullets li { font-size: 14px; }
+  .curr-panel-res span { font-size: 12px; padding: 5px 12px; }
+
+  /* Cases: 2→1 on mobile */
+  .case-grid { grid-template-columns: 1fr; max-width: 100%; }
+
+  /* Benefits */
+  .benefit-name { font-size: 16px; }
+  .benefit-desc { font-size: 14px; }
+  .benefit-icon { font-size: 28px; margin-bottom: 10px; }
+  .benefit-special-label { font-size: 16px; }
+
+  /* Reviews */
+  .review-body { font-size: 14px; }
+
+  /* Worries */
+  .worry-q { font-size: 15px; }
+  .worry-a { font-size: 14px; }
+
+  /* Who */
+  .who-name { font-size: 16px; }
+  .who-desc { font-size: 14px; }
+
+  /* Photos: 4→2 on mobile (instead of jumping from 4→1) */
+  .photo-grid-v2 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .photo-card-title { font-size: 14px; }
+  .photo-card-sub { font-size: 11px; }
+
+  /* FAQ */
+  .faq-q { font-size: 15px; padding: 18px 0; }
+  .faq-a-inner { font-size: 14px; }
+
+  /* Final CTA */
+  .final-sub { font-size: 15px; }
+
+  /* After section */
+  .after-line { margin-bottom: 14px; }
+
+  /* Pricing */
+  .pricing-card { padding: 28px 22px; }
+
+  /* Values grid — keep 2 cols but tighten */
+  .value-card { padding: 22px 16px; }
+  .value-icon { font-size: 28px; margin-bottom: 10px; }
+  .value-name { font-size: 15px; }
+  .value-desc { font-size: 13px; }
+
+  /* CMP Table */
+  .cmp-table th, .cmp-table td { padding: 10px 8px; font-size: 12px; line-height: 1.5; }
+  .cmp-row-label { font-size: 11px; }
+
+  /* Footer */
+  .ft-biz-body { font-size: 10px; word-break: keep-all; }
+  #footer { padding: 40px 20px 32px; }
+
+  /* Marquee cards */
+  .mq-card { width: 220px; }
+  .mq-card img { height: 130px; }
+
+  /* Apply form */
+  .apply-body { padding: 24px 20px 100px; }
+  .apply-phase-title { font-size: 20px; }
+
+  /* Cycle / Schedule / Categories */
+  .cycle-card { padding: 20px; }
+  .cat-card { padding: 22px 20px; }
+
+  /* Floating CTA */
+  .floating-btn { font-size: 14px; padding: 12px 20px; }
+}
+
+/* ── Small Mobile (max-width: 480px) ──────────────────── */
+@media (max-width: 480px) {
+  .section { padding: 44px 16px; }
+  #hero { min-height: 80vh; padding: 56px 16px 110px; }
+  #final-cta { padding: 56px 16px; }
+  #hook { padding: 44px 16px; }
+
+  .btn-cta-lg { font-size: 16px; padding: 16px 36px; }
+  h2.sec-title { font-size: clamp(20px, 6vw, 28px); }
+
+  /* Photo grid → 1 col */
+  .photo-grid-v2 { grid-template-columns: 1fr; }
+  .photo-card-v2 { aspect-ratio: 16/9; }
+
+  /* Values → 1 col */
+  .values-grid { grid-template-columns: 1fr; }
+
+  /* Marquee smaller */
+  .mq-card { width: 200px; }
+  .mq-card img { height: 110px; }
+
+  /* CMP table ultra-compact */
+  .cmp-table th, .cmp-table td { padding: 8px 6px; font-size: 11px; }
+  .cmp-row-label { font-size: 10px; }
+
+  /* Tutor tighter */
+  .tutor-grid { gap: 10px; }
+  .tutor-card { padding: 14px 12px 12px; }
+
+  /* Basecamp */
+  .basecamp-label-wrap { bottom: 16px; }
+  .mtn-divider-svg { height: 50px; }
+
+  /* Float CS widget — prevent overlap with floating CTA */
+  #float-cs-wrap { bottom: 76px; right: 12px; }
+
+  /* Floating CTA compact */
+  .floating-inner { gap: 10px; }
+  .floating-price { font-size: 15px; }
+  .floating-btn { font-size: 13px; padding: 11px 16px; }
+
+  /* FOMO cards */
+  .fomo-float-card { padding: 20px 22px; }
+  .fc-quote { font-size: 14px; }
+
+  /* Pain items */
+  .pain-item { padding: 14px 16px; }
+  .pain-copy { font-size: 14px; }
+  .pain-emoji { font-size: 20px; }
+}
+
+/* ── Extra Small (max-width: 360px) ───────────────────── */
+@media (max-width: 360px) {
+  .section { padding: 36px 12px; }
+  #hero { padding: 48px 12px 90px; min-height: 75vh; }
+
+  .hero-title { font-size: 22px; }
+  .hero-sub { font-size: 13px; }
+  .btn-cta-lg { font-size: 15px; padding: 14px 28px; }
+
+  h2.sec-title { font-size: 20px; }
+
+  /* Curriculum tabs ultra-compact */
+  .curr-tabs { gap: 4px; }
+  .curr-tab { padding: 10px 8px; }
+  .curr-tab-theme { font-size: 12px; }
+  .curr-tab-week { font-size: 11px; }
+
+  /* Tutor → 1 col on very small */
+  .tutor-grid { grid-template-columns: 1fr; }
+  .tutor-card { padding: 18px 16px 14px; }
+
+  /* FOMO */
+  .fomo-headline { font-size: 22px; }
+
+  /* Cases */
+  .case-body { padding: 16px 16px 20px; }
+  .case-metric { font-size: 18px; }
+
+  /* Benefit grid */
+  .benefit-card { padding: 22px 18px; }
+
+  /* Overview */
+  .ov-label { font-size: 13px; }
+
+  /* Floating CTA minimal */
+  .floating-price-sub { font-size: 10px; }
+  .floating-btn { font-size: 12px; padding: 10px 14px; }
+}
 </style>
 
 <script>
